@@ -15,6 +15,45 @@ const RoleForm = ({ intl }: Props) => {
     console.log(evt);
   };
 
+  const SIGNUP_FIELDS = [
+    {
+      id: 'firstName',
+      defaultValue: '',
+      type: 'text',
+      rules: { required: true }
+    },
+    {
+      id: 'lastName',
+      defaultValue: '',
+      type: 'text',
+      rules: { required: true }
+    },
+    {
+      id: 'email',
+      defaultValue: '',
+      type: 'email',
+      rules: { required: true, pattern: /^\w+([.-]?\w+)*@\w+([.-]?\w+)*(\.\w{2,3})+$/ }
+    },
+    {
+      id: 'userId',
+      defaultValue: '',
+      type: 'text',
+      rules: { required: true }
+    },
+    {
+      id: 'password',
+      defaultValue: '',
+      type: 'password',
+      rules: { required: true }
+    },
+    {
+      id: 'confirmPassword',
+      defaultValue: '',
+      type: 'password',
+      rules: { required: true, validate: (value: string) => getValues('password') === value }
+    }
+  ];
+
   return (
     <Grid>
       <Typography>
@@ -23,152 +62,36 @@ const RoleForm = ({ intl }: Props) => {
         })}
       </Typography>
       <Box component="form" onSubmit={handleSubmit(handleOnSubmit)}>
-        <Grid container>
-          <Grid container>
-            <Controller
-              control={control}
-              name="firstName"
-              defaultValue=""
-              rules={{
-                required: true
-              }}
-              render={({ field, fieldState: { error } }: any) => (
-                <TextField
-                  {...field}
-                  fullWidth
-                  variant="outlined"
-                  label={intl.formatMessage({ id: 'userForm.form.label.firstName' })}
-                  error={error !== undefined}
-                  helperText={
-                    error
-                      ? intl.formatMessage({ id: `userForm.form.error.firstName.${[error.type]}` })
-                      : ''
-                  }
+        <Grid container spacing={3}>
+          {SIGNUP_FIELDS.map((key) => {
+            return (
+              <Grid item xs={6}>
+                <Controller
+                  control={control}
+                  name={key.id}
+                  defaultValue={key.defaultValue}
+                  rules={key.rules}
+                  render={({ field, fieldState: { error } }: any) => (
+                    <TextField
+                      {...field}
+                      fullWidth
+                      variant="outlined"
+                      label={intl.formatMessage({ id: `userForm.form.label.${key.id}` })}
+                      error={error !== undefined}
+                      type={key.type}
+                      helperText={
+                        error
+                          ? intl.formatMessage({
+                              id: `userForm.form.error.${key.id}.${[error.type]}`
+                            })
+                          : ''
+                      }
+                    />
+                  )}
                 />
-              )}
-            />
-            <Controller
-              control={control}
-              name="lastName"
-              defaultValue=""
-              rules={{
-                required: true
-              }}
-              render={({ field, fieldState: { error } }: any) => (
-                <TextField
-                  {...field}
-                  fullWidth
-                  variant="outlined"
-                  label={intl.formatMessage({ id: 'userForm.form.label.lastName' })}
-                  error={error !== undefined}
-                  helperText={
-                    error
-                      ? intl.formatMessage({ id: `userForm.form.error.lastName.${[error.type]}` })
-                      : ''
-                  }
-                />
-              )}
-            />
-          </Grid>
-          <Grid container>
-            <Controller
-              control={control}
-              name="email"
-              defaultValue=""
-              rules={{
-                required: true,
-                pattern: /^\w+([.-]?\w+)*@\w+([.-]?\w+)*(\.\w{2,3})+$/
-              }}
-              render={({ field, fieldState: { error } }: any) => (
-                <TextField
-                  {...field}
-                  fullWidth
-                  type="email"
-                  variant="outlined"
-                  error={error !== undefined}
-                  label={intl.formatMessage({ id: 'userForm.form.label.email' })}
-                  helperText={
-                    error
-                      ? intl.formatMessage({ id: `userForm.form.error.email.${[error.type]}` })
-                      : ''
-                  }
-                />
-              )}
-            />
-            <Controller
-              control={control}
-              name="userId"
-              defaultValue=""
-              rules={{
-                required: true
-              }}
-              render={({ field, fieldState: { error } }: any) => (
-                <TextField
-                  {...field}
-                  fullWidth
-                  variant="outlined"
-                  label={intl.formatMessage({ id: 'userForm.form.label.userId' })}
-                  error={error !== undefined}
-                  helperText={
-                    error
-                      ? intl.formatMessage({ id: `userForm.form.error.userId.${[error.type]}` })
-                      : ''
-                  }
-                />
-              )}
-            />
-          </Grid>
-          <Grid container>
-            <Controller
-              control={control}
-              name="password"
-              defaultValue=""
-              rules={{
-                required: true
-              }}
-              render={({ field, fieldState: { error } }: any) => (
-                <TextField
-                  {...field}
-                  fullWidth
-                  variant="outlined"
-                  type="password"
-                  label={intl.formatMessage({ id: 'userForm.form.label.password' })}
-                  error={error !== undefined}
-                  helperText={
-                    error
-                      ? intl.formatMessage({ id: `userForm.form.error.password.${[error.type]}` })
-                      : ''
-                  }
-                />
-              )}
-            />
-            <Controller
-              control={control}
-              name="confirmPassword"
-              defaultValue=""
-              rules={{
-                required: true,
-                validate: (value) => getValues('password') === value
-              }}
-              render={({ field, fieldState: { error } }: any) => (
-                <TextField
-                  {...field}
-                  fullWidth
-                  variant="outlined"
-                  type="password"
-                  label={intl.formatMessage({ id: 'userForm.form.label.confirmPassword' })}
-                  error={error !== undefined}
-                  helperText={
-                    error
-                      ? intl.formatMessage({
-                          id: `userForm.form.error.password.${[error.type]}`
-                        })
-                      : ''
-                  }
-                />
-              )}
-            />
-          </Grid>
+              </Grid>
+            );
+          })}
         </Grid>
         <Grid>
           <Button variant="contained">

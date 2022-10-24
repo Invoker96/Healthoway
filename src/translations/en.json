@@ -18,6 +18,7 @@
   "userForm.form.error.email.required": "Email address is required",
   "userForm.form.error.userId.required": "User ID is required",
   "userForm.form.error.password.required": "Password is required",
-  "userForm.form.error.password.validate": "Passwords do not match",
+  "userForm.form.error.confirmPassword.required": "Password is required",
+  "userForm.form.error.confirmPassword.validate": "Passwords do not match",
   "userForm.form.error.email.pattern": "Invalid email address"
 }
