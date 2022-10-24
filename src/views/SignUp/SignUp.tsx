@@ -1,8 +1,15 @@
+import { Grid } from '@mui/material';
 import { injectIntl } from 'react-intl';
-import RoleInfo from '../../components/SignUp/RoleInfo';
+import RoleForm from '../../components/SignUp/RoleForm';
+import UserForm from '../../components/SignUp/UserForm';
 
 const SignUp = () => {
-  return <RoleInfo />;
+  return (
+    <Grid>
+      <RoleForm />
+      <UserForm />
+    </Grid>
+  );
 };
 
 export default injectIntl(SignUp);

@@ -3,5 +3,21 @@
   "role.button.doctor": "Doctor",
   "role.button.patient": "Patient",
   "role.button.next": "Next",
-  "role.label": "I am a..."
+  "role.label": "I am a...",
+  "userForm.label": "User Information",
+  "userForm.button.back": "Back",
+  "userForm.button.submit": "Register",
+  "userForm.form.label.confirmPassword": "Confirm Password",
+  "userForm.form.label.email": "Email",
+  "userForm.form.label.firstName": "First Name",
+  "userForm.form.label.lastName": "Last Name",
+  "userForm.form.label.password": "Password",
+  "userForm.form.label.userId": "User ID",
+  "userForm.form.error.firstName.required": "First name is required",
+  "userForm.form.error.lastName.required": "Last name is required",
+  "userForm.form.error.email.required": "Email address is required",
+  "userForm.form.error.userId.required": "User ID is required",
+  "userForm.form.error.password.required": "Password is required",
+  "userForm.form.error.password.validate": "Passwords do not match",
+  "userForm.form.error.email.pattern": "Invalid email address"
 }

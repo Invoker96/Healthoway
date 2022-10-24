@@ -6,7 +6,7 @@ type Props = {
   intl: any;
 };
 
-const RoleInfo = ({ intl }: Props) => {
+const RoleForm = ({ intl }: Props) => {
   return (
     <Grid>
       <Typography>
@@ -43,4 +43,4 @@ const RoleInfo = ({ intl }: Props) => {
   );
 };
 
-export default injectIntl(RoleInfo);
+export default injectIntl(RoleForm);
