@@ -1,3 +1,7 @@
 {
+  "role.button.counsellor": "Counsellor",
+  "role.button.doctor": "Doctor",
+  "role.button.patient": "Patient",
+  "role.button.next": "Next",
   "role.label": "I am a..."
 }
