@@ -4,9 +4,11 @@ import { LocalHospital, Masks, PsychologyAlt } from '@mui/icons-material';
 
 type Props = {
   intl: any;
+  page: number;
+  setPage: React.Dispatch<number>;
 };
 
-const RoleForm = ({ intl }: Props) => {
+const RoleForm = ({ page, setPage, intl }: Props) => {
   return (
     <Grid>
       <Typography>
@@ -34,7 +36,12 @@ const RoleForm = ({ intl }: Props) => {
           </IconButton>
         </Grid>
       </Grid>
-      <Button variant="contained">
+      <Button
+        variant="contained"
+        onClick={() => {
+          setPage(page + 1);
+        }}
+      >
         {intl.formatMessage({
           id: 'role.button.next'
         })}

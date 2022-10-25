@@ -4,9 +4,11 @@ import { Controller, useForm } from 'react-hook-form';
 
 type Props = {
   intl: any;
+  page: number;
+  setPage: React.Dispatch<number>;
 };
 
-const RoleForm = ({ intl }: Props) => {
+const RoleForm = ({ page, setPage, intl }: Props) => {
   const { control, handleSubmit, getValues } = useForm({
     reValidateMode: 'onBlur'
   });
@@ -94,7 +96,7 @@ const RoleForm = ({ intl }: Props) => {
           })}
         </Grid>
         <Grid>
-          <Button variant="contained">
+          <Button variant="contained" onClick={() => setPage(page - 1)}>
             {intl.formatMessage({
               id: 'userForm.button.back'
             })}
