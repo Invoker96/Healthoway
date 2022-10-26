@@ -1,5 +1,8 @@
+@import './variables.scss';
+
 .App {
   text-align: center;
+  background-color: $grey-00;
 }
 
 .App-logo {

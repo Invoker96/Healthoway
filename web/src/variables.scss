@@ -1,0 +1,27 @@
+//colors
+$grey-00: #f1f1f1;
+$grey-01: #cecece;
+$grey-02: #b0b0b0;
+$grey-03: #898989;
+
+$purple-00: #d1bef3;
+$purple-01: #673ab7;
+
+// spacing scale
+$spacing-unit: 8px;
+
+$spacing-00: $spacing-unit * 0.25; // 2px
+$spacing-01: $spacing-unit * 0.5; // 4px
+$spacing-02: $spacing-unit * 1; // 8px
+$spacing-03: $spacing-unit * 1.5; // 12px
+$spacing-04: $spacing-unit * 2; // 16px
+$spacing-05: $spacing-unit * 3; // 24px
+$spacing-06: $spacing-unit * 4; // 32px
+$spacing-07: $spacing-unit * 5; // 40px
+$spacing-08: $spacing-unit * 6; // 48px
+$spacing-09: $spacing-unit * 8; // 64px
+$spacing-10: $spacing-unit * 12; // 96px
+
+:export {
+  GREY_03: $grey-03;
+}
