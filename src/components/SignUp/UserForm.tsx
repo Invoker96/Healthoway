@@ -57,45 +57,43 @@ const RoleForm = ({ page, setPage, formData, setFormData, intl }: Props) => {
           id: 'userForm.label'
         })}
       </Typography>
-      <Box component="form" onSubmit={handleSubmit(onSubmit)}>
-        <Grid container spacing={3}>
-          {USER_FIELDS.map((key) => {
-            return (
-              <Grid item xs={6}>
-                <Controller
-                  control={control}
-                  name={key.id}
-                  rules={key.rules}
-                  render={({ field, fieldState: { error } }: any) => (
-                    <TextField
-                      {...field}
-                      fullWidth
-                      variant="outlined"
-                      label={intl.formatMessage({ id: `userForm.form.label.${key.id}` })}
-                      error={error !== undefined}
-                      type={key.type}
-                      helperText={
-                        error
-                          ? intl.formatMessage({
-                              id: `userForm.form.error.${key.id}.${[error.type]}`
-                            })
-                          : ''
-                      }
-                    />
-                  )}
-                />
-              </Grid>
-            );
-          })}
-        </Grid>
-      </Box>
+      <Grid component="form" container spacing={3}>
+        {USER_FIELDS.map((key) => {
+          return (
+            <Grid item xs={6}>
+              <Controller
+                control={control}
+                name={key.id}
+                rules={key.rules}
+                render={({ field, fieldState: { error } }: any) => (
+                  <TextField
+                    {...field}
+                    fullWidth
+                    variant="outlined"
+                    label={intl.formatMessage({ id: `userForm.form.label.${key.id}` })}
+                    error={error !== undefined}
+                    type={key.type}
+                    helperText={
+                      error
+                        ? intl.formatMessage({
+                            id: `userForm.form.error.${key.id}.${[error.type]}`
+                          })
+                        : ''
+                    }
+                  />
+                )}
+              />
+            </Grid>
+          );
+        })}
+      </Grid>
       <Grid container className="button-container">
         <Button variant="contained" onClick={() => setPage(page - 1)}>
           {intl.formatMessage({
             id: 'userForm.button.back'
           })}
         </Button>
-        <Button variant="contained" type="submit">
+        <Button variant="contained" type="submit" onClick={handleSubmit(onSubmit)}>
           {intl.formatMessage({
             id: 'userForm.button.submit'
           })}
