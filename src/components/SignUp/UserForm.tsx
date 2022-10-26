@@ -1,56 +1,44 @@
 import { injectIntl } from 'react-intl';
 import { Button, Grid, Box, TextField, Typography } from '@mui/material';
 import { Controller, useForm } from 'react-hook-form';
+import { User } from '../../types';
 
 type Props = {
   intl: any;
   page: number;
   setPage: React.Dispatch<number>;
+  formData: User;
+  setFormData: React.Dispatch<User>;
 };
 
-const RoleForm = ({ page, setPage, intl }: Props) => {
+const RoleForm = ({ page, setPage, formData, setFormData, intl }: Props) => {
   const { control, handleSubmit, getValues } = useForm({
     reValidateMode: 'onBlur'
   });
 
-  const handleOnSubmit = (evt: any) => {
-    console.log(evt);
+  const onSubmit = (data: any) => {
+    setFormData({ ...formData, ...data });
+    setPage(page + 1);
   };
 
-  const SIGNUP_FIELDS = [
+  const USER_FIELDS = [
     {
-      id: 'firstName',
-      defaultValue: '',
-      type: 'text',
-      rules: { required: true }
-    },
-    {
-      id: 'lastName',
-      defaultValue: '',
+      id: 'name',
       type: 'text',
       rules: { required: true }
     },
     {
       id: 'email',
-      defaultValue: '',
       type: 'email',
       rules: { required: true, pattern: /^\w+([.-]?\w+)*@\w+([.-]?\w+)*(\.\w{2,3})+$/ }
     },
     {
-      id: 'userId',
-      defaultValue: '',
-      type: 'text',
-      rules: { required: true }
-    },
-    {
       id: 'password',
-      defaultValue: '',
       type: 'password',
       rules: { required: true }
     },
     {
       id: 'confirmPassword',
-      defaultValue: '',
       type: 'password',
       rules: { required: true, validate: (value: string) => getValues('password') === value }
     }
@@ -63,15 +51,14 @@ const RoleForm = ({ page, setPage, intl }: Props) => {
           id: 'userForm.label'
         })}
       </Typography>
-      <Box component="form" onSubmit={handleSubmit(handleOnSubmit)}>
+      <Box component="form" onSubmit={handleSubmit(onSubmit)}>
         <Grid container spacing={3}>
-          {SIGNUP_FIELDS.map((key) => {
+          {USER_FIELDS.map((key) => {
             return (
               <Grid item xs={6}>
                 <Controller
                   control={control}
                   name={key.id}
-                  defaultValue={key.defaultValue}
                   rules={key.rules}
                   render={({ field, fieldState: { error } }: any) => (
                     <TextField
