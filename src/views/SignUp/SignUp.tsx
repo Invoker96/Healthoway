@@ -6,6 +6,7 @@ import RoleForm from '../../components/SignUp/RoleForm';
 import UserForm from '../../components/SignUp/UserForm';
 import { UserType } from '../../types';
 import { createUser } from '../../services/userService';
+import './SignUp.scss';
 
 const SignUp = () => {
   const [page, setPage] = useState(0);
@@ -34,7 +35,11 @@ const SignUp = () => {
     }
   }, [page, formData, signUpPages, navigate]);
 
-  return <Grid>{signUpPages[page]}</Grid>;
+  return (
+    <Grid container className="sign-up-container">
+      {signUpPages[page]}
+    </Grid>
+  );
 };
 
 export default injectIntl(SignUp);

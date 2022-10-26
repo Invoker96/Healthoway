@@ -2,6 +2,7 @@ import { injectIntl } from 'react-intl';
 import { Button, Grid, Box, TextField, Typography } from '@mui/material';
 import { Controller, useForm } from 'react-hook-form';
 import { User } from '../../types';
+import './SignUp.scss';
 
 type Props = {
   intl: any;
@@ -45,8 +46,13 @@ const RoleForm = ({ page, setPage, formData, setFormData, intl }: Props) => {
   ];
 
   return (
-    <Grid>
-      <Typography>
+    <Grid container className="form-card">
+      <Typography variant="h1">
+        {intl.formatMessage({
+          id: 'userForm.title'
+        })}
+      </Typography>
+      <Typography variant="h2">
         {intl.formatMessage({
           id: 'userForm.label'
         })}
@@ -82,19 +88,19 @@ const RoleForm = ({ page, setPage, formData, setFormData, intl }: Props) => {
             );
           })}
         </Grid>
-        <Grid>
-          <Button variant="contained" onClick={() => setPage(page - 1)}>
-            {intl.formatMessage({
-              id: 'userForm.button.back'
-            })}
-          </Button>
-          <Button variant="contained" type="submit">
-            {intl.formatMessage({
-              id: 'userForm.button.submit'
-            })}
-          </Button>
-        </Grid>
       </Box>
+      <Grid container className="button-container">
+        <Button variant="contained" onClick={() => setPage(page - 1)}>
+          {intl.formatMessage({
+            id: 'userForm.button.back'
+          })}
+        </Button>
+        <Button variant="contained" type="submit">
+          {intl.formatMessage({
+            id: 'userForm.button.submit'
+          })}
+        </Button>
+      </Grid>
     </Grid>
   );
 };

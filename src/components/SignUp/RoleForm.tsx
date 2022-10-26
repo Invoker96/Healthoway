@@ -3,6 +3,8 @@ import { injectIntl } from 'react-intl';
 import { Button, Grid, IconButton, Typography } from '@mui/material';
 import { LocalHospital, Masks, PsychologyAlt } from '@mui/icons-material';
 import { User, UserType } from '../../types';
+import './SignUp.scss';
+import './RoleForm.scss';
 
 type Props = {
   intl: any;
@@ -20,42 +22,61 @@ const RoleForm = ({ page, setPage, formData, setFormData, intl }: Props) => {
   }, [userType]);
 
   return (
-    <Grid>
-      <Typography>
+    <Grid className="form-card">
+      <Typography variant="h1">
+        {intl.formatMessage({
+          id: 'role.title'
+        })}
+      </Typography>
+      <Typography variant="h2">
         {intl.formatMessage({
           id: 'role.label'
         })}
       </Typography>
-      <Grid container>
-        <Grid item xs={4}>
-          <IconButton size="large" onClick={() => setUserType(UserType.PATIENT)}>
+      <Grid container justifyContent="space-around">
+        <Grid
+          item
+          xs={3}
+          className={`role-card-container ${userType === UserType.PATIENT ? 'selected' : ''}`}
+        >
+          <Button size="large" onClick={() => setUserType(UserType.PATIENT)}>
             <Masks />
             <Typography>{intl.formatMessage({ id: 'role.button.patient' })}</Typography>
-          </IconButton>
+          </Button>
         </Grid>
-        <Grid item xs={4}>
-          <IconButton size="large" onClick={() => setUserType(UserType.COUNSELLOR)}>
+        <Grid
+          item
+          xs={3}
+          className={`role-card-container ${userType === UserType.COUNSELLOR ? 'selected' : ''}`}
+        >
+          <Button size="large" onClick={() => setUserType(UserType.COUNSELLOR)}>
             <PsychologyAlt />
             <Typography>{intl.formatMessage({ id: 'role.button.counsellor' })}</Typography>
-          </IconButton>
+          </Button>
         </Grid>
-        <Grid item xs={4}>
-          <IconButton size="large" onClick={() => setUserType(UserType.DOCTOR)}>
+        <Grid
+          item
+          xs={3}
+          className={`role-card-container ${userType === UserType.DOCTOR ? 'selected' : ''}`}
+        >
+          <Button size="large" onClick={() => setUserType(UserType.DOCTOR)}>
             <LocalHospital />
             <Typography>{intl.formatMessage({ id: 'role.button.doctor' })}</Typography>
-          </IconButton>
+          </Button>
         </Grid>
       </Grid>
-      <Button
-        variant="contained"
-        onClick={() => {
-          setPage(page + 1);
-        }}
-      >
-        {intl.formatMessage({
-          id: 'role.button.next'
-        })}
-      </Button>
+      <Grid container className="button-container">
+        <Button
+          variant="contained"
+          onClick={() => {
+            setPage(page + 1);
+          }}
+        >
+          {intl.formatMessage({
+            id: 'role.button.next'
+          })}
+        </Button>
+      </Grid>
     </Grid>
   );
 };
