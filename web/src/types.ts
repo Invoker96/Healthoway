@@ -11,3 +11,8 @@ export enum UserType {
   DOCTOR = 'Doctor',
   MANAGER = 'Manager'
 }
+
+export type Auth = {
+  email: string;
+  password: string;
+};
