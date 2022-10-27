@@ -18,5 +18,11 @@
   "userForm.form.error.password.required": "Password is required",
   "userForm.form.error.confirmPassword.required": "Password is required",
   "userForm.form.error.confirmPassword.validate": "Passwords do not match",
-  "userForm.form.error.email.pattern": "Invalid email address"
+  "userForm.form.error.email.pattern": "Invalid email address",
+  "authForm.form.label.username": "Username",
+  "authForm.form.label.password": "Password",
+  "authForm.form.error.username.required": "Username is required",
+  "authForm.form.error.password.required": "Password is required",
+  "authForm.button.submit": "LOGIN",
+  "authForm.button.signup": "SIGN UP"
 }

@@ -1,0 +1,18 @@
+@import '../../variables.scss';
+
+.login-card {
+  display: flex;
+  justify-content: space-between;
+  flex-direction: column;
+  padding: $spacing-04;
+  max-width: 400px;
+
+  .button-container {
+    justify-content: end;
+    margin-top: $spacing-04;
+
+    a + button {
+      margin-left: $spacing-04;
+    }
+  }
+}
