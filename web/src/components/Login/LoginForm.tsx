@@ -1,10 +1,13 @@
 import { injectIntl } from 'react-intl';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { Button, Grid, TextField } from '@mui/material';
 import { Controller, useForm } from 'react-hook-form';
 import { Auth } from '../../types';
 import './LoginForm.scss';
 import { authenticator } from '../../services/authService';
+import ClearIcon from '@mui/icons-material/Clear';
+import ErrorIcon from '@mui/icons-material/Error';
+import { useState } from 'react';
 
 type Props = {
   intl: any;
@@ -13,19 +16,38 @@ type Props = {
 };
 
 const LoginForm = ({ formData, setFormData, intl }: Props) => {
+  const [isLoginError, setLoginError] = useState(false);
   const { control, handleSubmit } = useForm({
     reValidateMode: 'onBlur'
   });
 
+  const navigate = useNavigate();
+
   const onSubmit = (data: any) => {
-    console.log(data);
+    // console.log(data);
     setFormData({ ...formData, ...data });
+    setLoginError(false);
     authenticator(data)
       .then(function (response) {
-        console.log(response);
+        if (response?.data?.role !== 'NA') {
+          const role = response.data.role.toLowerCase();
+
+          if (role === 'doctor') {
+            navigate('/doctorHome');
+          } else if (role === 'patient') {
+            navigate('/patientHome');
+          } else if (role === 'manager') {
+            navigate('/managerHome');
+          } else if (role === 'counsellor') {
+            navigate('/counsellorHome');
+          }
+        } else {
+          setLoginError(true);
+        }
       })
       .catch((err) => {
         console.log(err);
+        setLoginError(true);
       });
   };
 
@@ -44,6 +66,18 @@ const LoginForm = ({ formData, setFormData, intl }: Props) => {
 
   return (
     <Grid container className="login-card">
+      {isLoginError && (
+        <Grid component="form" container spacing={3}>
+          <Grid item xs={12}>
+            <div className="login-error">
+              <ErrorIcon className="login-svg" />
+              {intl.formatMessage({
+                id: 'authForm.form.error'
+              })}
+            </div>
+          </Grid>
+        </Grid>
+      )}
       <Grid component="form" container spacing={3} justifyContent="center" alignItems="center">
         {LOGIN_FIELDS.map((key, index) => {
           return (

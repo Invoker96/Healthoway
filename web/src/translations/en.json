@@ -24,5 +24,6 @@
   "authForm.form.error.username.required": "Username is required",
   "authForm.form.error.password.required": "Password is required",
   "authForm.button.submit": "LOGIN",
-  "authForm.button.signup": "SIGN UP"
+  "authForm.button.signup": "SIGN UP",
+  "authForm.form.error": "Username/Password not found"
 }
