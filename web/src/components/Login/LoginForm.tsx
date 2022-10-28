@@ -1,6 +1,6 @@
 import { injectIntl } from 'react-intl';
 import { Link, useNavigate } from 'react-router-dom';
-import { Button, Grid, TextField } from '@mui/material';
+import { Button, Grid, TextField, CircularProgress } from '@mui/material';
 import { Controller, useForm } from 'react-hook-form';
 import { Auth } from '../../types';
 import './LoginForm.scss';
@@ -16,15 +16,15 @@ type Props = {
 };
 
 const LoginForm = ({ formData, setFormData, intl }: Props) => {
+  const [loading, setLoading] = useState(false);
   const [isLoginError, setLoginError] = useState(false);
   const { control, handleSubmit } = useForm({
     reValidateMode: 'onBlur'
   });
-
   const navigate = useNavigate();
 
   const onSubmit = (data: any) => {
-    // console.log(data);
+    setLoading(true);
     setFormData({ ...formData, ...data });
     setLoginError(false);
     authenticator(data)
@@ -49,6 +49,7 @@ const LoginForm = ({ formData, setFormData, intl }: Props) => {
         console.log(err);
         setLoginError(true);
       });
+    setLoading(false);
   };
 
   const LOGIN_FIELDS = [
@@ -65,62 +66,65 @@ const LoginForm = ({ formData, setFormData, intl }: Props) => {
   ];
 
   return (
-    <Grid container className="login-card">
-      {isLoginError && (
-        <Grid component="form" container spacing={3}>
-          <Grid item xs={12}>
-            <div className="login-error">
-              <ErrorIcon className="login-svg" />
-              {intl.formatMessage({
-                id: 'authForm.form.error'
-              })}
-            </div>
-          </Grid>
-        </Grid>
-      )}
-      <Grid component="form" container spacing={3} justifyContent="center" alignItems="center">
-        {LOGIN_FIELDS.map((key, index) => {
-          return (
-            <Grid key={index} item xs={12}>
-              <Controller
-                control={control}
-                name={key.id}
-                rules={key.rules}
-                render={({ field, fieldState: { error } }: any) => (
-                  <TextField
-                    {...field}
-                    fullWidth
-                    variant="outlined"
-                    label={intl.formatMessage({ id: `authForm.form.label.${key.id}` })}
-                    error={error !== undefined}
-                    type={key.type}
-                    helperText={
-                      error
-                        ? intl.formatMessage({
-                            id: `authForm.form.error.${key.id}.${[error.type]}`
-                          })
-                        : ''
-                    }
-                  />
-                )}
-              />
+    <>
+      {loading && <CircularProgress />}
+      <Grid container className="login-card">
+        {isLoginError && (
+          <Grid component="form" container spacing={3}>
+            <Grid item xs={12}>
+              <div className="login-error">
+                <ErrorIcon className="login-svg" />
+                {intl.formatMessage({
+                  id: 'authForm.form.error'
+                })}
+              </div>
             </Grid>
-          );
-        })}
-      </Grid>
-      <Grid container className="button-container" spacing={3}>
-        <Button component={Link} to={'/register'}>
-          {intl.formatMessage({
-            id: 'authForm.button.signup'
+          </Grid>
+        )}
+        <Grid component="form" container spacing={3} justifyContent="center" alignItems="center">
+          {LOGIN_FIELDS.map((key, index) => {
+            return (
+              <Grid key={index} item xs={12}>
+                <Controller
+                  control={control}
+                  name={key.id}
+                  rules={key.rules}
+                  render={({ field, fieldState: { error } }: any) => (
+                    <TextField
+                      {...field}
+                      fullWidth
+                      variant="outlined"
+                      label={intl.formatMessage({ id: `authForm.form.label.${key.id}` })}
+                      error={error !== undefined}
+                      type={key.type}
+                      helperText={
+                        error
+                          ? intl.formatMessage({
+                              id: `authForm.form.error.${key.id}.${[error.type]}`
+                            })
+                          : ''
+                      }
+                    />
+                  )}
+                />
+              </Grid>
+            );
           })}
-        </Button>
-        <Button variant="contained" type="submit" onClick={handleSubmit(onSubmit)}>
-          {intl.formatMessage({
-            id: 'authForm.button.submit'
-          })}
-        </Button>
+        </Grid>
+        <Grid container className="button-container" spacing={3}>
+          <Button component={Link} to={'/register'}>
+            {intl.formatMessage({
+              id: 'authForm.button.signup'
+            })}
+          </Button>
+          <Button variant="contained" type="submit" onClick={handleSubmit(onSubmit)}>
+            {intl.formatMessage({
+              id: 'authForm.button.submit'
+            })}
+          </Button>
+        </Grid>
       </Grid>
-    </Grid>
+    </>
   );
 };
 
