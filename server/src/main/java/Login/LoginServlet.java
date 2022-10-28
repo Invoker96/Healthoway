@@ -13,8 +13,6 @@ import javax.servlet.http.HttpServletResponse;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import com.mysql.cj.xdevapi.JsonParser;
-
 import Manager.ConnectionManager;
 
 public class LoginServlet extends HttpServlet{
@@ -27,26 +25,28 @@ public class LoginServlet extends HttpServlet{
 		String username= value[0];
 		String password= value[1];
 
-		String role = "";
+		String[] result = new String[2];
 		try {
-			role = ConnectionManager.loginCheck(username, password);
+			result = ConnectionManager.loginCheck(username, password);
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		
-		response.setContentType("text/html");
+		response.setContentType("application/json");
 		response.setCharacterEncoding("UTF-8");
 		PrintWriter out = response.getWriter();
-
-		out.println("<html><body>");
-		if(!role.isEmpty()) {
-			out.println("<h1>Hello"+role+"</h1>");
+		JSONObject obj = new JSONObject();
+		
+		if(result!=null) {
+			obj.put("role", result[0]);
+			obj.put("name", result[1]);
 		}
 		else {
-			out.println("<h1>No Record Found</h1>");
+			obj.put("role", "NA");
+			
 		}
-		out.println("</body></html>");
+		out.println(obj);
 	}
 
 	private String readFromRequest(HttpServletRequest req) throws IOException {
