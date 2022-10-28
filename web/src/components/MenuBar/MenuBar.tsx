@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom';
 import Box from '@mui/material/Box';
 import Toolbar from '@mui/material/Toolbar';
 import Button from '@mui/material/Button';
-import Image from '../../assests/logo.png';
+import Image from '../../assets/logo.png';
 import './MenuBar.scss';
 
 type Props = {
