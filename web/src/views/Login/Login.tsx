@@ -18,7 +18,7 @@ const Login = () => {
 
   return (
     <Grid container direction="column" className="sign-up-container">
-      <img src={img} className="logo" height="400" width="400" />
+      <img src={img} className="logo" height="230" width="230" />
       {loginPage}
     </Grid>
   );

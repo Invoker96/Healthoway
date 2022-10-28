@@ -1,5 +1,9 @@
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
+import CounsellorHome from './Counsellor/CounsellorHome';
+import DoctorHome from './Doctor/DoctorHome';
 import Login from './Login/Login';
+import ManagerHome from './Manager/ManagerHome';
+import PatientHome from './Patient/PatientHome';
 import SignUp from './SignUp/SignUp';
 
 const AppRoutes = () => {
@@ -8,6 +12,10 @@ const AppRoutes = () => {
       <Routes>
         <Route path="/" element={<Login />} />
         <Route path="register" element={<SignUp />} />
+        <Route path="doctorHome" element={<DoctorHome />} />
+        <Route path="patientHome" element={<PatientHome />} />
+        <Route path="counsellorHome" element={<CounsellorHome />} />
+        <Route path="managerHome" element={<ManagerHome />} />
       </Routes>
     </BrowserRouter>
   );
