@@ -26,6 +26,10 @@ const theme = createTheme({
       fontSize: '1.2rem',
       fontWeight: 300,
       color: variables.GREY_03
+    },
+    h3: {
+      fontSize: '1.2rem',
+      fontWeight: 'bold'
     }
   }
 });

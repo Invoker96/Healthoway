@@ -7,6 +7,7 @@ import UserForm from '../../components/SignUp/UserForm';
 import { UserType } from '../../types';
 import { createUser } from '../../services/userService';
 import './SignUp.scss';
+import DisclaimerForm from '../../components/SignUp/DisclaimerForm';
 
 const SignUp = () => {
   const [page, setPage] = useState(0);
@@ -23,7 +24,8 @@ const SignUp = () => {
   const signUpPages = useMemo(() => {
     return [
       <RoleForm page={page} setPage={setPage} formData={formData} setFormData={setFormData} />,
-      <UserForm page={page} setPage={setPage} formData={formData} setFormData={setFormData} />
+      <UserForm page={page} setPage={setPage} formData={formData} setFormData={setFormData} />,
+      <DisclaimerForm page={page} setPage={setPage} formData={formData} setFormData={setFormData} />
     ];
   }, [formData, page]);
 

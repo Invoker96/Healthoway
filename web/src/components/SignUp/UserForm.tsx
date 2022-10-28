@@ -95,7 +95,7 @@ const RoleForm = ({ page, setPage, formData, setFormData, intl }: Props) => {
         </Button>
         <Button variant="contained" type="submit" onClick={handleSubmit(onSubmit)}>
           {intl.formatMessage({
-            id: 'userForm.button.submit'
+            id: 'userForm.button.next'
           })}
         </Button>
       </Grid>
