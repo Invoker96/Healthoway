@@ -25,5 +25,15 @@
   "authForm.form.error.password.required": "Password is required",
   "authForm.button.submit": "LOGIN",
   "authForm.button.signup": "SIGN UP",
-  "authForm.form.error": "Username/Password is incorrect"
+  "authForm.form.error": "Username/Password is incorrect",
+  "landingPage.workingHoursTitle": "Working Hours",
+  "landingPage.workingHours1": "Monday-Friday: 09:00 - 20:00",
+  "landingPage.workingHours2": "Saturday: 11:00 - 18:00",
+  "landingPage.workingHours3": "Sunday: Closed",
+  "landingPage.patientReviewTitle": "Patient Review",
+  "landingPage.patientReview": "\"What a miracle! 3 months after consulting doctor Gabriel, I have started feeling relaxed and have reduced symptoms.\"",
+  "landingPage.patientName": " - Adam",
+  "landingPage.addressTitle": "Address",
+  "landingPage.addressLine1": "1575 Summerhill Avenue, Montreal",
+  "landingPage.addressLine2": "Quebec, H3H 1C5"
 }
