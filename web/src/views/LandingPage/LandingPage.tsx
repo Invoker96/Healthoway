@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react';
 import { injectIntl } from 'react-intl';
 import { Button, Grid, Container, Typography, Paper, Box } from '@mui/material';
 import MenuBar from '../../components/MenuBar/MenuBar';
-import bg from '../../assests/landingImage.jpg';
+import bg from '../../assets/landingImage.jpg';
 import './LandingPage.scss';
 
 type Props = {
