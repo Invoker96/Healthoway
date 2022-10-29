@@ -4,14 +4,17 @@ import { useNavigate } from 'react-router-dom';
 import { Grid } from '@mui/material';
 import RoleForm from '../../components/SignUp/RoleForm';
 import UserForm from '../../components/SignUp/UserForm';
+import DisclaimerForm from '../../components/SignUp/DisclaimerForm';
 import { UserType } from '../../types';
 import { createUser } from '../../services/userService';
 import './SignUp.scss';
-import DisclaimerForm from '../../components/SignUp/DisclaimerForm';
+import LoadingSpinner from '../../components/common/LoadingSpinner/LoadingSpinner';
 
 const SignUp = () => {
-  const [page, setPage] = useState(0);
   const navigate = useNavigate();
+
+  const [page, setPage] = useState(0);
+  const [loading, setLoading] = useState(false);
 
   //state for form data
   const [formData, setFormData] = useState({
@@ -32,13 +35,16 @@ const SignUp = () => {
   useEffect(() => {
     //submitted clicked
     if (page >= signUpPages.length) {
+      setLoading(true);
       createUser(formData);
+      setLoading(false);
       navigate('/');
     }
   }, [page, formData, signUpPages, navigate]);
 
   return (
     <Grid container className="sign-up-container">
+      <LoadingSpinner isOpen={loading} />
       {signUpPages[page]}
     </Grid>
   );

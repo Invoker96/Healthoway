@@ -17,7 +17,6 @@ const DisclaimerForm = ({ page, setPage, formData, setFormData, intl }: Props) =
   const { control, handleSubmit } = useForm({
     reValidateMode: 'onBlur'
   });
-
   const disclaimerTypes = ['website', 'professional'];
 
   const onSubmit = () => {
@@ -48,20 +47,25 @@ const DisclaimerForm = ({ page, setPage, formData, setFormData, intl }: Props) =
             </Typography>
           </Grid>
         ))}
-        <Grid item className="disclaimer-checkbox-container">
-          <Controller
-            name={'disclaimer'}
-            control={control}
-            render={({ field: props }) => (
-              <Checkbox
-                {...props}
-                checked={props.value}
-                onChange={(e) => props.onChange(e.target.checked)}
-              />
-            )}
-          />
-          <Typography>{intl.formatMessage({ id: 'disclaimerForm.agree.label' })}</Typography>
-        </Grid>
+        <Controller
+          name={'disclaimer'}
+          control={control}
+          rules={{ required: true }}
+          render={({ field: props, fieldState: { error } }: any) => {
+            return (
+              <Grid item className="disclaimer-checkbox-container">
+                <Checkbox
+                  {...props}
+                  checked={props.value}
+                  onChange={(e) => props.onChange(e.target.checked)}
+                />
+                <Typography className={`${error ? 'error-text' : ''}`}>
+                  {intl.formatMessage({ id: 'disclaimerForm.agree.label' })}
+                </Typography>
+              </Grid>
+            );
+          }}
+        />
       </Grid>
       <Grid container className="button-container">
         <Button variant="contained" onClick={() => setPage(page - 1)}>
