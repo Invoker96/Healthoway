@@ -1,4 +1,3 @@
-import { useState } from 'react';
 import { injectIntl } from 'react-intl';
 import { Button, Grid, Checkbox, Typography } from '@mui/material';
 import { Controller, useForm } from 'react-hook-form';
@@ -48,20 +47,25 @@ const DisclaimerForm = ({ page, setPage, formData, setFormData, intl }: Props) =
             </Typography>
           </Grid>
         ))}
-        <Grid item className="disclaimer-checkbox-container">
-          <Controller
-            name={'disclaimer'}
-            control={control}
-            render={({ field: props }) => (
-              <Checkbox
-                {...props}
-                checked={props.value}
-                onChange={(e) => props.onChange(e.target.checked)}
-              />
-            )}
-          />
-          <Typography>{intl.formatMessage({ id: 'disclaimerForm.agree.label' })}</Typography>
-        </Grid>
+        <Controller
+          name={'disclaimer'}
+          control={control}
+          rules={{ required: true }}
+          render={({ field: props, fieldState: { error } }: any) => {
+            return (
+              <Grid item className="disclaimer-checkbox-container">
+                <Checkbox
+                  {...props}
+                  checked={props.value}
+                  onChange={(e) => props.onChange(e.target.checked)}
+                />
+                <Typography className={`${error ? 'error-text' : ''}`}>
+                  {intl.formatMessage({ id: 'disclaimerForm.agree.label' })}
+                </Typography>
+              </Grid>
+            );
+          }}
+        />
       </Grid>
       <Grid container className="button-container">
         <Button variant="contained" onClick={() => setPage(page - 1)}>

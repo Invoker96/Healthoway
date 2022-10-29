@@ -25,7 +25,7 @@
   "disclaimerForm.website.description": "The information provided by Healthoway (\"we,\" \"us,\" or \"our\") on https://healthoway.org.ca (the \"Site\") is for general informational purposes only. All information on  is provided in good faith, however we make no representation or warranty of any kind, express or implied, regarding the accuracy, adequacy, validity, reliability, availability, or completeness of any information on the Site. UNDER NO CIRCUMSTANCE SHALL WE HAVE ANY LIABILITY TO YOU FOR ANY LOSS OR DAMAGE OF ANY KIND INCURRED AS A RESULT OF THE USE OF OR RELIANCE ON ANY INFORMATION PROVIDED ON . YOUR USE OF  AND YOUR RELIANCE ON ANY INFORMATION ON IS SOLELY AT YOUR OWN RISK.",
   "disclaimerForm.professional.title": "Professional Disclaimer",
   "disclaimerForm.professional.description": "The Site cannot and does not contain medical/health advice. The medical/health information is provided for general informational and educational purposes only and is not a substitute for professional advice. Accordingly, before taking any actions based upon such information, we encourage you to consult with the appropriate professionals. THE USE OR RELIANCE OF ANY INFORMATION CONTAINED ON THE SITE IS SOLELY AT YOUR OWN RISK.",
-  "disclaimerForm.agree.label": "I have read the disclaimer and agree to the terms and conditions as mentioned.",
+  "disclaimerForm.agree.label": "* I have read the disclaimer and agree to the terms and conditions as mentioned.",
   "authForm.form.label.username": "Username",
   "authForm.form.label.password": "Password",
   "authForm.form.error.username.required": "Username is required",
