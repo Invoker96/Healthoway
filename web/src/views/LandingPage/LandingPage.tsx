@@ -1,7 +1,7 @@
 import { injectIntl } from 'react-intl';
 import { Grid, Typography, Box } from '@mui/material';
 import MenuBar from '../../components/MenuBar/MenuBar';
-import bg from '../../assets/landingImage.jpg';
+import bg from '../../assets/LandingImg.jpg';
 import './LandingPage.scss';
 
 type Props = {
