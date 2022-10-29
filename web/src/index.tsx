@@ -1,4 +1,4 @@
-import { deepPurple } from '@mui/material/colors';
+import { deepPurple, lightBlue } from '@mui/material/colors';
 import { createTheme, ThemeProvider, StyledEngineProvider } from '@mui/material/styles';
 import ReactDOM from 'react-dom/client';
 import { IntlProvider } from 'react-intl';
@@ -15,6 +15,9 @@ const theme = createTheme({
   palette: {
     primary: {
       main: deepPurple[500]
+    },
+    secondary: {
+      main: lightBlue[100]
     }
   },
   typography: {
@@ -26,6 +29,10 @@ const theme = createTheme({
       fontSize: '1.2rem',
       fontWeight: 300,
       color: variables.GREY_03
+    },
+    h3: {
+      fontSize: '1.2rem',
+      fontWeight: 'bold'
     }
   }
 });

@@ -20,12 +20,24 @@ const MenuBar = ({ intl }: Props) => {
             <img className="home_logo" src={Image}></img>
           </Box>
           <Box sx={{ display: { xs: 'none', sm: 'block' } }}>
-            <Button className="actionBtn" variant="contained" component={Link} to={'/login'}>
+            <Button
+              className="actionBtn"
+              variant="outlined"
+              color="secondary"
+              component={Link}
+              to={'/login'}
+            >
               {intl.formatMessage({
                 id: 'authForm.button.submit'
               })}
             </Button>
-            <Button className="actionBtn" variant="contained" component={Link} to={'/register'}>
+            <Button
+              className="actionBtn"
+              variant="outlined"
+              color="secondary"
+              component={Link}
+              to={'/register'}
+            >
               {intl.formatMessage({
                 id: 'authForm.button.signup'
               })}

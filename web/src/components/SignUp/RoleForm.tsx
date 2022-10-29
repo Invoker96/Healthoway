@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 import { injectIntl } from 'react-intl';
-import { Button, Grid, IconButton, Typography } from '@mui/material';
+import { Button, Grid, Typography } from '@mui/material';
 import { LocalHospital, Masks, PsychologyAlt } from '@mui/icons-material';
 import { User, UserType } from '../../types';
 import './SignUp.scss';
@@ -25,12 +25,12 @@ const RoleForm = ({ page, setPage, formData, setFormData, intl }: Props) => {
     <Grid className="form-card">
       <Typography variant="h1">
         {intl.formatMessage({
-          id: 'role.title'
+          id: 'roleForm.title'
         })}
       </Typography>
       <Typography variant="h2">
         {intl.formatMessage({
-          id: 'role.label'
+          id: 'roleForm.label'
         })}
       </Typography>
       <Grid container justifyContent="space-around">
@@ -41,7 +41,7 @@ const RoleForm = ({ page, setPage, formData, setFormData, intl }: Props) => {
         >
           <Button size="large" onClick={() => setUserType(UserType.PATIENT)}>
             <Masks />
-            <Typography>{intl.formatMessage({ id: 'role.button.patient' })}</Typography>
+            <Typography>{intl.formatMessage({ id: 'role.patient' })}</Typography>
           </Button>
         </Grid>
         <Grid
@@ -51,7 +51,7 @@ const RoleForm = ({ page, setPage, formData, setFormData, intl }: Props) => {
         >
           <Button size="large" onClick={() => setUserType(UserType.COUNSELLOR)}>
             <PsychologyAlt />
-            <Typography>{intl.formatMessage({ id: 'role.button.counsellor' })}</Typography>
+            <Typography>{intl.formatMessage({ id: 'role.counsellor' })}</Typography>
           </Button>
         </Grid>
         <Grid
@@ -61,7 +61,7 @@ const RoleForm = ({ page, setPage, formData, setFormData, intl }: Props) => {
         >
           <Button size="large" onClick={() => setUserType(UserType.DOCTOR)}>
             <LocalHospital />
-            <Typography>{intl.formatMessage({ id: 'role.button.doctor' })}</Typography>
+            <Typography>{intl.formatMessage({ id: 'role.doctor' })}</Typography>
           </Button>
         </Grid>
       </Grid>
@@ -73,7 +73,7 @@ const RoleForm = ({ page, setPage, formData, setFormData, intl }: Props) => {
           }}
         >
           {intl.formatMessage({
-            id: 'role.button.next'
+            id: 'userForm.button.next'
           })}
         </Button>
       </Grid>
