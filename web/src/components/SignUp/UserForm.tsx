@@ -1,6 +1,6 @@
-import React, { useState, useEffect } from 'react';
+import React from 'react';
 import { injectIntl } from 'react-intl';
-import { Button, Grid, Box, TextField, Typography, CircularProgress } from '@mui/material';
+import { Button, Grid, TextField, Typography } from '@mui/material';
 import { Controller, useForm } from 'react-hook-form';
 import { User } from '../../types';
 import './SignUp.scss';
@@ -17,13 +17,10 @@ const RoleForm = ({ page, setPage, formData, setFormData, intl }: Props) => {
   const { control, handleSubmit, getValues } = useForm({
     reValidateMode: 'onBlur'
   });
-  const [loading, setLoading] = useState(false);
 
-  const onSubmit = (data: any) => {
-    setLoading(true);
+  const onSubmit = async (data: any) => {
     setFormData({ ...formData, ...data });
     setPage(page + 1);
-    setLoading(false);
   };
 
   const USER_FIELDS = [
@@ -51,7 +48,6 @@ const RoleForm = ({ page, setPage, formData, setFormData, intl }: Props) => {
 
   return (
     <>
-      {loading && <CircularProgress />}
       <Grid container className="form-card">
         <Typography variant="h1">
           {intl.formatMessage({
@@ -101,7 +97,7 @@ const RoleForm = ({ page, setPage, formData, setFormData, intl }: Props) => {
           </Button>
           <Button variant="contained" type="submit" onClick={handleSubmit(onSubmit)}>
             {intl.formatMessage({
-              id: 'userForm.button.submit'
+              id: 'userForm.button.next'
             })}
           </Button>
         </Grid>

@@ -1,3 +1,4 @@
+import { useState } from 'react';
 import { injectIntl } from 'react-intl';
 import { Button, Grid, Checkbox, Typography } from '@mui/material';
 import { Controller, useForm } from 'react-hook-form';
@@ -17,7 +18,6 @@ const DisclaimerForm = ({ page, setPage, formData, setFormData, intl }: Props) =
   const { control, handleSubmit } = useForm({
     reValidateMode: 'onBlur'
   });
-
   const disclaimerTypes = ['website', 'professional'];
 
   const onSubmit = () => {
