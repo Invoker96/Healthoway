@@ -31,4 +31,18 @@ public class ConnectionManager {
 			return null;
 		}
 	}
+
+	public static void registerUser(String name, String username, String password, String user_role, String role_id, String email, String address, String dob, String pnum)throws SQLException{
+		PreparedStatement ps = con.prepareStatement("INSERT INTO SOEN6841.USERS (`FULLNAME`,`USERNAME`,`PASWORD`,`USER_ROLE`,`ROLE_ID`,`EMAIL`,`ADDRESS`,`DOB`,`PNUM`)" + "VALUES(?,?,?,?,?,?,?,?,?)");
+		ps.setString(1,name);
+		ps.setString(2,username);
+		ps.setString(3,password);
+		ps.setString(4,user_role);
+		ps.setString(5,role_id);
+		ps.setString(6,email);
+		ps.setString(7,address);
+		ps.setString(8,dob);
+		ps.setString(9,pnum);
+		ps.executeUpdate();
+	}
 }
