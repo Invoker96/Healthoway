@@ -3,11 +3,11 @@ package model;
 import enums.UserRole;
 
 import java.time.LocalDate;
-import java.util.Date;
 
 public class User {
     private Long id;
     private String fullName;
+    private String username;
     private String email;
     private String password;
     private UserRole userRole;
@@ -26,6 +26,14 @@ public class User {
 
     public String getFullName() {
         return fullName;
+    }
+
+    public String getUsername() {
+        return username;
+    }
+
+    public void setUsername(String username) {
+        this.username = username;
     }
 
     public void setFullName(String fullName) {
