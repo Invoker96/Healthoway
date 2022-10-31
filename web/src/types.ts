@@ -1,11 +1,11 @@
 export type User = {
-  name: string;
+  fullName: string;
   email: string;
   password: string;
-  type: UserType;
+  userRole: RoleType;
 };
 
-export enum UserType {
+export enum RoleType {
   PATIENT = 'Patient',
   COUNSELLOR = 'Counsellor',
   DOCTOR = 'Doctor',

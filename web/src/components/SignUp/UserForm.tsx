@@ -25,7 +25,7 @@ const RoleForm = ({ page, setPage, formData, setFormData, intl }: Props) => {
 
   const USER_FIELDS = [
     {
-      id: 'name',
+      id: 'fullName',
       type: 'text',
       rules: { required: true }
     },

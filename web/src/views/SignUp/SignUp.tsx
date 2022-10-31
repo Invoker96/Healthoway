@@ -5,7 +5,7 @@ import { Grid } from '@mui/material';
 import RoleForm from '../../components/SignUp/RoleForm';
 import UserForm from '../../components/SignUp/UserForm';
 import DisclaimerForm from '../../components/SignUp/DisclaimerForm';
-import { UserType } from '../../types';
+import { RoleType } from '../../types';
 import { createUser } from '../../services/userService';
 import './SignUp.scss';
 import LoadingSpinner from '../../components/common/LoadingSpinner/LoadingSpinner';
@@ -18,10 +18,10 @@ const SignUp = () => {
 
   //state for form data
   const [formData, setFormData] = useState({
-    name: '',
+    fullName: '',
     email: '',
     password: '',
-    type: UserType.PATIENT
+    userRole: RoleType.PATIENT
   });
 
   const signUpPages = useMemo(() => {
