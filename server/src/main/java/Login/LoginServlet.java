@@ -1,6 +1,5 @@
 package Login;
 
-import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.sql.SQLException;
@@ -14,13 +13,14 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import Manager.ConnectionManager;
+import util.HttpUtils;
 
 public class LoginServlet extends HttpServlet{
 
 	@Override
-	protected void service(HttpServletRequest req, HttpServletResponse response) throws ServletException, IOException {
+	protected void doPost(HttpServletRequest req, HttpServletResponse response) throws ServletException, IOException {
 
-		String data = readFromRequest(req);
+		String data = HttpUtils.readFromRequest(req);
 		String[] value= getValues(data);
 		String username= value[0];
 		String password= value[1];
@@ -47,19 +47,7 @@ public class LoginServlet extends HttpServlet{
 			
 		}
 		out.println(obj);
-	}
-
-	private String readFromRequest(HttpServletRequest req) throws IOException {
-		// Read from request
-		StringBuilder buffer = new StringBuilder();
-		BufferedReader reader = req.getReader();
-		String line;
-		while ((line = reader.readLine()) != null) {
-			buffer.append(line);
-			buffer.append(System.lineSeparator());
-		}
-		return buffer.toString();
-
+		out.flush();
 	}
 
 	private String[] getValues(String data) {

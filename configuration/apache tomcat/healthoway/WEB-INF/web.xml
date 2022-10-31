@@ -8,9 +8,17 @@
 		<servlet-name>Login</servlet-name>
 		<servlet-class>Login.LoginServlet</servlet-class>
 	</servlet>
+	<servlet>
+		<servlet-name>User</servlet-name>
+		<servlet-class>User.UserServlet</servlet-class>
+	</servlet>
 	<servlet-mapping>
 		<servlet-name>Login</servlet-name>
 		<url-pattern>/login</url-pattern>
+	</servlet-mapping>
+	<servlet-mapping>
+		<servlet-name>User</servlet-name>
+		<url-pattern>/users</url-pattern>
 	</servlet-mapping>
 	<resource-ref>
 		<description>MySQL Connection</description>
@@ -23,7 +31,7 @@
     <filter-class>org.apache.catalina.filters.CorsFilter</filter-class>
     <init-param>
         <param-name>cors.allowed.origins</param-name>
-        <param-value>http://localhost:3000</param-value>
+        <param-value>*</param-value>
     </init-param>
     <init-param>
         <param-name>cors.allowed.methods</param-name>

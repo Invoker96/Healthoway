@@ -25,7 +25,12 @@ const RoleForm = ({ page, setPage, formData, setFormData, intl }: Props) => {
 
   const USER_FIELDS = [
     {
-      id: 'name',
+      id: 'username',
+      type: 'text',
+      rules: { required: true }
+    },
+    {
+      id: 'fullName',
       type: 'text',
       rules: { required: true }
     },
@@ -33,6 +38,10 @@ const RoleForm = ({ page, setPage, formData, setFormData, intl }: Props) => {
       id: 'email',
       type: 'email',
       rules: { required: true, pattern: /^\w+([.-]?\w+)*@\w+([.-]?\w+)*(\.\w{2,3})+$/ }
+    },
+    {
+      id: 'address',
+      type: 'text'
     },
     {
       id: 'password',

@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react';
 import { injectIntl } from 'react-intl';
 import { Button, Grid, Typography } from '@mui/material';
 import { LocalHospital, Masks, PsychologyAlt } from '@mui/icons-material';
-import { User, UserType } from '../../types';
+import { User, RoleType } from '../../types';
 import './SignUp.scss';
 import './RoleForm.scss';
 
@@ -15,11 +15,11 @@ type Props = {
 };
 
 const RoleForm = ({ page, setPage, formData, setFormData, intl }: Props) => {
-  const [userType, setUserType] = useState(UserType.PATIENT);
+  const [userRole, setUserRole] = useState(RoleType.PATIENT);
 
   useEffect(() => {
-    setFormData({ ...formData, type: userType });
-  }, [formData, setFormData, userType]);
+    setFormData({ ...formData, userRole: userRole });
+  }, [formData, setFormData, userRole]);
 
   return (
     <Grid className="form-card">
@@ -37,9 +37,9 @@ const RoleForm = ({ page, setPage, formData, setFormData, intl }: Props) => {
         <Grid
           item
           xs={3}
-          className={`role-card-container ${userType === UserType.PATIENT ? 'selected' : ''}`}
+          className={`role-card-container ${userRole === RoleType.PATIENT ? 'selected' : ''}`}
         >
-          <Button size="large" onClick={() => setUserType(UserType.PATIENT)}>
+          <Button size="large" onClick={() => setUserRole(RoleType.PATIENT)}>
             <Masks />
             <Typography>{intl.formatMessage({ id: 'role.patient' })}</Typography>
           </Button>
@@ -47,9 +47,9 @@ const RoleForm = ({ page, setPage, formData, setFormData, intl }: Props) => {
         <Grid
           item
           xs={3}
-          className={`role-card-container ${userType === UserType.COUNSELLOR ? 'selected' : ''}`}
+          className={`role-card-container ${userRole === RoleType.COUNSELLOR ? 'selected' : ''}`}
         >
-          <Button size="large" onClick={() => setUserType(UserType.COUNSELLOR)}>
+          <Button size="large" onClick={() => setUserRole(RoleType.COUNSELLOR)}>
             <PsychologyAlt />
             <Typography>{intl.formatMessage({ id: 'role.counsellor' })}</Typography>
           </Button>
@@ -57,9 +57,9 @@ const RoleForm = ({ page, setPage, formData, setFormData, intl }: Props) => {
         <Grid
           item
           xs={3}
-          className={`role-card-container ${userType === UserType.DOCTOR ? 'selected' : ''}`}
+          className={`role-card-container ${userRole === RoleType.DOCTOR ? 'selected' : ''}`}
         >
-          <Button size="large" onClick={() => setUserType(UserType.DOCTOR)}>
+          <Button size="large" onClick={() => setUserRole(RoleType.DOCTOR)}>
             <LocalHospital />
             <Typography>{intl.formatMessage({ id: 'role.doctor' })}</Typography>
           </Button>
