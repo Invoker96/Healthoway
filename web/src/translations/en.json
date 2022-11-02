@@ -44,5 +44,17 @@
   "landingPage.patientName": " - Adam",
   "landingPage.addressTitle": "Address",
   "landingPage.addressLine1": "1575 Summerhill Avenue, Montreal",
-  "landingPage.addressLine2": "Quebec, H3H 1C5"
+  "landingPage.addressLine2": "Quebec, H3H 1C5",
+  "counsellor.title": "Counsellor Dashboard",
+  "counsellor.self_assign": "ASSIGN TO SELF",
+  "counsellor.doctor_assign": "ASSIGN TO DOCTOR",
+  "doctor.title": "Doctor Dashboard",
+  "counsellor.patient_name_title": "Patient Name",
+  "patient.title": "Patient Dashboard",
+  "patient.self_assessment": "COMPLETE SELF ASSESSMENT FORM",
+  "global.s_no": "S. NO",
+  "global.patient_name_title": "Patient Name",
+  "global.self_assessment_title": "VIEW SELF ASSESSMENT RESULTS",
+  "global.my_appointments": "My Appointments",
+  "global.reject": "REJECT"
 }
