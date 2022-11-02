@@ -1,5 +1,4 @@
 import { injectIntl } from 'react-intl';
-import { useEffect, useState } from 'react';
 import { Button, Grid, Typography, TextField } from '@mui/material';
 import './CounsellorHome.scss';
 
@@ -44,7 +43,7 @@ const CounsellorHome = ({ intl }: Props) => {
           {' '}
           <Button variant="contained">
             {intl.formatMessage({
-              id: 'counsellor.self_assessment_title'
+              id: 'global.self_assessment_title'
             })}
           </Button>
         </td>
@@ -68,7 +67,7 @@ const CounsellorHome = ({ intl }: Props) => {
           {' '}
           <Button variant="contained">
             {intl.formatMessage({
-              id: 'counsellor.reject'
+              id: 'global.reject'
             })}
           </Button>
         </td>
@@ -86,7 +85,7 @@ const CounsellorHome = ({ intl }: Props) => {
         </Typography>
         <Button variant="contained" className="my_appointment_btn">
           {intl.formatMessage({
-            id: 'counsellor.appointments'
+            id: 'global.my_appointments'
           })}
         </Button>
       </Grid>
@@ -106,7 +105,7 @@ const CounsellorHome = ({ intl }: Props) => {
                 <th>
                   <Typography variant="h3">
                     {intl.formatMessage({
-                      id: 'counsellor.patient_name_title'
+                      id: 'global.patient_name_title'
                     })}
                   </Typography>
                 </th>
