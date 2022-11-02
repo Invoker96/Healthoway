@@ -16,9 +16,9 @@ INSERT INTO `soen6841`.`users`
 (`FULLNAME`,`USERNAME`,`PASSWORD`,`USER_ROLE`,`ROLE_ID`,`EMAIL`,`ADDRESS`,`DOB`,
 `PNUM`)
 VALUES
-('Jon Wick','jonWick','dog','Doctor','D561344','jon52@hotmail.com','',
+('Jon Wick','jon52@hotmail.com','dog','Doctor','D561344','jon52@hotmail.com','',
 '1982-03-19','2144661245'),
-('GUSTAVO FRING','Gus','busns','Counsellor','S341344','gustavo.fring@gmail.com','123 Driver Lane',
+('GUSTAVO FRING','gustavo.fring@gmail.com','busns','Counsellor','S341344','gustavo.fring@gmail.com','123 Driver Lane',
 '1965-10-22','2144661245');
 
 INSERT INTO `soen6841`.`users`(`FULLNAME`, `USERNAME`,`PASSWORD`, `USER_ROLE`,`PNUM`) 
