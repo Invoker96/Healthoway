@@ -84,3 +84,49 @@ QUES7,QUES8,QUES9);
 */
 
 --------------------------------------------------------------------------------------
+
+-------------------------NEW 3-NOV-2022-----------------------------------------------
+
+ALTER TABLE SOEN6841.PATIENT_REQUESTS
+ADD QUES5 VARCHAR(255) NOT NULL;
+
+
+CREATE TABLE `soen6841`.`email_table` (
+  `ID` int NOT NULL,
+  `USERNAME` varchar(255) CHARACTER SET utf8mb3 COLLATE utf8mb3_unicode_ci NOT NULL,
+  `EMAIL` varchar(255) CHARACTER SET utf8mb3 COLLATE utf8mb3_unicode_ci NOT NULL,
+  `BODY` varchar(1000) CHARACTER SET utf8mb3 COLLATE utf8mb3_unicode_ci NOT NULL,
+  `SUBJECT` varchar(255) CHARACTER SET utf8mb3 COLLATE utf8mb3_unicode_ci NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3 COLLATE=utf8mb3_unicode_ci;
+
+
+Delimiter #
+CREATE TRIGGER `soen6841`.`patient_requests_AFTER_INSERT` 
+AFTER INSERT ON `patient_requests` FOR EACH ROW
+BEGIN
+	INSERT INTO SOEN6841.EMAIL_TABLE(ID,USERNAME,EMAIL,BODY,SUBJECT)
+    VALUES(new.ID,new.USERNAME,new.EMAIL,'Hi '||new.username||', You have requested appointment with a doctor. 
+    You will be notified as soon as we process your request.','Requested appointment for'||new.Username);
+END#
+
+CREATE TABLE `soen6841`.`appointments` (
+  `ID` int NOT NULL,
+  `REQ` int NOT NULL,
+  `USERNAME` varchar(255) CHARACTER SET utf8mb3 COLLATE utf8mb3_unicode_ci NOT NULL,
+  `EMAIL` varchar(255) CHARACTER SET utf8mb3 COLLATE utf8mb3_unicode_ci NOT NULL,
+  `APPOINTMENT` TIMESTAMP NOT NULL,
+  `ROLE` varchar(255) CHARACTER SET utf8mb3 COLLATE utf8mb3_unicode_ci NOT NULL,
+  `COMMENTS` varchar(1000) CHARACTER SET utf8mb3 COLLATE utf8mb3_unicode_ci NOT NULL,
+  PRIMARY KEY (`ID`,`REQ`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3 COLLATE=utf8mb3_unicode_ci;
+
+Delimiter #
+CREATE TRIGGER `soen6841`.`appointments_AFTER_INSERT` 
+AFTER INSERT ON `appointments` FOR EACH ROW
+BEGIN
+	INSERT INTO SOEN6841.EMAIL_TABLE(ID,USERNAME,EMAIL,BODY,SUBJECT)
+    VALUES(new.ID,new.USERNAME,new.EMAIL,'Hi '||new.username||',   You have a confirmed appointment with '||new.ROLE||' on '||new.appointment||'. 
+    Please make sure you attend the appointment.','Appointment confirmed for'||new.USERNAME);
+END#
+
+--------------------------------------------------------------------------------------
