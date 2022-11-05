@@ -1,7 +1,7 @@
 import { useEffect, useMemo, useState } from 'react';
 import { injectIntl } from 'react-intl';
 import { useNavigate } from 'react-router-dom';
-import { Grid } from '@mui/material';
+import { Grid, Link, Typography } from '@mui/material';
 import RoleForm from '../../components/SignUp/RoleForm';
 import UserForm from '../../components/SignUp/UserForm';
 import DisclaimerForm from '../../components/SignUp/DisclaimerForm';
@@ -10,7 +10,11 @@ import { createUser } from '../../services/userService';
 import './SignUp.scss';
 import LoadingSpinner from '../../components/common/LoadingSpinner/LoadingSpinner';
 
-const SignUp = () => {
+type Props = {
+  intl: any;
+};
+
+const SignUp = ({ intl }: Props) => {
   const navigate = useNavigate();
 
   const [page, setPage] = useState(0);
@@ -42,9 +46,14 @@ const SignUp = () => {
     }
   }, [page, formData, signUpPages, navigate]);
 
+  const onClickBackToLogin = () => {
+    navigate('/login');
+  };
+
   return (
     <Grid container className="sign-up-container">
       <LoadingSpinner isOpen={loading} />
+      <Link onClick={onClickBackToLogin}>{intl.formatMessage({ id: 'button.backToLogin' })}</Link>
       {signUpPages[page]}
     </Grid>
   );
