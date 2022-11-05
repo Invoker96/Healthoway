@@ -1,6 +1,9 @@
 import { injectIntl } from 'react-intl';
 import { Button, Grid, Typography, TextField } from '@mui/material';
 import './CounsellorHome.scss';
+import MenuBar from '../../components/MenuBar/MenuBar';
+import Footer from '../../components/Footer/Footer';
+import './CounsellorHome.scss';
 
 type Props = {
   intl: any;
@@ -64,37 +67,48 @@ const CounsellorHome = ({ intl }: Props) => {
           </Button>
         </td>
         <td>
-          {' '}
-          <Button variant="contained">
+          <Typography variant="h3">
             {intl.formatMessage({
               id: 'global.reject'
             })}
-          </Button>
+          </Typography>
         </td>
       </tr>
     );
   });
 
   return (
-    <Grid sx={{ mt: 3 }}>
-      <Grid container justifyContent="center">
-        <Typography variant="h1">
-          {intl.formatMessage({
-            id: 'counsellor.title'
-          })}
-        </Typography>
-        <Button variant="contained" className="my_appointment_btn">
-          {intl.formatMessage({
-            id: 'global.my_appointments'
-          })}
-        </Button>
-      </Grid>
-      <Grid container>
+    <>
+      <MenuBar
+        isCustomView
+        title={intl.formatMessage({
+          id: 'counsellor.title'
+        })}
+      />
+      <Grid sx={{ mt: 20 }}>
+        <Grid container justifyContent="center">
+          <Typography
+            variant="h1"
+            sx={{ display: { xs: 'flex', sm: 'flex', justifyContent: 'center' } }}
+            style={{ margin: '20px' }}
+          >
+            <u>
+              {intl.formatMessage({
+                id: 'global.list_of_patients'
+              })}
+            </u>
+          </Typography>
+          <Button variant="contained" className="my_appointment_btn">
+            {intl.formatMessage({
+              id: 'global.my_appointments'
+            })}
+          </Button>
+        </Grid>
         <Grid container justifyContent="space-around">
           <table className="table table-stripped">
             <thead>
               <tr>
-                <th style={{ padding: '10px' }}>
+                <th style={{ padding: '10px', border: 'none' }}>
                   {' '}
                   <Typography variant="h3">
                     {intl.formatMessage({
@@ -102,7 +116,7 @@ const CounsellorHome = ({ intl }: Props) => {
                     })}
                   </Typography>
                 </th>
-                <th>
+                <th style={{ border: 'none' }}>
                   <Typography variant="h3">
                     {intl.formatMessage({
                       id: 'global.patient_name_title'
@@ -115,7 +129,8 @@ const CounsellorHome = ({ intl }: Props) => {
           </table>
         </Grid>
       </Grid>
-    </Grid>
+      <Footer />
+    </>
   );
 };
 

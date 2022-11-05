@@ -1,16 +1,14 @@
 @import '../../variables.scss';
 
-.my_appointment_btn {
-    position: absolute;
-    right: 1%;
-    top: 8%;
-}
-
 thead, tbody, th, tr, td {
-    padding: 20px;
+    padding: 20px 120px;
 }
 
 td {
     border: 1px solid black;
     border-collapse: collapse;
+}
+
+.table-wrapper {
+    margin-top: 25px;
 }
