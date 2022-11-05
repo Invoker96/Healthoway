@@ -16,6 +16,7 @@
   "userForm.form.label.username": "Username",
   "userForm.form.label.address": "Address",
   "userForm.form.error.fullName.required": "Name is required",
+  "userForm.form.error.username.required": "Username is required",
   "userForm.form.error.email.required": "Email address is required",
   "userForm.form.error.password.required": "Password is required",
   "userForm.form.error.confirmPassword.required": "Password is required",
