@@ -1,5 +1,8 @@
 import { injectIntl } from 'react-intl';
 import { Button, Grid, Typography } from '@mui/material';
+import MenuBar from '../../components/MenuBar/MenuBar';
+import Footer from '../../components/Footer/Footer';
+import './DoctorHome.scss';
 
 type Props = {
   intl: any;
@@ -48,57 +51,65 @@ const DoctorHome = ({ intl }: Props) => {
         </td>
         <td>
           {' '}
-          <Button variant="contained">
+          <Typography variant="h3">
             {intl.formatMessage({
               id: 'global.reject'
             })}
-          </Button>
+          </Typography>
         </td>
       </tr>
     );
   });
 
   return (
-    <Grid sx={{ mt: 3 }}>
-      <Grid container justifyContent="center">
-        <Typography variant="h1">
-          {intl.formatMessage({
-            id: 'doctor.title'
-          })}
-        </Typography>
-      </Grid>
-      <Grid container sx={{ display: { xs: 'flex', sm: 'flex', justifyContent: 'center' } }}>
-        <Typography variant="h3" style={{ margin: '20px' }}>
-          {intl.formatMessage({
-            id: 'global.my_appointments'
-          })}
-        </Typography>
-        <Grid container justifyContent="space-around">
-          <table className="table table-stripped">
-            <thead>
-              <tr>
-                <th style={{ padding: '10px' }}>
-                  {' '}
-                  <Typography variant="h3">
-                    {intl.formatMessage({
-                      id: 'global.s_no'
-                    })}
-                  </Typography>
-                </th>
-                <th>
-                  <Typography variant="h3">
-                    {intl.formatMessage({
-                      id: 'global.patient_name_title'
-                    })}
-                  </Typography>
-                </th>
-              </tr>
-            </thead>
-            <tbody>{tableRows}</tbody>
-          </table>
+    <>
+      <MenuBar
+        isCustomView
+        title={intl.formatMessage({
+          id: 'doctor.title'
+        })}
+      />
+      <Grid sx={{ mt: 20 }}>
+        <Grid container sx={{ display: { xs: 'flex', sm: 'flex', justifyContent: 'center' } }}>
+          <Typography
+            variant="h1"
+            sx={{ display: { xs: 'flex', sm: 'flex', justifyContent: 'center' } }}
+            style={{ margin: '10px' }}
+          >
+            <u>
+              {intl.formatMessage({
+                id: 'global.my_appointments'
+              })}
+            </u>
+          </Typography>
+          <Grid container justifyContent="space-around">
+            <table className="table table-stripped table-wrapper">
+              <thead>
+                <tr>
+                  <th style={{ padding: '10px', border: 'none' }}>
+                    {' '}
+                    <Typography variant="h3">
+                      {intl.formatMessage({
+                        id: 'global.s_no'
+                      })}
+                    </Typography>
+                  </th>
+                  <th style={{ padding: '10px', border: 'none' }}>
+                    <Typography variant="h3">
+                      {intl.formatMessage({
+                        id: 'global.patient_name_title'
+                      })}
+                    </Typography>
+                  </th>
+                </tr>
+              </thead>
+              <tbody>{tableRows}</tbody>
+            </table>
+          </Grid>
         </Grid>
       </Grid>
-    </Grid>
+      <Footer />
+    </>
   );
 };
 
