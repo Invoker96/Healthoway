@@ -5,6 +5,7 @@ import Login from './Login/Login';
 import ManagerHome from './Manager/ManagerHome';
 import PatientHome from './Patient/PatientHome';
 import LandingPage from './LandingPage/LandingPage';
+import CounsellorAppointments from './CounsellorAppointments/CounsellorAppointments';
 import SignUp from './SignUp/SignUp';
 
 const AppRoutes = () => {
@@ -17,6 +18,7 @@ const AppRoutes = () => {
         <Route path="doctorHome" element={<DoctorHome />} />
         <Route path="patientHome" element={<PatientHome />} />
         <Route path="counsellorHome" element={<CounsellorHome />} />
+        <Route path="counsellor/appointments" element={<CounsellorAppointments />} />
         <Route path="managerHome" element={<ManagerHome />} />
       </Routes>
     </BrowserRouter>

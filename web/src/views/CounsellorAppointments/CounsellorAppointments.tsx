@@ -2,13 +2,13 @@ import { injectIntl } from 'react-intl';
 import { Button, Grid, Typography } from '@mui/material';
 import MenuBar from '../../components/MenuBar/MenuBar';
 import Footer from '../../components/Footer/Footer';
-import './DoctorHome.scss';
+import './CounsellorAppointments.scss';
 
 type Props = {
   intl: any;
 };
 
-const DoctorHome = ({ intl }: Props) => {
+const CounsellorAppointments = ({ intl }: Props) => {
   const PATIENTS_DATA = [
     {
       patient_name: 'Altouf',
@@ -27,24 +27,6 @@ const DoctorHome = ({ intl }: Props) => {
       assessment_form: 'text',
       date: '11/15/2022',
       time: '08:00 EST'
-    },
-    {
-      patient_name: 'Ray',
-      assessment_form: 'text',
-      date: '12/02/2022',
-      time: '11:00 EST'
-    },
-    {
-      patient_name: 'Jack',
-      assessment_form: 'text',
-      date: '12/14/2022',
-      time: '14:00 EST'
-    },
-    {
-      patient_name: 'Oliver',
-      assessment_form: 'text',
-      date: '11/28/2022',
-      time: '13:00 EST'
     }
   ];
 
@@ -80,7 +62,7 @@ const DoctorHome = ({ intl }: Props) => {
       <MenuBar
         isCustomView
         title={intl.formatMessage({
-          id: 'doctor.title'
+          id: 'counsellor.title'
         })}
       />
       <Grid sx={{ mt: 20 }}>
@@ -198,4 +180,4 @@ const DoctorHome = ({ intl }: Props) => {
   );
 };
 
-export default injectIntl(DoctorHome);
+export default injectIntl(CounsellorAppointments);
