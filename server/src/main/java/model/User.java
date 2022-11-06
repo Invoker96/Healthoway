@@ -2,10 +2,21 @@ package model;
 
 import enums.UserRole;
 
-import java.time.LocalDate;
+import java.io.Serializable;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import org.json.JSONObject;
 
-public class User {
-    private Long id;
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
+
+
+public class User implements Serializable{
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = -671784076038520948L;
+	private Long id;
     private String fullName;
     private String username;
     private String email;
@@ -13,7 +24,7 @@ public class User {
     private UserRole userRole;
     private String roleId;
     private String address;
-    private LocalDate dob;
+    private String dob;
     private String pNum;
 
     public Long getId() {
@@ -80,11 +91,11 @@ public class User {
         this.address = address;
     }
 
-    public LocalDate getDob() {
+    public String getDob() {
         return dob;
     }
 
-    public void setDob(LocalDate dob) {
+    public void setDob(String dob) {
         this.dob = dob;
     }
 
@@ -95,4 +106,30 @@ public class User {
     public void setPNum(String pNum) {
         this.pNum = pNum;
     }
+
+	public static User convertResultSet(ResultSet rs) throws SQLException {
+		User user = new User();
+		user.setId(Long.valueOf(rs.getString("ID")));
+		user.setFullName(rs.getString("FULLNAME"));
+		user.setUsername(rs.getString("USERNAME"));
+		user.setUserRole(UserRole.valueOf(rs.getString("USER_ROLE")));
+		user.setRoleId(rs.getString("ROLE_ID"));
+		user.setEmail(rs.getString("EMAIL"));
+		user.setPassword("********");
+//		Timestamp ts = new Timestamp(Long.valueOf(1667769339880L));
+//		user.setDob(ts.toLocalDateTime().toLocalDate());
+		
+		user.setDob(rs.getString("DOB"));
+		user.setAddress(rs.getString("ADDRESS"));
+		user.setPNum(rs.getString("PNUM"));
+		return user;
+	}
+
+	public static JSONObject convertIntoJSON(User user) throws JsonProcessingException {
+
+		String jsonString = new ObjectMapper().writeValueAsString(user);
+		return new JSONObject(jsonString);
+	}
+    
+	
 }
