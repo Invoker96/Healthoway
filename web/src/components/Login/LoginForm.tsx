@@ -29,8 +29,8 @@ const LoginForm = ({ formData, setFormData, intl }: Props) => {
     setLoginError(false);
     authenticator(data)
       .then(function (response) {
-        if (response?.data?.role !== 'NA') {
-          const role = response.data.role.toLowerCase();
+        if (response?.data?.userRole !== 'NA') {
+          const role = response.data.userRole.toLowerCase();
 
           if (role === 'doctor') {
             navigate('/doctorHome');
