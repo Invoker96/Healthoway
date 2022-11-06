@@ -32,6 +32,8 @@ import {
   removePatient
 } from '../../services/counsellorService';
 import Footer from '../../components/Footer/Footer';
+import CalendarMonthIcon from '@mui/icons-material/CalendarMonth';
+import { Link } from 'react-router-dom';
 import './CounsellorHome.scss';
 
 type Props = {
@@ -313,7 +315,12 @@ const CounsellorHome = ({ intl }: Props) => {
               })}
             </u>
           </Typography>
-          <Button variant="contained" className="my_appointment_btn">
+          <Button
+            variant="contained"
+            className="my_appointment_btn"
+            component={Link}
+            to={'/counsellor/appointments'}
+          >
             {intl.formatMessage({
               id: 'global.my_appointments'
             })}
@@ -400,6 +407,70 @@ const CounsellorHome = ({ intl }: Props) => {
               onRowsPerPageChange={handleChangeRowsPerPage}
             />
           </Paper>
+{/* <Grid container justifyContent="space-around" sx={{ mt: 3 }}>
+<table className="table table-stripped">
+  <thead>
+    <tr>
+      <th
+        style={{ padding: '10px', border: 'none', background: '#673ab7', color: 'white' }}
+      >
+        {' '}
+        <Typography variant="h3">
+          {intl.formatMessage({
+            id: 'global.s_no'
+          })}
+        </Typography>
+      </th>
+      <th
+        style={{ padding: '10px', border: 'none', background: '#673ab7', color: 'white' }}
+      >
+        <Typography variant="h3">
+          {intl.formatMessage({
+            id: 'global.patient_name_title'
+          })}
+        </Typography>
+      </th>
+      <th
+        style={{ padding: '10px', border: 'none', background: '#673ab7', color: 'white' }}
+      >
+        {' '}
+        <Typography variant="h3">
+          {intl.formatMessage({
+            id: 'global.results'
+          })}
+        </Typography>
+      </th>
+      <th
+        style={{ padding: '10px', border: 'none', background: '#673ab7', color: 'white' }}
+      >
+        <Typography variant="h3">
+          {intl.formatMessage({
+            id: 'counsellor.self_assign'
+          })}
+        </Typography>
+      </th>
+      <th
+        style={{ padding: '10px', border: 'none', background: '#673ab7', color: 'white' }}
+      >
+        <Typography variant="h3">
+          {intl.formatMessage({
+            id: 'counsellor.doctor_assign'
+          })}
+        </Typography>
+      </th>
+      <th
+        style={{ padding: '10px', border: 'none', background: '#673ab7', color: 'white' }}
+      >
+        <Typography variant="h3">
+          {intl.formatMessage({
+            id: 'global.reject_title'
+          })}
+        </Typography>
+      </th>
+    </tr>
+  </thead>
+  <tbody>{tableRows}</tbody>
+</table> */}
         </Grid>
       </Grid>
       {/* <Footer /> */}
