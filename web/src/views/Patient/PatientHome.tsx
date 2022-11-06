@@ -3,6 +3,7 @@ import { Button, Grid, Typography } from '@mui/material';
 import MenuBar from '../../components/MenuBar/MenuBar';
 import './PatientHome.scss';
 import FooterComp from '../../components/FooterComp/FooterComp';
+import { useNavigate } from 'react-router-dom';
 
 type Props = {
   intl: any;
@@ -35,6 +36,11 @@ const PatientHome = ({ intl }: Props) => {
       </tr>
     );
   });
+  const navigate = useNavigate();
+
+  const navigateToSelfAssessment = () => {
+    navigate('/patient/selfAssessment');
+  };
 
   return (
     <>
@@ -71,9 +77,10 @@ const PatientHome = ({ intl }: Props) => {
           variant="contained"
           style={{ margin: '20px' }}
           sx={{ display: { xs: 'flex', sm: 'flex', justifyContent: 'center' } }}
+          onClick={navigateToSelfAssessment}
         >
           {intl.formatMessage({
-            id: 'patient.self_assessment'
+            id: 'patientHome.button.selfAssessment'
           })}
         </Button>
         <Typography
