@@ -93,7 +93,9 @@ const PatientHome = ({ intl }: Props) => {
         <table className="table table-stripped table-container">
           <thead>
             <tr>
-              <th style={{ padding: '10px' }}>
+              <th
+                style={{ padding: '10px', border: 'none', background: '#673ab7', color: 'white' }}
+              >
                 {' '}
                 <Typography variant="h3">
                   {intl.formatMessage({
@@ -101,28 +103,36 @@ const PatientHome = ({ intl }: Props) => {
                   })}
                 </Typography>
               </th>
-              <th>
+              <th
+                style={{ padding: '10px', border: 'none', background: '#673ab7', color: 'white' }}
+              >
                 <Typography variant="h3">
                   {intl.formatMessage({
                     id: 'patient.appointment_with'
                   })}
                 </Typography>
               </th>
-              <th>
+              <th
+                style={{ padding: '10px', border: 'none', background: '#673ab7', color: 'white' }}
+              >
                 <Typography variant="h3">
                   {intl.formatMessage({
                     id: 'patient.name_title'
                   })}
                 </Typography>
               </th>
-              <th>
+              <th
+                style={{ padding: '10px', border: 'none', background: '#673ab7', color: 'white' }}
+              >
                 <Typography variant="h3">
                   {intl.formatMessage({
                     id: 'global.date'
                   })}
                 </Typography>
               </th>
-              <th>
+              <th
+                style={{ padding: '10px', border: 'none', background: '#673ab7', color: 'white' }}
+              >
                 <Typography variant="h3">
                   {intl.formatMessage({
                     id: 'global.time'

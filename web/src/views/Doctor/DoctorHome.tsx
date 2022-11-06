@@ -12,27 +12,39 @@ const DoctorHome = ({ intl }: Props) => {
   const PATIENTS_DATA = [
     {
       patient_name: 'Altouf',
-      assessment_form: 'text'
+      assessment_form: 'text',
+      date: '11/28/2022',
+      time: '14:30 EST'
     },
     {
       patient_name: 'Haider',
-      assessment_form: 'text'
+      assessment_form: 'text',
+      date: '12/15/2022',
+      time: '12:00 EST'
     },
     {
       patient_name: 'Dalie',
-      assessment_form: 'text'
+      assessment_form: 'text',
+      date: '11/15/2022',
+      time: '08:00 EST'
     },
     {
       patient_name: 'Ray',
-      assessment_form: 'text'
+      assessment_form: 'text',
+      date: '12/02/2022',
+      time: '11:00 EST'
     },
     {
       patient_name: 'Jack',
-      assessment_form: 'text'
+      assessment_form: 'text',
+      date: '12/14/2022',
+      time: '14:00 EST'
     },
     {
       patient_name: 'Oliver',
-      assessment_form: 'text'
+      assessment_form: 'text',
+      date: '11/28/2022',
+      time: '13:00 EST'
     }
   ];
 
@@ -49,6 +61,8 @@ const DoctorHome = ({ intl }: Props) => {
             })}
           </Button>
         </td>
+        <td>{info.date}</td>
+        <td>{info.time}</td>
         <td>
           {' '}
           <Typography variant="h3">
@@ -82,11 +96,18 @@ const DoctorHome = ({ intl }: Props) => {
               })}
             </u>
           </Typography>
-          <Grid container justifyContent="space-around">
+          <Grid container justifyContent="space-around" sx={{ mt: 3 }}>
             <table className="table table-stripped table-wrapper">
               <thead>
                 <tr>
-                  <th style={{ padding: '10px', border: 'none' }}>
+                  <th
+                    style={{
+                      padding: '10px',
+                      border: 'none',
+                      background: '#673ab7',
+                      color: 'white'
+                    }}
+                  >
                     {' '}
                     <Typography variant="h3">
                       {intl.formatMessage({
@@ -94,10 +115,74 @@ const DoctorHome = ({ intl }: Props) => {
                       })}
                     </Typography>
                   </th>
-                  <th style={{ padding: '10px', border: 'none' }}>
+                  <th
+                    style={{
+                      padding: '10px',
+                      border: 'none',
+                      background: '#673ab7',
+                      color: 'white'
+                    }}
+                  >
                     <Typography variant="h3">
                       {intl.formatMessage({
                         id: 'global.patient_name_title'
+                      })}
+                    </Typography>
+                  </th>
+                  <th
+                    style={{
+                      padding: '10px',
+                      border: 'none',
+                      background: '#673ab7',
+                      color: 'white'
+                    }}
+                  >
+                    {' '}
+                    <Typography variant="h3">
+                      {intl.formatMessage({
+                        id: 'global.results'
+                      })}
+                    </Typography>
+                  </th>
+                  <th
+                    style={{
+                      padding: '10px',
+                      border: 'none',
+                      background: '#673ab7',
+                      color: 'white'
+                    }}
+                  >
+                    <Typography variant="h3">
+                      {intl.formatMessage({
+                        id: 'global.date'
+                      })}
+                    </Typography>
+                  </th>
+                  <th
+                    style={{
+                      padding: '10px',
+                      border: 'none',
+                      background: '#673ab7',
+                      color: 'white'
+                    }}
+                  >
+                    <Typography variant="h3">
+                      {intl.formatMessage({
+                        id: 'global.time'
+                      })}
+                    </Typography>
+                  </th>
+                  <th
+                    style={{
+                      padding: '10px',
+                      border: 'none',
+                      background: '#673ab7',
+                      color: 'white'
+                    }}
+                  >
+                    <Typography variant="h3">
+                      {intl.formatMessage({
+                        id: 'global.reject_title'
                       })}
                     </Typography>
                   </th>

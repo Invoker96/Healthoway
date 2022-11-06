@@ -104,11 +104,13 @@ const CounsellorHome = ({ intl }: Props) => {
             })}
           </Button>
         </Grid>
-        <Grid container justifyContent="space-around">
+        <Grid container justifyContent="space-around" sx={{ mt: 3 }}>
           <table className="table table-stripped">
             <thead>
               <tr>
-                <th style={{ padding: '10px', border: 'none' }}>
+                <th
+                  style={{ padding: '10px', border: 'none', background: '#673ab7', color: 'white' }}
+                >
                   {' '}
                   <Typography variant="h3">
                     {intl.formatMessage({
@@ -116,10 +118,49 @@ const CounsellorHome = ({ intl }: Props) => {
                     })}
                   </Typography>
                 </th>
-                <th style={{ border: 'none' }}>
+                <th
+                  style={{ padding: '10px', border: 'none', background: '#673ab7', color: 'white' }}
+                >
                   <Typography variant="h3">
                     {intl.formatMessage({
                       id: 'global.patient_name_title'
+                    })}
+                  </Typography>
+                </th>
+                <th
+                  style={{ padding: '10px', border: 'none', background: '#673ab7', color: 'white' }}
+                >
+                  {' '}
+                  <Typography variant="h3">
+                    {intl.formatMessage({
+                      id: 'global.results'
+                    })}
+                  </Typography>
+                </th>
+                <th
+                  style={{ padding: '10px', border: 'none', background: '#673ab7', color: 'white' }}
+                >
+                  <Typography variant="h3">
+                    {intl.formatMessage({
+                      id: 'global.schedule_appointment'
+                    })}
+                  </Typography>
+                </th>
+                <th
+                  style={{ padding: '10px', border: 'none', background: '#673ab7', color: 'white' }}
+                >
+                  <Typography variant="h3">
+                    {intl.formatMessage({
+                      id: 'global.schedule_appointment'
+                    })}
+                  </Typography>
+                </th>
+                <th
+                  style={{ padding: '10px', border: 'none', background: '#673ab7', color: 'white' }}
+                >
+                  <Typography variant="h3">
+                    {intl.formatMessage({
+                      id: 'global.reject_title'
                     })}
                   </Typography>
                 </th>
