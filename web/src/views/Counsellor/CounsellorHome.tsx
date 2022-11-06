@@ -3,6 +3,8 @@ import { Button, Grid, Typography, TextField } from '@mui/material';
 import './CounsellorHome.scss';
 import MenuBar from '../../components/MenuBar/MenuBar';
 import Footer from '../../components/Footer/Footer';
+import CalendarMonthIcon from '@mui/icons-material/CalendarMonth';
+import { Link } from 'react-router-dom';
 import './CounsellorHome.scss';
 
 type Props = {
@@ -52,19 +54,11 @@ const CounsellorHome = ({ intl }: Props) => {
         </td>
         <td>
           {' '}
-          <Button variant="contained">
-            {intl.formatMessage({
-              id: 'counsellor.self_assign'
-            })}
-          </Button>
+          <CalendarMonthIcon />
         </td>
         <td>
           {' '}
-          <Button variant="contained">
-            {intl.formatMessage({
-              id: 'counsellor.doctor_assign'
-            })}
-          </Button>
+          <CalendarMonthIcon />
         </td>
         <td>
           <Typography variant="h3">
@@ -98,7 +92,12 @@ const CounsellorHome = ({ intl }: Props) => {
               })}
             </u>
           </Typography>
-          <Button variant="contained" className="my_appointment_btn">
+          <Button
+            variant="contained"
+            className="my_appointment_btn"
+            component={Link}
+            to={'/counsellor/appointments'}
+          >
             {intl.formatMessage({
               id: 'global.my_appointments'
             })}
@@ -142,7 +141,7 @@ const CounsellorHome = ({ intl }: Props) => {
                 >
                   <Typography variant="h3">
                     {intl.formatMessage({
-                      id: 'global.schedule_appointment'
+                      id: 'counsellor.self_assign'
                     })}
                   </Typography>
                 </th>
@@ -151,7 +150,7 @@ const CounsellorHome = ({ intl }: Props) => {
                 >
                   <Typography variant="h3">
                     {intl.formatMessage({
-                      id: 'global.schedule_appointment'
+                      id: 'counsellor.doctor_assign'
                     })}
                   </Typography>
                 </th>
