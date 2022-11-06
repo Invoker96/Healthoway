@@ -1,0 +1,18 @@
+@import '../../variables.scss';
+
+.home_logo {
+    background: $grey-00;;
+    margin: 5px;
+    width: 5%;
+}
+
+.actionBtn {
+    margin-right: 10px;
+}
+
+.footer-container {
+    position:absolute;
+    left:0;
+    bottom:0;
+    right:0;
+}
