@@ -1,14 +1,1 @@
 @import '../../variables.scss';
-
-thead, tbody, th, tr, td {
-    padding: 20px 100px;
-}
-
-th, td {
-    border: 1px solid black;
-    border-collapse: collapse;
-}
-
-.table-container {
-    min-height: 200px;
-}
