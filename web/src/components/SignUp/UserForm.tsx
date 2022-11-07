@@ -41,7 +41,8 @@ const RoleForm = ({ page, setPage, formData, setFormData, intl }: Props) => {
     },
     {
       id: 'address',
-      type: 'text'
+      type: 'text',
+      rules: { required: true }
     },
     {
       id: 'password',

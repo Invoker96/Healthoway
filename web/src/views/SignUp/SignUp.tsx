@@ -46,14 +46,14 @@ const SignUp = ({ intl }: Props) => {
     }
   }, [page, formData, signUpPages, navigate]);
 
-  const onClickBackToLogin = () => {
-    navigate('/login');
+  const navigateToHome = () => {
+    navigate('/');
   };
 
   return (
     <Grid container className="sign-up-container">
       <LoadingSpinner isOpen={loading} />
-      <Link onClick={onClickBackToLogin}>{intl.formatMessage({ id: 'button.backToLogin' })}</Link>
+      <Link onClick={navigateToHome}>{intl.formatMessage({ id: 'button.backToHome' })}</Link>
       {signUpPages[page]}
     </Grid>
   );
