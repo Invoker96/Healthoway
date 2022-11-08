@@ -34,7 +34,6 @@ import {
 import Footer from '../../components/Footer/Footer';
 import CalendarMonthIcon from '@mui/icons-material/CalendarMonth';
 import { Link } from 'react-router-dom';
-import './CounsellorHome.scss';
 
 type Props = {
   intl: any;
@@ -297,7 +296,7 @@ const CounsellorHome = ({ intl }: Props) => {
         </List>
       </Dialog>
       <MenuBar
-        isCustomView
+        isLoggedIn={true}
         title={intl.formatMessage({
           id: 'counsellor.title'
         })}
@@ -473,7 +472,6 @@ const CounsellorHome = ({ intl }: Props) => {
           </table> */}
         </Grid>
       </Grid>
-      {/* <Footer /> */}
     </>
   );
 };

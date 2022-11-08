@@ -1,7 +1,6 @@
 import { injectIntl } from 'react-intl';
 import { Button, Grid, Typography } from '@mui/material';
 import MenuBar from '../../components/MenuBar/MenuBar';
-import Footer from '../../components/Footer/Footer';
 import './CounsellorAppointments.scss';
 
 type Props = {
@@ -60,7 +59,7 @@ const CounsellorAppointments = ({ intl }: Props) => {
   return (
     <>
       <MenuBar
-        isCustomView
+        isLoggedIn={true}
         title={intl.formatMessage({
           id: 'counsellor.title'
         })}
@@ -175,7 +174,6 @@ const CounsellorAppointments = ({ intl }: Props) => {
           </Grid>
         </Grid>
       </Grid>
-      <Footer />
     </>
   );
 };
