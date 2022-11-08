@@ -510,13 +510,12 @@ const CounsellorHome = ({ intl }: Props) => {
         </List>
       </Dialog>
       <MenuBar
-        isLoggedIn={true}
+        isCustomView
         title={intl.formatMessage({
           id: 'counsellor.title'
         })}
-        noBtn={false}
       />
-      <Grid sx={{ mt: 5 }}>
+      <Grid sx={{ mt: 20 }}>
         <Grid container justifyContent="center">
           <Typography
             variant="h1"
@@ -696,7 +695,7 @@ const CounsellorHome = ({ intl }: Props) => {
           </table> */}
         </Grid>
       </Grid>
-      <FooterComp />
+      {/* <Footer /> */}
     </>
   );
 };
