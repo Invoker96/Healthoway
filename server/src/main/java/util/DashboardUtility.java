@@ -8,6 +8,7 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import Manager.ConnectionManager;
+import model.Appointment;
 
 public class DashboardUtility {
 
@@ -19,6 +20,8 @@ public class DashboardUtility {
 				JSONObject obj = new JSONObject();
 				obj.put("userName", rs.getString(1));
 				obj.put("patientName", rs.getString(2));
+				obj.put("req", rs.getString(3));
+				obj.put("email", rs.getString(4));
 				arr.put(obj);
 			}while(rs.next());
 		} catch (JSONException | SQLException e) {
@@ -57,6 +60,31 @@ public class DashboardUtility {
 			}
 			arr.put(obj);
 		}while(question.next());
+		return arr;
+	}
+
+
+	public static boolean assignToSelf(Appointment app) {
+		
+		return ConnectionManager.assignToSelf(app);
+
+	}
+
+
+	public static JSONArray getListOfDoctors(ResultSet rs) {
+		JSONArray arr = new JSONArray();
+		try {
+			do {
+				JSONObject obj = new JSONObject();
+				obj.put("userName", rs.getString(1));
+				obj.put("doctorName", rs.getString(2));
+				arr.put(obj);
+			}while(rs.next());
+		} catch (JSONException | SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} 
+
 		return arr;
 	}
 }

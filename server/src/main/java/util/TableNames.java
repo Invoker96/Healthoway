@@ -6,7 +6,7 @@ public class TableNames {
 	
 	public static final String PATIENT_REQUESTS_TABLE = "SOEN6841.PATIENT_REQUESTS";
 	
-	public static final String APPOINTMENTS_TABLE = "SOEN6841.APPOINMENTS";
+	public static final String APPOINTMENTS_TABLE = "SOEN6841.APPOINTMENTS";
 	
 	public static final String QUES_EVAL_TABLE = "SOEN6841.QUES_EVAL";
 	

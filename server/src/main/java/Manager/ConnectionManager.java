@@ -1,5 +1,6 @@
 package Manager;
 
+import model.Appointment;
 import model.User;
 import util.DashboardUtility;
 import util.TableNames;
@@ -8,6 +9,8 @@ import java.sql.*;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
+
+import enums.UserRole;
 
 public class ConnectionManager {
 
@@ -51,12 +54,12 @@ public class ConnectionManager {
 		return 0;
 	}
 
-	public static JSONArray listOfPatient() {
+	public static JSONArray listOfPatientForCounsellor() {
 
 		JSONArray arr = new JSONArray();
 		try {
-			String query = "SELECT u.username, u.fullname FROM users u,patient_requests p WHERE p.username = u.username;";
-			System.out.println(query);
+			String query = "SELECT U.USERNAME, U.FULLNAME, P.REQ, P.EMAIL FROM USERS U,PATIENT_REQUESTS P "
+					+ "WHERE P.USERNAME = U.USERNAME AND P.APPOINTMENT_GIVEN = 'NO' AND P.DOCTOR_USERNAME IS NULL;";
 			PreparedStatement stmt = con.prepareStatement(query);
 			ResultSet rs = stmt.executeQuery();
 			if(rs.next()) {
@@ -71,6 +74,27 @@ public class ConnectionManager {
 				System.out.println("no result found");
 			}
 
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return arr;
+	}
+
+	public static JSONArray listOfDoctors() {
+
+		JSONArray arr = new JSONArray();
+		try {
+			String query = "select username, fullname from users where user_role = ?;";
+			PreparedStatement stmt = con.prepareStatement(query);
+			stmt.setString(1, String.valueOf(UserRole.Doctor));
+			ResultSet rs = stmt.executeQuery();
+			if(rs.next()) {
+				arr=DashboardUtility.getListOfDoctors(rs);
+			}
+			else {
+				System.out.println("no result found");
+			}
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -121,5 +145,55 @@ public class ConnectionManager {
 		}
 
 		return n;
+	}
+
+	public static boolean assignToSelf(Appointment app) {
+
+		String insertQuery = "INSERT INTO "+TableNames.APPOINTMENTS_TABLE+"(REQ,USERNAME,EMAIL,APPOINTMENT,ROLE,COMMENTS,PATIENT_USERNAME) VALUES (?,?,?,?,?,?,?);";
+		try {
+			PreparedStatement pstmt = con.prepareStatement(insertQuery);
+			pstmt.setInt(1, app.getReq());
+			pstmt.setString(2, app.getUserName());
+			pstmt.setString(3, app.getEmail());
+			pstmt.setString(4, app.getAppointment());
+			pstmt.setString(5, String.valueOf(app.getRole()));
+			pstmt.setString(6, app.getComments());
+			pstmt.setString(7, app.getPatientUserName());
+			int n = pstmt.executeUpdate();
+			if(n>0) {
+				String updateQuery = "UPDATE SOEN6841.PATIENT_REQUESTS SET APPOINTMENT_GIVEN = 'YES' WHERE USERNAME = ?";
+				pstmt = con.prepareStatement(updateQuery);
+				pstmt.setString(1, app.getPatientUserName());
+				n=pstmt.executeUpdate();
+				if(n>0) {
+					return true;
+				}
+			}
+
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return false;
+	}
+
+	public static boolean assignToDoctor(String doctorUserName, String patientUserName) {
+
+		String insertQuery = "UPDATE SOEN6841.PATIENT_REQUESTS SET DOCTOR_USERNAME = ? WHERE USERNAME = ?";
+		try {
+			PreparedStatement pstmt = con.prepareStatement(insertQuery);
+			pstmt.setString(1, doctorUserName);
+			pstmt.setString(2, patientUserName);
+
+			int n = pstmt.executeUpdate();
+			if(n>0) {
+				return true;
+			}
+
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return false;
 	}
 }

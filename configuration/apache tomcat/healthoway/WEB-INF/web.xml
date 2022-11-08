@@ -30,11 +30,23 @@
 	</servlet-mapping>
 	<servlet-mapping>
 		<servlet-name>CounsellorDashboard</servlet-name>
+		<url-pattern>/listOfDoctors/*</url-pattern>
+	</servlet-mapping>
+	<servlet-mapping>
+		<servlet-name>CounsellorDashboard</servlet-name>
 		<url-pattern>/getSelfAssesmentResult/*</url-pattern>
 	</servlet-mapping>
 	<servlet-mapping>
 		<servlet-name>CounsellorDashboard</servlet-name>
 		<url-pattern>/remove/*</url-pattern>
+	</servlet-mapping>
+	<servlet-mapping>
+		<servlet-name>CounsellorDashboard</servlet-name>
+		<url-pattern>/makeAppointment/*</url-pattern>
+	</servlet-mapping>
+	<servlet-mapping>
+		<servlet-name>CounsellorDashboard</servlet-name>
+		<url-pattern>/assignToDoctor/*</url-pattern>
 	</servlet-mapping>
 	<resource-ref>
 		<description>MySQL Connection</description>
