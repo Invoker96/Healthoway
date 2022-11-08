@@ -17,6 +17,7 @@ const LandingPage = ({ intl }: Props) => {
         title={intl.formatMessage({
           id: 'global.empty'
         })}
+        noBtn={false}
       />
       <img className="bg-img" src={bg}></img>
       <Box sx={{ flexGrow: 1, display: { xs: 'flex', sm: 'flex' } }}></Box>

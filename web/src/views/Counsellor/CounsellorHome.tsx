@@ -34,6 +34,7 @@ import {
 import Footer from '../../components/Footer/Footer';
 import CalendarMonthIcon from '@mui/icons-material/CalendarMonth';
 import { Link } from 'react-router-dom';
+import FooterComp from '../../components/FooterComp/FooterComp';
 
 type Props = {
   intl: any;
@@ -300,8 +301,9 @@ const CounsellorHome = ({ intl }: Props) => {
         title={intl.formatMessage({
           id: 'counsellor.title'
         })}
+        noBtn={false}
       />
-      <Grid sx={{ mt: 20 }}>
+      <Grid sx={{ mt: 5 }}>
         <Grid container justifyContent="center">
           <Typography
             variant="h1"
@@ -472,6 +474,7 @@ const CounsellorHome = ({ intl }: Props) => {
           </table> */}
         </Grid>
       </Grid>
+      <FooterComp />
     </>
   );
 };

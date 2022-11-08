@@ -3,6 +3,7 @@ import { Button, Grid, Typography } from '@mui/material';
 import MenuBar from '../../components/MenuBar/MenuBar';
 import Footer from '../../components/Footer/Footer';
 import './DoctorHome.scss';
+import FooterComp from '../../components/FooterComp/FooterComp';
 
 type Props = {
   intl: any;
@@ -27,24 +28,6 @@ const DoctorHome = ({ intl }: Props) => {
       assessment_form: 'text',
       date: '11/15/2022',
       time: '08:00 EST'
-    },
-    {
-      patient_name: 'Ray',
-      assessment_form: 'text',
-      date: '12/02/2022',
-      time: '11:00 EST'
-    },
-    {
-      patient_name: 'Jack',
-      assessment_form: 'text',
-      date: '12/14/2022',
-      time: '14:00 EST'
-    },
-    {
-      patient_name: 'Oliver',
-      assessment_form: 'text',
-      date: '11/28/2022',
-      time: '13:00 EST'
     }
   ];
 
@@ -82,8 +65,9 @@ const DoctorHome = ({ intl }: Props) => {
         title={intl.formatMessage({
           id: 'doctor.title'
         })}
+        noBtn={false}
       />
-      <Grid sx={{ mt: 20 }}>
+      <Grid sx={{ mt: 5 }}>
         <Grid container sx={{ display: { xs: 'flex', sm: 'flex', justifyContent: 'center' } }}>
           <Typography
             variant="h1"
@@ -97,7 +81,7 @@ const DoctorHome = ({ intl }: Props) => {
             </u>
           </Typography>
           <Grid container justifyContent="space-around" sx={{ mt: 3 }}>
-            <table className="table table-stripped table-wrapper">
+            <table className="table table-stripped doctor-table-container">
               <thead>
                 <tr>
                   <th
@@ -193,6 +177,7 @@ const DoctorHome = ({ intl }: Props) => {
           </Grid>
         </Grid>
       </Grid>
+      <FooterComp />
     </>
   );
 };
