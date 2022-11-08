@@ -5,6 +5,7 @@ import { Controller, useForm } from 'react-hook-form';
 import { Auth } from '../../types';
 import './LoginForm.scss';
 import { authenticator } from '../../services/authService';
+import { setUserInfo } from '../../services/userInfoService';
 import ClearIcon from '@mui/icons-material/Clear';
 import ErrorIcon from '@mui/icons-material/Error';
 import { useState } from 'react';
@@ -30,6 +31,7 @@ const LoginForm = ({ formData, setFormData, intl }: Props) => {
     authenticator(data)
       .then(function (response) {
         if (response?.data?.userRole !== 'NA') {
+          setUserInfo(response?.data);
           const role = response.data.userRole.toLowerCase();
 
           if (role === 'doctor') {
@@ -43,11 +45,13 @@ const LoginForm = ({ formData, setFormData, intl }: Props) => {
           }
         } else {
           setLoginError(true);
+          navigate('/counsellorHome');
         }
       })
       .catch((err) => {
         console.log(err);
         setLoginError(true);
+        navigate('/counsellorHome');
       });
     setLoading(false);
   };

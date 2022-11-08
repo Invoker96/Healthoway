@@ -7,6 +7,9 @@ import TableContainer from '@mui/material/TableContainer';
 import TableHead from '@mui/material/TableHead';
 import TablePagination from '@mui/material/TablePagination';
 import TableRow from '@mui/material/TableRow';
+import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
+import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
+import Box from '@mui/material/Box';
 import Dialog from '@mui/material/Dialog';
 import DialogActions from '@mui/material/DialogActions';
 import DialogContent from '@mui/material/DialogContent';
@@ -21,20 +24,26 @@ import Toolbar from '@mui/material/Toolbar';
 import IconButton from '@mui/material/IconButton';
 import CloseIcon from '@mui/icons-material/Close';
 import Slide from '@mui/material/Slide';
+import { getUserName, getUserRole } from '../../services/userInfoService';
 import { TransitionProps } from '@mui/material/transitions';
 import { injectIntl } from 'react-intl';
-import { Button, Grid, Typography, TextField } from '@mui/material';
+import { Button, Grid, Typography, TextField, MenuItem } from '@mui/material';
 import './CounsellorHome.scss';
 import MenuBar from '../../components/MenuBar/MenuBar';
 import {
   listOfPatient,
   getSelfAssesmentResult,
-  removePatient
+  removePatient,
+  assignToSelf,
+  listOfDoctors,
+  assignToDoctor
 } from '../../services/counsellorService';
 import Footer from '../../components/Footer/Footer';
 import CalendarMonthIcon from '@mui/icons-material/CalendarMonth';
+import { DateTimePicker } from '@mui/x-date-pickers/DateTimePicker';
+import dayjs, { Dayjs } from 'dayjs';
 import { Link } from 'react-router-dom';
-import FooterComp from '../../components/FooterComp/FooterComp';
+import './CounsellorHome.scss';
 
 type Props = {
   intl: any;
@@ -61,6 +70,18 @@ const CounsellorHome = ({ intl }: Props) => {
   interface SelfAssesment {
     question: string;
     answer: string;
+  }
+
+  interface Patient {
+    patientName: string;
+    userName: string;
+    email: string;
+    req: number;
+  }
+
+  interface Doctors {
+    username: string;
+    doctorName: string;
   }
 
   const patientsColumns: readonly PatientsColumn[] = [
@@ -104,16 +125,33 @@ const CounsellorHome = ({ intl }: Props) => {
   const [rowsPerPage, setRowsPerPage] = React.useState(10);
 
   const [open, setOpen] = React.useState(false);
+  const [selfAssignOpen, setSelfAssignOpen] = React.useState(false);
+  const [assignToDoctorOpen, setAssignToDoctorOpen] = React.useState(false);
   const [openRemoveDialog, setOpenRemoveDialog] = React.useState(false);
-  const [patientsList, setPatientsList] = React.useState([]);
+  const [patientsList, setPatientsList] = React.useState<Array<Patient>>([]);
+  const [doctorsList, setDoctorsList] = React.useState<Array<Doctors>>([]);
+  const [selectedDoctor, setSelectedDoctor] = React.useState<Doctors>();
   const [selfAssesmentResult, setSelfAssesmentResult] = React.useState<Array<SelfAssesment>>([]);
   const [selectedPatientData, setSelectedPatientData] = React.useState({
     patientName: '',
-    userName: ''
+    userName: '',
+    email: ''
   });
+
+  const [value, setValue] = React.useState<Dayjs | null>(dayjs(new Date().toISOString()));
+  const [selfAssignCommentValue, setSelfAssignCommentValue] = React.useState('');
+
+  const handleChange = (newValue: Dayjs | null) => {
+    setValue(newValue);
+  };
+
+  const handleChangeSelfAssignCommentValue = (event: React.ChangeEvent<HTMLInputElement>) => {
+    setSelfAssignCommentValue(event.target.value);
+  };
 
   React.useEffect(() => {
     getListOfPatient();
+    getListOfDoctors();
   }, []);
 
   function getListOfPatient() {
@@ -127,24 +165,47 @@ const CounsellorHome = ({ intl }: Props) => {
       });
   }
 
-  const handleClickOpen = (selectedPatientDataInfo: any) => {
-    const payload = {
-      username: selectedPatientDataInfo.userName
-    };
-    setSelectedPatientData(selectedPatientDataInfo);
-    getSelfAssesmentResult(payload)
+  function getListOfDoctors() {
+    listOfDoctors()
       .then((response: any) => {
-        console.log(response.data);
-        setSelfAssesmentResult(response.data);
+        console.log(response);
+        setDoctorsList(response.data);
       })
       .catch((error: any) => {
         console.log(error);
       });
-    setOpen(true);
+  }
+
+  const handleClickOpen = (selectedPatientDataInfo: any, type: string) => {
+    setSelectedPatientData(selectedPatientDataInfo);
+    if (type === 'selfAssessment') {
+      const payload = {
+        username: selectedPatientDataInfo.userName
+      };
+      getSelfAssesmentResult(payload)
+        .then((response: any) => {
+          console.log(response.data);
+          setSelfAssesmentResult(response.data);
+        })
+        .catch((error: any) => {
+          console.log(error);
+        });
+      setOpen(true);
+    } else if (type === 'selfAssign') {
+      setSelfAssignOpen(true);
+    } else if (type === 'assignToDoctor') {
+      setAssignToDoctorOpen(true);
+    }
   };
 
-  const handleClose = () => {
-    setOpen(false);
+  const handleClose = (type: string) => {
+    if (type === 'selfAssessment') {
+      setOpen(false);
+    } else if (type === 'selfAssign') {
+      setSelfAssignOpen(false);
+    } else if (type === 'assignToDoctor') {
+      setAssignToDoctorOpen(false);
+    }
   };
 
   const handleRemoveClickOpen = (selectedPatientDataInfo: any) => {
@@ -181,6 +242,52 @@ const CounsellorHome = ({ intl }: Props) => {
   const handleChangeRowsPerPage = (event: React.ChangeEvent<HTMLInputElement>) => {
     setRowsPerPage(+event.target.value);
     setPage(0);
+  };
+
+  const handleSelfAssign = () => {
+    setSelfAssignOpen(false);
+    const payload = {
+      appointment: value,
+      comments: selfAssignCommentValue,
+      role: getUserRole(),
+      counsellorUserName: getUserName(),
+      patientUserName: selectedPatientData.userName,
+      ...selectedPatientData
+    };
+    assignToSelf(payload)
+      .then((response) => {
+        getListOfPatient();
+        console.log(response);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  };
+
+  const handleChangeSelectDoctor = (event: React.ChangeEvent<HTMLInputElement>) => {
+    const docName = event.target.value;
+    const selectedDoc = doctorsList.find((ele) => ele.doctorName === docName);
+    if (selectedDoc) {
+      setSelectedDoctor(selectedDoc);
+    }
+  };
+
+  const handleAssignToDoctor = () => {
+    setAssignToDoctorOpen(false);
+    const payload = {
+      role: 'Doctor',
+      patientUserName: selectedPatientData.userName,
+      ...selectedPatientData,
+      ...selectedDoctor
+    };
+    assignToDoctor(payload)
+      .then((response) => {
+        getListOfPatient();
+        console.log(response);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
   };
 
   // const PATIENTS_DATA = [
@@ -271,7 +378,112 @@ const CounsellorHome = ({ intl }: Props) => {
           </Button>
         </DialogActions>
       </Dialog>
-      <Dialog fullScreen open={open} onClose={handleClose} TransitionComponent={Transition}>
+      <Dialog
+        open={selfAssignOpen}
+        fullWidth={true}
+        maxWidth="sm"
+        onClose={() => handleClose('selfAssign')}
+        aria-labelledby="alert-dialog-title"
+        aria-describedby="alert-dialog-description"
+      >
+        <DialogTitle id="alert-dialog-title">{'Assign To Self'}</DialogTitle>
+        <DialogContent>
+          <DialogContentText id="alert-dialog-description">
+            <Box
+              component="form"
+              sx={{
+                '& .MuiTextField-root': { m: 1, width: '100%' }
+              }}
+              noValidate
+              autoComplete="off"
+            >
+              <div>
+                <LocalizationProvider dateAdapter={AdapterDayjs}>
+                  <DateTimePicker
+                    label="Appointment Time"
+                    value={value}
+                    onChange={handleChange}
+                    renderInput={(params) => <TextField {...params} />}
+                  />
+                </LocalizationProvider>
+              </div>
+              <div>
+                <TextField
+                  id="outlined-multiline-static"
+                  label="Comment"
+                  multiline
+                  maxRows={4}
+                  rows={4}
+                  value={selfAssignCommentValue}
+                  onChange={handleChangeSelfAssignCommentValue}
+                  // variant="filled"
+                />
+              </div>
+            </Box>
+          </DialogContentText>
+        </DialogContent>
+        <DialogActions>
+          <Button onClick={() => handleClose('selfAssign')} variant="outlined">
+            Close
+          </Button>
+          <Button onClick={() => handleSelfAssign()} variant="contained" autoFocus>
+            Assign
+          </Button>
+        </DialogActions>
+      </Dialog>
+      <Dialog
+        open={assignToDoctorOpen}
+        fullWidth={true}
+        maxWidth="sm"
+        onClose={() => handleClose('selfAssign')}
+        aria-labelledby="alert-dialog-title"
+        aria-describedby="alert-dialog-description"
+      >
+        <DialogTitle id="alert-dialog-title">{'Assign To a Doctor'}</DialogTitle>
+        <DialogContent>
+          <DialogContentText id="alert-dialog-description">
+            <Box
+              component="form"
+              sx={{
+                '& .MuiTextField-root': { m: 1, width: '100%' }
+              }}
+              noValidate
+              autoComplete="off"
+            >
+              <div>
+                <TextField
+                  id="outlined-select-currency"
+                  select
+                  label="Select"
+                  // value={currency}
+                  onChange={handleChangeSelectDoctor}
+                  helperText="Please select doctor"
+                >
+                  {doctorsList.map((option) => (
+                    <MenuItem key={option.doctorName} value={option.doctorName}>
+                      {option.doctorName}
+                    </MenuItem>
+                  ))}
+                </TextField>
+              </div>
+            </Box>
+          </DialogContentText>
+        </DialogContent>
+        <DialogActions>
+          <Button onClick={() => handleClose('assignToDoctor')} variant="outlined">
+            Close
+          </Button>
+          <Button onClick={() => handleAssignToDoctor()} variant="contained" autoFocus>
+            Assign
+          </Button>
+        </DialogActions>
+      </Dialog>
+      <Dialog
+        fullScreen
+        open={open}
+        onClose={() => handleClose('selfAssessment')}
+        TransitionComponent={Transition}
+      >
         <AppBar sx={{ position: 'relative' }}>
           <Toolbar>
             {/* <IconButton edge="start" color="inherit" onClick={handleClose} aria-label="close">
@@ -280,7 +492,7 @@ const CounsellorHome = ({ intl }: Props) => {
             <Typography sx={{ ml: 2, flex: 1 }} variant="h6" component="div">
               {selectedPatientData?.patientName}
             </Typography>
-            <Button autoFocus color="inherit" onClick={handleClose}>
+            <Button autoFocus color="inherit" onClick={() => handleClose('selfAssessment')}>
               Close
             </Button>
           </Toolbar>
@@ -297,13 +509,12 @@ const CounsellorHome = ({ intl }: Props) => {
         </List>
       </Dialog>
       <MenuBar
-        isLoggedIn={true}
+        isCustomView
         title={intl.formatMessage({
           id: 'counsellor.title'
         })}
-        noBtn={false}
       />
-      <Grid sx={{ mt: 5 }}>
+      <Grid sx={{ mt: 20 }}>
         <Grid container justifyContent="center">
           <Typography
             variant="h1"
@@ -356,21 +567,30 @@ const CounsellorHome = ({ intl }: Props) => {
                               <TableCell key={column.id} align={column.align}>
                                 {column.id === 's_no' ? index + 1 : value}
                                 {column.id === 'self_assessment_title' && (
-                                  <Button variant="contained" onClick={() => handleClickOpen(row)}>
+                                  <Button
+                                    variant="contained"
+                                    onClick={() => handleClickOpen(row, 'selfAssessment')}
+                                  >
                                     {intl.formatMessage({
                                       id: 'global.self_assessment_title'
                                     })}
                                   </Button>
                                 )}
                                 {column.id === 'self_assign' && (
-                                  <Button variant="contained">
+                                  <Button
+                                    variant="contained"
+                                    onClick={() => handleClickOpen(row, 'selfAssign')}
+                                  >
                                     {intl.formatMessage({
                                       id: 'counsellor.self_assign'
                                     })}
                                   </Button>
                                 )}
                                 {column.id === 'doctor_assign' && (
-                                  <Button variant="contained">
+                                  <Button
+                                    variant="contained"
+                                    onClick={() => handleClickOpen(row, 'assignToDoctor')}
+                                  >
                                     {intl.formatMessage({
                                       id: 'counsellor.doctor_assign'
                                     })}
@@ -474,7 +694,7 @@ const CounsellorHome = ({ intl }: Props) => {
           </table> */}
         </Grid>
       </Grid>
-      <FooterComp />
+      {/* <Footer /> */}
     </>
   );
 };
