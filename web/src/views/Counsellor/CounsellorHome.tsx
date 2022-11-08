@@ -417,7 +417,6 @@ const CounsellorHome = ({ intl }: Props) => {
                   rows={4}
                   value={selfAssignCommentValue}
                   onChange={handleChangeSelfAssignCommentValue}
-                  // variant="filled"
                 />
               </div>
             </Box>
@@ -513,8 +512,8 @@ const CounsellorHome = ({ intl }: Props) => {
         isLoggedIn={true}
         title={intl.formatMessage({
           id: 'counsellor.title'
-          noBtn={false}
         })}
+        noBtn={false}
       />
       <Grid sx={{ mt: 5 }}>
         <Grid container justifyContent="center">
