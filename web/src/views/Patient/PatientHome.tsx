@@ -2,6 +2,7 @@ import { injectIntl } from 'react-intl';
 import { Button, Grid, Typography } from '@mui/material';
 import MenuBar from '../../components/MenuBar/MenuBar';
 import './PatientHome.scss';
+import FooterComp from '../../components/FooterComp/FooterComp';
 
 type Props = {
   intl: any;
@@ -42,9 +43,10 @@ const PatientHome = ({ intl }: Props) => {
         title={intl.formatMessage({
           id: 'patient.title'
         })}
+        noBtn={false}
       />
       {/* <div style={{ backgroundImage: `url('${background}')` }}> */}
-      <Grid sx={{ mt: 20 }}>
+      <Grid sx={{ mt: 5 }}>
         <Typography
           variant="h1"
           sx={{ display: { xs: 'flex', sm: 'flex', justifyContent: 'center' } }}
@@ -67,7 +69,7 @@ const PatientHome = ({ intl }: Props) => {
         </Typography>
         <Button
           variant="contained"
-          style={{ margin: '40px' }}
+          style={{ margin: '20px' }}
           sx={{ display: { xs: 'flex', sm: 'flex', justifyContent: 'center' } }}
         >
           {intl.formatMessage({
@@ -77,7 +79,7 @@ const PatientHome = ({ intl }: Props) => {
         <Typography
           variant="h1"
           sx={{ display: { xs: 'flex', sm: 'flex', justifyContent: 'center' } }}
-          style={{ margin: '80px' }}
+          style={{ margin: '20px' }}
         >
           <u>
             {intl.formatMessage({
@@ -141,6 +143,7 @@ const PatientHome = ({ intl }: Props) => {
           <tbody>{tableRows}</tbody>
         </table>
       </Grid>
+      <FooterComp />
     </>
   );
 };

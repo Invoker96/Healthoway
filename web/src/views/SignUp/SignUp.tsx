@@ -9,6 +9,8 @@ import { RoleType } from '../../types';
 import { createUser } from '../../services/userService';
 import './SignUp.scss';
 import LoadingSpinner from '../../components/common/LoadingSpinner/LoadingSpinner';
+import MenuBar from '../../components/MenuBar/MenuBar';
+import FooterComp from '../../components/FooterComp/FooterComp';
 
 type Props = {
   intl: any;
@@ -51,11 +53,21 @@ const SignUp = ({ intl }: Props) => {
   };
 
   return (
-    <Grid container className="sign-up-container">
-      <LoadingSpinner isOpen={loading} />
-      <Link onClick={navigateToHome}>{intl.formatMessage({ id: 'button.backToHome' })}</Link>
-      {signUpPages[page]}
-    </Grid>
+    <>
+      <MenuBar
+        isLoggedIn={false}
+        title={intl.formatMessage({
+          id: 'global.app_title'
+        })}
+        noBtn={true}
+      />
+      <Grid container className="sign-up-container">
+        <LoadingSpinner isOpen={loading} />
+        <Link onClick={navigateToHome}>{intl.formatMessage({ id: 'button.backToHome' })}</Link>
+        {signUpPages[page]}
+      </Grid>
+      <FooterComp />
+    </>
   );
 };
 

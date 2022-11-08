@@ -12,9 +12,10 @@ type Props = {
   intl: any;
   isLoggedIn: boolean;
   title: string;
+  noBtn: boolean;
 };
 
-const MenuBar = ({ intl, isLoggedIn, title }: Props) => {
+const MenuBar = ({ intl, isLoggedIn, title, noBtn }: Props) => {
   return (
     <Box sx={{ flexGrow: 1 }}>
       <AppBar component="nav" position="sticky">
@@ -26,7 +27,7 @@ const MenuBar = ({ intl, isLoggedIn, title }: Props) => {
             })}
           </Typography>
           <Box>
-            {!isLoggedIn ? (
+            {!isLoggedIn && !noBtn ? (
               <>
                 <Button variant="outlined" color="secondary" component={Link} to={'/login'}>
                   {intl.formatMessage({
@@ -40,11 +41,13 @@ const MenuBar = ({ intl, isLoggedIn, title }: Props) => {
                 </Button>
               </>
             ) : (
-              <Button variant="outlined" color="secondary" component={Link} to={'/'}>
-                {intl.formatMessage({
-                  id: 'authForm.button.logout'
-                })}
-              </Button>
+              !noBtn && (
+                <Button variant="outlined" color="secondary" component={Link} to={'/'}>
+                  {intl.formatMessage({
+                    id: 'authForm.button.logout'
+                  })}
+                </Button>
+              )
             )}
           </Box>
         </Toolbar>

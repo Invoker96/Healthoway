@@ -2,6 +2,7 @@ import { injectIntl } from 'react-intl';
 import { Button, Grid, Typography } from '@mui/material';
 import MenuBar from '../../components/MenuBar/MenuBar';
 import './CounsellorAppointments.scss';
+import FooterComp from '../../components/FooterComp/FooterComp';
 
 type Props = {
   intl: any;
@@ -63,8 +64,9 @@ const CounsellorAppointments = ({ intl }: Props) => {
         title={intl.formatMessage({
           id: 'counsellor.title'
         })}
+        noBtn={false}
       />
-      <Grid sx={{ mt: 20 }}>
+      <Grid sx={{ mt: 5 }}>
         <Grid container sx={{ display: { xs: 'flex', sm: 'flex', justifyContent: 'center' } }}>
           <Typography
             variant="h1"
@@ -174,6 +176,7 @@ const CounsellorAppointments = ({ intl }: Props) => {
           </Grid>
         </Grid>
       </Grid>
+      <FooterComp />
     </>
   );
 };

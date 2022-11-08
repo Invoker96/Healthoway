@@ -71,6 +71,8 @@
   "global.date": "DATE 📅",
   "global.time": "TIME 🕑",
   "global.empty": " ",
+  "global.app_title": "HEALTHOWAY",
+  "global.copyright": "Copyright © HEALTHOWAY 2022",
   "global.my_appointments": "My Appointments",
   "patientHome.button.selfAssessment": "Complete Self Assessment Form",
   "selfAssessment.title": "Self Assessment Form",
