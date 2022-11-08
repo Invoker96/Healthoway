@@ -18,7 +18,7 @@ const RoleForm = ({ page, setPage, formData, setFormData, intl }: Props) => {
     reValidateMode: 'onBlur'
   });
 
-  const onSubmit = async (data: any) => {
+  const onSubmit = (data: any) => {
     setFormData({ ...formData, ...data });
     setPage(page + 1);
   };

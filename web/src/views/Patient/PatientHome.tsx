@@ -1,9 +1,6 @@
 import { injectIntl } from 'react-intl';
 import { Button, Grid, Typography } from '@mui/material';
 import MenuBar from '../../components/MenuBar/MenuBar';
-import Footer from '../../components/Footer/Footer';
-// import background from '../../assets/logo.png';
-// import background from '../../assets/patient_bg.jpg';
 import './PatientHome.scss';
 
 type Props = {
@@ -41,7 +38,7 @@ const PatientHome = ({ intl }: Props) => {
   return (
     <>
       <MenuBar
-        isCustomView
+        isLoggedIn={true}
         title={intl.formatMessage({
           id: 'patient.title'
         })}
@@ -144,8 +141,6 @@ const PatientHome = ({ intl }: Props) => {
           <tbody>{tableRows}</tbody>
         </table>
       </Grid>
-      {/* </div> */}
-      <Footer />
     </>
   );
 };

@@ -78,7 +78,7 @@ const DoctorHome = ({ intl }: Props) => {
   return (
     <>
       <MenuBar
-        isCustomView
+        isLoggedIn={true}
         title={intl.formatMessage({
           id: 'doctor.title'
         })}
@@ -193,7 +193,6 @@ const DoctorHome = ({ intl }: Props) => {
           </Grid>
         </Grid>
       </Grid>
-      <Footer />
     </>
   );
 };

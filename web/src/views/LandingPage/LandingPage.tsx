@@ -13,7 +13,7 @@ const LandingPage = ({ intl }: Props) => {
   return (
     <>
       <MenuBar
-        isCustomView={false}
+        isLoggedIn={false}
         title={intl.formatMessage({
           id: 'global.empty'
         })}

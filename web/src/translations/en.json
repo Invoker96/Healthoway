@@ -63,7 +63,6 @@
   "global.s_no": "S. NO",
   "global.patient_name_title": "Patient Name 🚑",
   "global.self_assessment_title": "VIEW SELF ASSESSMENT RESULTS",
-  "global.my_appointments": "MY APPOINTMENTS",
   "global.list_of_patients": "LIST OF PATIENTS",
   "global.schedule_appointment": "SCHEDULE AN APPOINTMENT",
   "global.results": "RESULTS ✍️",
@@ -71,5 +70,9 @@
   "global.reject": "❌",
   "global.date": "DATE 📅",
   "global.time": "TIME 🕑",
-  "global.empty": " "
+  "global.empty": " ",
+  "global.my_appointments": "My Appointments",
+  "patientHome.button.selfAssessment": "Complete Self Assessment Form",
+  "selfAssessment.title": "Self Assessment Form",
+  "selfAssessment.button.backToHome": "Back to home"
 }
