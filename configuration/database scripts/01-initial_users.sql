@@ -129,4 +129,18 @@ BEGIN
     Please make sure you attend the appointment.','Appointment confirmed for'||new.USERNAME);
 END#
 
---------------------------------------------------------------------------------------
+-------------------------NEW 11-NOV-2022-----------------------------------------------
+
+ALTER TABLE SOEN6841.PATIENT_REQUESTS
+ADD DOCTOR_USERNAME VARCHAR(255);
+
+ALTER TABLE SOEN6841.appointments
+ADD PATIENT_USERNAME VARCHAR(255);
+
+ALTER TABLE SOEN6841.appointments MODIFY appointment VARCHAR(255);
+
+ALTER TABLE SOEN6841.appointments CHANGE ID ID INT(100)AUTO_INCREMENT;
+
+ALTER TABLE SOEN6841.PATIENT_REQUESTS
+ADD APPOINTMENT_GIVEN VARCHAR(255) DEFAULT 'NO';
+---------------------------------------------------------------------------------------
