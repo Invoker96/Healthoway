@@ -44,6 +44,7 @@ import { DateTimePicker } from '@mui/x-date-pickers/DateTimePicker';
 import dayjs, { Dayjs } from 'dayjs';
 import { Link } from 'react-router-dom';
 import './CounsellorHome.scss';
+import FooterComp from '../../components/FooterComp/FooterComp';
 
 type Props = {
   intl: any;
