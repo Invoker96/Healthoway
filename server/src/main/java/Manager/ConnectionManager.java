@@ -59,7 +59,7 @@ public class ConnectionManager {
 		JSONArray arr = new JSONArray();
 		try {
 			String query = "SELECT U.USERNAME, U.FULLNAME, P.REQ, P.EMAIL FROM USERS U,PATIENT_REQUESTS P "
-					+ "WHERE P.USERNAME = U.USERNAME AND P.APPOINTMENT_GIVEN = 'NO' AND P.DOCTOR_USERNAME IS NULL;";
+					+ "WHERE P.USERNAME = U.USERNAME AND P.APPOINTMENT_GIVEN = 'NO' AND (P.DOCTOR_USERNAME IS NULL OR P.DOCTOR_USERNAME = '');";
 			PreparedStatement stmt = con.prepareStatement(query);
 			ResultSet rs = stmt.executeQuery();
 			if(rs.next()) {
@@ -195,5 +195,55 @@ public class ConnectionManager {
 			e.printStackTrace();
 		}
 		return false;
+	}
+
+	public static ResultSet getAppointmentDetails(String username) {
+
+		String query = "SELECT U.FULLNAME,A.PATIENT_USERNAME, A.APPOINTMENT,A.COMMENTS "
+				+ "FROM SOEN6841.APPOINTMENTS A , SOEN6841.USERS U , SOEN6841.PATIENT_REQUESTS P WHERE A.USERNAME = ? AND A.PATIENT_USERNAME = P.USERNAME "
+				+ "AND P.USERNAME = U.USERNAME;";
+
+		try {
+			PreparedStatement pstmt = con.prepareStatement(query);
+			pstmt.setString(1, username);
+			return pstmt.executeQuery();
+		}
+		catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return null;
+
+	}
+	public static ResultSet getAppointmentDetailsOfPatient(String username) {
+
+		String query = "SELECT U.FULLNAME, U.USER_ROLE, A.APPOINTMENT, U.USERNAME FROM SOEN6841.APPOINTMENTS A , SOEN6841.USERS U "
+				+ "WHERE A.PATIENT_USERNAME = ? AND A.USERNAME = U.USERNAME;";
+		try {
+			PreparedStatement pstmt = con.prepareStatement(query);
+			pstmt.setString(1, username);
+			return pstmt.executeQuery();
+		}
+		catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return null;
+	}
+
+	public static ResultSet getListOfPatientForDoctor(String username) {
+
+		String query = "SELECT U.USERNAME, U.FULLNAME, P.REQ, P.EMAIL FROM SOEN6841.PATIENT_REQUESTS P, SOEN6841.USERS U "
+				+ "WHERE P.USERNAME = U.USERNAME AND P.DOCTOR_USERNAME = ? AND P.APPOINTMENT_GIVEN = 'NO';";
+		try {
+			PreparedStatement pstmt = con.prepareStatement(query);
+			pstmt.setString(1, username);
+			return pstmt.executeQuery();
+		}
+		catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return null;
 	}
 }

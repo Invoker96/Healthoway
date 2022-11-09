@@ -36,7 +36,7 @@ public class DashboardUtility {
 	public static JSONArray getSelfAssesmentResult(String username) {
 
 		JSONArray arr = ConnectionManager.getSelfAssesmentResult(username);
-		
+
 		return arr;
 	}
 
@@ -45,7 +45,7 @@ public class DashboardUtility {
 
 		JSONArray arr = new JSONArray();
 		int i =1;
-	    do{
+		do{
 			String quesNo = "QUES"+(i++);
 			JSONObject obj = new JSONObject();
 			try {
@@ -65,7 +65,7 @@ public class DashboardUtility {
 
 
 	public static boolean assignToSelf(Appointment app) {
-		
+
 		return ConnectionManager.assignToSelf(app);
 
 	}
@@ -85,6 +85,22 @@ public class DashboardUtility {
 			e.printStackTrace();
 		} 
 
+		return arr;
+	}
+
+
+	public static JSONArray listOfPatientForDoctor(String username) {
+
+		ResultSet rs = ConnectionManager.getListOfPatientForDoctor(username);
+		JSONArray arr = new JSONArray();
+		try {
+			if(rs.next()) {
+				arr = DashboardUtility.convertIntoListOfPatient(rs);
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		return arr;
 	}
 }

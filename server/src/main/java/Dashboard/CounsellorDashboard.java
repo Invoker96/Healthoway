@@ -60,7 +60,7 @@ public class CounsellorDashboard extends HttpServlet{
 			if(n<0) 
 				response.sendError(500);
 
-		}else if(URL.contains("makeAppointment")){
+		}else if(URL.contains("scheduleAppointment")){
 			Appointment app = Appointment.convert(data);
 			boolean result = DashboardUtility.assignToSelf(app);
 			if(!result) 
