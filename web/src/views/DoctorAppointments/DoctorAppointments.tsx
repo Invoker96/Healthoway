@@ -30,12 +30,11 @@ import {
   myAppointments,
   getSelfAssesmentResult,
   removePatient
-} from '../../services/counsellorService';
+} from '../../services/doctorService';
 import dayjs, { Dayjs } from 'dayjs';
 import { Link } from 'react-router-dom';
-import './CounsellorAppointments.scss';
+import './DoctorAppointments.scss';
 import FooterComp from '../../components/FooterComp/FooterComp';
-// import moment from 'moment';
 
 type Props = {
   intl: any;
@@ -50,7 +49,7 @@ const Transition = React.forwardRef(function Transition(
   return <Slide direction="up" ref={ref} {...props} />;
 });
 
-const CounsellorAppointments = ({ intl }: Props) => {
+const DoctorAppointments = ({ intl }: Props) => {
   interface PatientsColumn {
     id: string;
     label: string;
@@ -259,7 +258,7 @@ const CounsellorAppointments = ({ intl }: Props) => {
       <MenuBar
         isLoggedIn={true}
         title={intl.formatMessage({
-          id: 'counsellor.title'
+          id: 'doctor.title'
         })}
         noBtn={false}
       />
@@ -278,7 +277,7 @@ const CounsellorAppointments = ({ intl }: Props) => {
             variant="contained"
             className="my_appointment_btn"
             component={Link}
-            to={'/counsellorHome'}
+            to={'/doctorHome'}
           >
             {intl.formatMessage({
               id: 'global.my_dashboard'
@@ -297,10 +296,6 @@ const CounsellorAppointments = ({ intl }: Props) => {
                         <TableRow hover role="checkbox" tabIndex={-1} key={index}>
                           {patientsColumns.map((column) => {
                             const value = (row as any)[column.id];
-                            // let date = '';
-                            // if (column.id === 'appointment') {
-                            //   // date = moment(value).format('MM/DD/YYYY HH:mm');
-                            // }
                             return (
                               <TableCell key={column.id} align={column.align}>
                                 {column.id === 's_no' ? index + 1 : value}
@@ -314,16 +309,7 @@ const CounsellorAppointments = ({ intl }: Props) => {
                                     })}
                                   </Button>
                                 )}
-                                {column.id === 'doctor_assign' && (
-                                  <Button
-                                    variant="contained"
-                                    onClick={() => handleClickOpen(row, 'assignToDoctor')}
-                                  >
-                                    {intl.formatMessage({
-                                      id: 'counsellor.doctor_assign'
-                                    })}
-                                  </Button>
-                                )}
+
                                 {column.id === 'reject' && (
                                   <Typography
                                     variant="h3"
@@ -360,4 +346,4 @@ const CounsellorAppointments = ({ intl }: Props) => {
   );
 };
 
-export default injectIntl(CounsellorAppointments);
+export default injectIntl(DoctorAppointments);
