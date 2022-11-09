@@ -1,7 +1,7 @@
 import { useEffect, useMemo, useState } from 'react';
 import { injectIntl } from 'react-intl';
 import { useNavigate } from 'react-router-dom';
-import { Grid, Link, Typography } from '@mui/material';
+import { Grid, Link } from '@mui/material';
 import RoleForm from '../../components/SignUp/RoleForm';
 import UserForm from '../../components/SignUp/UserForm';
 import DisclaimerForm from '../../components/SignUp/DisclaimerForm';
@@ -39,12 +39,16 @@ const SignUp = ({ intl }: Props) => {
   }, [formData, page]);
 
   useEffect(() => {
-    //submitted clicked
+    const submitForm = async () => {
+      await setLoading(true);
+      await createUser(formData).then((res) => {
+        setLoading(false);
+        const response = res.data;
+        navigate('/', { state: { ...response } });
+      });
+    };
     if (page >= signUpPages.length) {
-      setLoading(true);
-      createUser(formData);
-      setLoading(false);
-      navigate('/');
+      submitForm();
     }
   }, [page, formData, signUpPages, navigate]);
 
