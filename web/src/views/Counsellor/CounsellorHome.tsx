@@ -518,15 +518,13 @@ const CounsellorHome = ({ intl }: Props) => {
       <Grid sx={{ mt: 5 }}>
         <Grid container justifyContent="center">
           <Typography
-            variant="h1"
-            sx={{ display: { xs: 'flex', sm: 'flex', justifyContent: 'center' } }}
+            variant="h3"
+            sx={{ display: { xs: 'flex', sm: 'flex', justifyContent: 'left' } }}
             style={{ margin: '20px' }}
           >
-            <u>
-              {intl.formatMessage({
-                id: 'global.list_of_patients'
-              })}
-            </u>
+            {intl.formatMessage({
+              id: 'global.list_of_patients'
+            })}
           </Typography>
           <Button
             variant="contained"
@@ -543,7 +541,7 @@ const CounsellorHome = ({ intl }: Props) => {
           <Paper sx={{ width: '100%', overflow: 'hidden' }}>
             <TableContainer sx={{ maxHeight: 440 }}>
               <Table stickyHeader aria-label="sticky table">
-                <TableHead>
+                {/* <TableHead>
                   <TableRow>
                     {patientsColumns.map((column) => (
                       <TableCell
@@ -555,7 +553,7 @@ const CounsellorHome = ({ intl }: Props) => {
                       </TableCell>
                     ))}
                   </TableRow>
-                </TableHead>
+                </TableHead> */}
                 <TableBody>
                   {patientsList
                     .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)

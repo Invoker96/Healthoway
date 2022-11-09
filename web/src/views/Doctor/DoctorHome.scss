@@ -1,14 +1,7 @@
 @import '../../variables.scss';
 
-.table-wrapper {
-  margin-top: 25px;
+.my_appointment_btn {
+  position: absolute;
+  right: 1%;
+  top: 10%;
 }
-
-.doctor-table-container {
-    padding: 10px 60px;
-}
-
-// td {
-//     border: 1px solid black;
-//     border-collapse: collapse;
-// }

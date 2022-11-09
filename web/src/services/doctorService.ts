@@ -1,8 +1,8 @@
 import axios from 'axios';
 import { API_URL } from '../constants';
 
-export const listOfPatient = () => {
-  return axios.get(`${API_URL}/listOfPatient`);
+export const listOfPatient = (payload: object) => {
+  return axios.post(`${API_URL}/doctor/listOfPatient`, payload);
 };
 
 export const getSelfAssesmentResult = (payload: object) => {
@@ -15,14 +15,6 @@ export const removePatient = (payload: object) => {
 
 export const assignToSelf = (payload: object) => {
   return axios.post(`${API_URL}/scheduleAppointment`, payload);
-};
-
-export const listOfDoctors = () => {
-  return axios.get(`${API_URL}/listOfDoctors`);
-};
-
-export const assignToDoctor = (payload: object) => {
-  return axios.post(`${API_URL}/assignToDoctor`, payload);
 };
 
 export const myAppointments = (payload: object) => {

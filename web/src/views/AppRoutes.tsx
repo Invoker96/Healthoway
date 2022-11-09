@@ -7,6 +7,7 @@ import PatientHome from './Patient/PatientHome';
 import LandingPage from './LandingPage/LandingPage';
 import CounsellorAppointments from './CounsellorAppointments/CounsellorAppointments';
 import SignUp from './SignUp/SignUp';
+import DoctorAppointments from './DoctorAppointments/DoctorAppointments';
 
 const AppRoutes = () => {
   return (
@@ -19,6 +20,7 @@ const AppRoutes = () => {
         <Route path="patientHome" element={<PatientHome />} />
         <Route path="counsellorHome" element={<CounsellorHome />} />
         <Route path="counsellor/appointments" element={<CounsellorAppointments />} />
+        <Route path="doctor/appointments" element={<DoctorAppointments />} />
         <Route path="managerHome" element={<ManagerHome />} />
       </Routes>
     </BrowserRouter>
