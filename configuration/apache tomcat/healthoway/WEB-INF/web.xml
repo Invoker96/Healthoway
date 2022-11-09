@@ -16,6 +16,14 @@
 		<servlet-name>CounsellorDashboard</servlet-name>
 		<servlet-class>Dashboard.CounsellorDashboard</servlet-class>
 	</servlet>
+	<servlet>
+		<servlet-name>DoctorDashboard</servlet-name>
+		<servlet-class>Dashboard.DoctorDashboard</servlet-class>
+	</servlet>
+	<servlet>
+		<servlet-name>Appointment</servlet-name>
+		<servlet-class>Appointment.AppointmentServlet</servlet-class>
+	</servlet>
 	<servlet-mapping>
 		<servlet-name>Login</servlet-name>
 		<url-pattern>/login</url-pattern>
@@ -42,11 +50,19 @@
 	</servlet-mapping>
 	<servlet-mapping>
 		<servlet-name>CounsellorDashboard</servlet-name>
-		<url-pattern>/makeAppointment/*</url-pattern>
+		<url-pattern>/scheduleAppointment/*</url-pattern>
 	</servlet-mapping>
 	<servlet-mapping>
 		<servlet-name>CounsellorDashboard</servlet-name>
 		<url-pattern>/assignToDoctor/*</url-pattern>
+	</servlet-mapping>
+	<servlet-mapping>
+		<servlet-name>Appointment</servlet-name>
+		<url-pattern>/myAppointments/*</url-pattern>
+	</servlet-mapping>
+	<servlet-mapping>
+		<servlet-name>DoctorDashboard</servlet-name>
+		<url-pattern>/doctor/listOfPatient/*</url-pattern>
 	</servlet-mapping>
 	<resource-ref>
 		<description>MySQL Connection</description>

@@ -15,20 +15,20 @@ import util.HttpUtils;
 public class Appointment {
 
 	private String appointment;
-	
+
 	private String comments;
-	
+
 	//username of doctor or counsellor
 	private String userName;
-	
+
 	private String email;
-	
+
 	private String patientUserName;
-	
+
 	private int req;	
-		
+
 	private UserRole role;
-	
+
 	public String getAppointment() {
 		return appointment;
 	}
@@ -90,7 +90,13 @@ public class Appointment {
 		JSONObject jsonObject = new JSONObject(data);
 		app.setAppointment((String)jsonObject.get("appointment"));
 		app.setComments((String)jsonObject.get("comments"));
-		app.setUserName((String)jsonObject.get("counsellorUserName"));
+		app.setRole(UserRole.valueOf((String)jsonObject.get("role")));
+		if(app.getRole() == UserRole.Counsellor) {
+			app.setUserName((String)jsonObject.get("counsellorUserName"));
+		}
+		if(app.getRole() == UserRole.Doctor) {
+			app.setUserName((String)jsonObject.get("doctorUserName"));
+		}
 		app.setEmail((String)jsonObject.get("email"));
 		app.setPatientUserName((String)jsonObject.get("patientUserName"));
 		app.setReq(Integer.parseInt((String)jsonObject.get("req")));
