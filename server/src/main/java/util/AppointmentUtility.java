@@ -6,6 +6,8 @@ import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.Locale;
+import java.util.TimeZone;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -18,11 +20,18 @@ public class AppointmentUtility {
 	public static String convert(String dateString) throws ParseException {
 
 		dateString = dateString.substring(0,19);
-		DateFormat sdf = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss");
-		Date date = sdf.parse(dateString);
-		String longDate = new SimpleDateFormat("EEE, d MMM yyyy").format(date);
-		String time = new SimpleDateFormat("h:mm a").format(date);
-		return longDate +" "+ time;
+
+		DateFormat utcFormatter = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss",Locale.CANADA);
+
+		utcFormatter.setTimeZone(TimeZone.getTimeZone("UTC"));
+		Date gpsUTCDate = null;
+		try {
+			gpsUTCDate = utcFormatter.parse(dateString);
+		} catch (ParseException e) {
+			e.printStackTrace();
+		}
+		String longDate = new SimpleDateFormat("EEE, d MMM yyyy h:mm a").format(gpsUTCDate);
+		return longDate;
 	}
 
 	public static JSONArray getAppointmentDetails(String userName) {
