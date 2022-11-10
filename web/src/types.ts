@@ -3,6 +3,8 @@ export type User = {
   email: string;
   password: string;
   userRole: RoleType;
+  dob: string;
+  pNum: string;
 };
 
 export enum RoleType {

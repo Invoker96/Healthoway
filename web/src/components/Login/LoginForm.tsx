@@ -2,12 +2,11 @@ import { useState } from 'react';
 
 import { injectIntl } from 'react-intl';
 import { Link, useNavigate } from 'react-router-dom';
-import { Button, Grid, TextField, CircularProgress } from '@mui/material';
+import { Button, Grid, TextField } from '@mui/material';
 import { Controller, useForm } from 'react-hook-form';
 import { Auth } from '../../types';
 import { login } from '../../services/authService';
 import { setUserInfo } from '../../services/userInfoService';
-import ErrorIcon from '@mui/icons-material/Error';
 import './LoginForm.scss';
 import LoadingSpinner from '../common/LoadingSpinner/LoadingSpinner';
 import AppSnackbar from '../AppSnackbar/AppSnackbar';

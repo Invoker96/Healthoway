@@ -29,7 +29,9 @@ const SignUp = ({ intl }: Props) => {
     fullName: '',
     email: '',
     password: '',
-    userRole: RoleType.PATIENT
+    userRole: RoleType.PATIENT,
+    dob: new Date().toISOString().split('T')[0],
+    pNum: ''
   });
 
   const signUpPages = useMemo(() => {

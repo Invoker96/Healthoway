@@ -2,7 +2,7 @@ import React from 'react';
 import { injectIntl } from 'react-intl';
 import { Button, Grid, TextField, Typography } from '@mui/material';
 import { Controller, useForm } from 'react-hook-form';
-import { User } from '../../types';
+import { RoleType, User } from '../../types';
 import './SignUp.scss';
 
 type Props = {
@@ -53,8 +53,21 @@ const RoleForm = ({ page, setPage, formData, setFormData, intl }: Props) => {
       id: 'confirmPassword',
       type: 'password',
       rules: { required: true, validate: (value: string) => getValues('password') === value }
+    },
+    {
+      id: 'dob',
+      type: 'date',
+      rules: { required: true }
     }
   ];
+
+  if (formData['userRole'] === RoleType.DOCTOR || formData['userRole'] === RoleType.COUNSELLOR) {
+    USER_FIELDS.push({
+      id: 'pNum',
+      type: 'text',
+      rules: { required: true }
+    });
+  }
 
   return (
     <>
@@ -74,6 +87,7 @@ const RoleForm = ({ page, setPage, formData, setFormData, intl }: Props) => {
             return (
               <Grid item xs={6}>
                 <Controller
+                  key={key.id}
                   control={control}
                   name={key.id}
                   rules={key.rules}
