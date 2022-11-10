@@ -1,6 +1,7 @@
 package Manager;
 
 import model.Appointment;
+import model.SelfAssessmentForm;
 import model.User;
 import util.DashboardUtility;
 import util.TableNames;
@@ -54,6 +55,55 @@ public class ConnectionManager {
 		}
 		return 0;
 	}
+
+	public static int insertSelfAssessmentResult(SelfAssessmentForm form) {
+		int check = 0;
+		try {
+			check = 0;
+			int VARIABLE;
+			int id = form.getId();
+			String query1 = "SELECT MAX(REQ) FROM SOEN6841.PATIENT_REQUESTS WHERE ID = ?";
+			PreparedStatement stmt = con.prepareStatement(query1, Statement.RETURN_GENERATED_KEYS);
+			stmt.setInt(1, id);
+			stmt.executeQuery();
+			ResultSet rs = stmt.getGeneratedKeys();
+			if (rs.next() && rs != null) {
+				// GET INT VALUE FROM RESULT SET AND INCREMENT IT
+				int val = rs.getInt(1);
+				VARIABLE = val + 1;
+				System.out.println(VARIABLE);
+				check = rs.getInt(1);
+			} else {
+				// TEST FOR NULL VALUE OF VARIABLE
+				VARIABLE = 1;
+				System.out.println(VARIABLE);
+			}
+
+			String query2 = "INSERT INTO SOEN6841.PATIENT_REQUESTS(ID,REQ,USERNAME,EMAIL,QUES1,QUES2,QUES3,QUES4,QUES5,QUES6,QUES7,QUES8,QUES9)VALUES(?,?,?,?,?,?,?,?,?,?,?,?,?)";
+			PreparedStatement ps = con.prepareStatement(query2);
+			ps.setInt(1, form.getId());
+			ps.setInt(2, VARIABLE);
+			System.out.println(form.getUsername());
+			ps.setString(3, form.getUsername());
+			ps.setString(4, form.getEmail());
+			ps.setString(5, form.getQues1());
+			ps.setString(6, form.getQues2());
+			ps.setString(7, form.getQues3());
+			ps.setString(8, form.getQues4());
+			ps.setString(9, form.getQues5());
+			ps.setString(10, form.getQues6());
+			ps.setString(11, form.getQues7());
+			ps.setString(12, form.getQues8());
+			ps.setString(13, form.getQues9());
+			ps.executeUpdate();
+
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return check;
+	}
+
+
 
 	public static JSONArray listOfPatientForCounsellor() {
 
