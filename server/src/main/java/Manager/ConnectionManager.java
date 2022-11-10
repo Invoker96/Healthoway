@@ -6,10 +6,12 @@ import util.DashboardUtility;
 import util.TableNames;
 
 import java.sql.*;
+import java.util.ArrayList;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
 
+import Email.sendEmail;
 import enums.UserRole;
 
 public class ConnectionManager {
@@ -32,7 +34,7 @@ public class ConnectionManager {
 
 	public static int registerUser(User user) {
 		try {
-			String query = "INSERT INTO SOEN6841.USERS (USERNAME,FULLNAME,EMAIL,PASSWORD,USER_ROLE,ROLE_ID,ADDRESS,PNUM,DOB) VALUES (?,?,?,?,?,?,?,?,?)";
+			String query = "INSERT INTO SOEN6841.USERS (USERNAME,FULLNAME,EMAIL,PASSWORD,USER_ROLE,ROLE_ID,ADDRESS,PNUM) VALUES (?,?,?,?,?,?,?,?)";
 			PreparedStatement ps = con.prepareStatement(query, Statement.RETURN_GENERATED_KEYS);
 			ps.setString(1, user.getUsername());
 			ps.setString(2, user.getFullName());
@@ -42,7 +44,6 @@ public class ConnectionManager {
 			ps.setString(6, user.getRoleId());
 			ps.setString(7, user.getAddress());
 			ps.setString(8, user.getPNum());
-			ps.setString(9, user.getDob());
 			ps.executeUpdate();
 
 			ResultSet rs = ps.getGeneratedKeys();
@@ -147,7 +148,43 @@ public class ConnectionManager {
 
 		return n;
 	}
-
+	public static void emailDetails(String uname) //function to called at end of insert to tables patient_requests and appointments
+	{
+		String selectQuery = "SELECT USERNAME, EMAIL, BODY, SUBJECT FROM SOEN6841.EMAIL_TABLE WHERE USERNAME = ?";
+		try 
+		{
+			PreparedStatement pt = con.prepareStatement(selectQuery);
+			pt.setString(1, uname);
+			ResultSet rs = pt.executeQuery();
+			String email ="", body ="",subject="";
+			if(rs.next())
+			{
+				email = rs.getString("EMAIL");
+				body = rs.getString("BODY");
+				subject = rs.getString("SUBJECT");
+			}
+			sendEmail.emailConfirmation(subject, body, uname, email);
+			deleteEmailDetails(uname);
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
+	
+	public static void deleteEmailDetails(String uname)
+	{
+		String delQuery = "DELETE FROM SOEN6841.EMAIL_TABLE WHERE USERNAME = ?";
+		try 
+		{
+			PreparedStatement pt = con.prepareStatement(delQuery);
+			pt.setString(1, uname);
+			int r = pt.executeUpdate();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
+	
 	public static boolean assignToSelf(Appointment app) {
 
 		String insertQuery = "INSERT INTO "+TableNames.APPOINTMENTS_TABLE+"(REQ,USERNAME,EMAIL,APPOINTMENT,ROLE,COMMENTS,PATIENT_USERNAME) VALUES (?,?,?,?,?,?,?);";
@@ -161,6 +198,7 @@ public class ConnectionManager {
 			pstmt.setString(6, app.getComments());
 			pstmt.setString(7, app.getPatientUserName());
 			int n = pstmt.executeUpdate();
+			
 			if(n>0) {
 				String updateQuery = "UPDATE SOEN6841.PATIENT_REQUESTS SET APPOINTMENT_GIVEN = 'YES' WHERE USERNAME = ?";
 				pstmt = con.prepareStatement(updateQuery);
@@ -170,7 +208,7 @@ public class ConnectionManager {
 					return true;
 				}
 			}
-
+			
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
