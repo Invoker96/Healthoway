@@ -8,4 +8,8 @@
 .menu-bar-container {
   display: flex;
   justify-content: space-between;
+
+  a:not(:last-child) {
+    margin-right: $spacing-04;
+  }
 }

@@ -12,6 +12,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.logging.*;
 
 public class UserServlet extends HttpServlet {
 
@@ -26,7 +27,7 @@ public class UserServlet extends HttpServlet {
             obj.put("id", newUserId);
             out.println(obj);
         } catch (Exception e) {
-            System.out.println(e.getMessage());
+            Logger.getLogger (UserServlet.class.getName()).log(Level.WARNING, e.getMessage(), e);
         } finally {
             out.close();
         }

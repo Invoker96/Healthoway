@@ -20,7 +20,7 @@ const AppSnackbar = ({ type, message, open }: Props) => {
   return (
     <Snackbar
       open={isOpen}
-      autoHideDuration={6000}
+      autoHideDuration={3000}
       anchorOrigin={{ vertical: 'top', horizontal: 'right' }}
       onClose={handleClose}
     >
