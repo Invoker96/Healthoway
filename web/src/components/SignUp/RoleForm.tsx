@@ -19,7 +19,7 @@ const RoleForm = ({ page, setPage, formData, setFormData, intl }: Props) => {
 
   useEffect(() => {
     setFormData({ ...formData, userRole: userRole });
-  }, [formData, setFormData, userRole]);
+  }, [setFormData, userRole]);
 
   return (
     <Grid className="form-card">

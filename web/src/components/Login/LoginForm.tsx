@@ -1,14 +1,16 @@
+import { useState } from 'react';
+
 import { injectIntl } from 'react-intl';
 import { Link, useNavigate } from 'react-router-dom';
 import { Button, Grid, TextField, CircularProgress } from '@mui/material';
 import { Controller, useForm } from 'react-hook-form';
 import { Auth } from '../../types';
-import './LoginForm.scss';
-import { authenticator } from '../../services/authService';
+import { login } from '../../services/authService';
 import { setUserInfo } from '../../services/userInfoService';
-import ClearIcon from '@mui/icons-material/Clear';
 import ErrorIcon from '@mui/icons-material/Error';
-import { useState } from 'react';
+import './LoginForm.scss';
+import LoadingSpinner from '../common/LoadingSpinner/LoadingSpinner';
+import AppSnackbar from '../AppSnackbar/AppSnackbar';
 
 type Props = {
   intl: any;
@@ -25,35 +27,39 @@ const LoginForm = ({ formData, setFormData, intl }: Props) => {
   const navigate = useNavigate();
 
   const onSubmit = (data: any) => {
-    setLoading(true);
-    setFormData({ ...formData, ...data });
-    setLoginError(false);
-    authenticator(data)
-      .then(function (response) {
-        if (response?.data?.userRole !== 'NA') {
-          setUserInfo(response?.data);
-          const role = response.data.userRole.toLowerCase();
+    const doLogin = async () => {
+      await setLoginError(false);
+      await setLoading(true);
+      await setFormData({ ...formData, ...data });
+      await login(data)
+        .then((response) => {
+          if (response?.data?.userRole !== 'NA') {
+            setUserInfo(response?.data);
+            const role = response.data.userRole.toLowerCase();
 
-          if (role === 'doctor') {
-            navigate('/doctorHome');
-          } else if (role === 'patient') {
-            navigate('/patientHome');
-          } else if (role === 'manager') {
-            navigate('/managerHome');
-          } else if (role === 'counsellor') {
-            navigate('/counsellorHome');
+            if (role === 'doctor') {
+              navigate('/doctorHome');
+            } else if (role === 'patient') {
+              navigate('/patientHome');
+            } else if (role === 'manager') {
+              navigate('/managerHome');
+            } else if (role === 'counsellor') {
+              navigate('/counsellorHome');
+            }
+          } else {
+            setLoginError(true);
           }
-        } else {
+        })
+        .catch((err) => {
+          console.log(err);
           setLoginError(true);
-          navigate('/counsellorHome');
-        }
-      })
-      .catch((err) => {
-        console.log(err);
-        setLoginError(true);
-        navigate('/counsellorHome');
-      });
-    setLoading(false);
+        })
+        .finally(() => {
+          setLoading(false);
+        });
+    };
+
+    doLogin();
   };
 
   const LOGIN_FIELDS = [
@@ -71,20 +77,15 @@ const LoginForm = ({ formData, setFormData, intl }: Props) => {
 
   return (
     <>
-      {loading && <CircularProgress />}
+      <LoadingSpinner isOpen={loading} />
+      <AppSnackbar
+        type="error"
+        message={intl.formatMessage({
+          id: 'authForm.form.error'
+        })}
+        open={isLoginError}
+      />
       <Grid container className="login-card">
-        {isLoginError && (
-          <Grid component="form" container spacing={3}>
-            <Grid item xs={12}>
-              <div className="login-error">
-                <ErrorIcon className="login-svg" />
-                {intl.formatMessage({
-                  id: 'authForm.form.error'
-                })}
-              </div>
-            </Grid>
-          </Grid>
-        )}
         <Grid component="form" container spacing={3} justifyContent="center" alignItems="center">
           {LOGIN_FIELDS.map((key, index) => {
             return (

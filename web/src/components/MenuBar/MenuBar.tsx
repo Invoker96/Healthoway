@@ -21,11 +21,7 @@ const MenuBar = ({ intl, isLoggedIn, title, noBtn }: Props) => {
       <AppBar component="nav" position="sticky">
         <Toolbar className="menu-bar-container">
           <img className="home_logo" src={Image}></img>
-          <Typography variant="h6">
-            {intl.formatMessage({
-              id: title
-            })}
-          </Typography>
+          <Typography variant="h6">{title}</Typography>
           <Box>
             {!isLoggedIn && !noBtn ? (
               <>

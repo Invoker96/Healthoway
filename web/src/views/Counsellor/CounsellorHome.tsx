@@ -43,7 +43,6 @@ import CalendarMonthIcon from '@mui/icons-material/CalendarMonth';
 import { DateTimePicker } from '@mui/x-date-pickers/DateTimePicker';
 import dayjs, { Dayjs } from 'dayjs';
 import { Link } from 'react-router-dom';
-import './CounsellorHome.scss';
 import FooterComp from '../../components/FooterComp/FooterComp';
 
 type Props = {
@@ -404,7 +403,7 @@ const CounsellorHome = ({ intl }: Props) => {
                     label="Appointment Time"
                     value={value}
                     onChange={handleChange}
-                    renderInput={(params) => <TextField {...params} />}
+                    renderInput={(params: any) => <TextField {...params} />}
                   />
                 </LocalizationProvider>
               </div>
