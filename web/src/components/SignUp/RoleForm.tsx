@@ -20,7 +20,18 @@ const RoleForm = ({ page, setPage, formData, setFormData, intl }: Props) => {
   );
 
   useEffect(() => {
-    setFormData({ ...formData, userRole: userRole });
+    setFormData({
+      //reset form data
+      ...{
+        fullName: '',
+        email: '',
+        password: '',
+        userRole: RoleType.PATIENT,
+        dob: new Date().toISOString().split('T')[0],
+        pNum: ''
+      },
+      userRole: userRole
+    });
   }, [setFormData, userRole]);
 
   return (
