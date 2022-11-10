@@ -12,8 +12,11 @@ type Props = {
 };
 
 const LandingPage = ({ intl }: Props) => {
+  //clear state on refresh so snack bar is not shown
+  window.history.replaceState({}, document.title);
+
   const location = useLocation();
-  const createdUserId = location.state.id;
+  const createdUserId = location.state?.id;
 
   return (
     <>
@@ -21,7 +24,7 @@ const LandingPage = ({ intl }: Props) => {
         <AppSnackbar
           type="success"
           message={intl.formatMessage({
-            id: 'userForm.createUser.label.success'
+            id: 'userForm.createUser.success'
           })}
           open={true}
         />

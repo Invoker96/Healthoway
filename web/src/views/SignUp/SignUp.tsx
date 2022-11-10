@@ -11,6 +11,7 @@ import './SignUp.scss';
 import LoadingSpinner from '../../components/common/LoadingSpinner/LoadingSpinner';
 import MenuBar from '../../components/MenuBar/MenuBar';
 import FooterComp from '../../components/FooterComp/FooterComp';
+import AppSnackbar from '../../components/AppSnackbar/AppSnackbar';
 
 type Props = {
   intl: any;
@@ -21,6 +22,7 @@ const SignUp = ({ intl }: Props) => {
 
   const [page, setPage] = useState(0);
   const [loading, setLoading] = useState(false);
+  const [isError, setIsError] = useState(false);
 
   //state for form data
   const [formData, setFormData] = useState({
@@ -40,12 +42,20 @@ const SignUp = ({ intl }: Props) => {
 
   useEffect(() => {
     const submitForm = async () => {
+      await setIsError(false);
       await setLoading(true);
-      await createUser(formData).then((res) => {
-        setLoading(false);
-        const response = res.data;
-        navigate('/', { state: { ...response } });
-      });
+      await createUser(formData)
+        .then((res) => {
+          navigate('/', { state: { ...res.data } });
+        })
+        .catch((err) => {
+          setPage(page - 1);
+          console.log(err);
+          setIsError(true);
+        })
+        .finally(() => {
+          setLoading(false);
+        });
     };
     if (page >= signUpPages.length) {
       submitForm();
@@ -58,6 +68,13 @@ const SignUp = ({ intl }: Props) => {
 
   return (
     <>
+      <AppSnackbar
+        type="error"
+        message={intl.formatMessage({
+          id: 'userForm.createUser.error'
+        })}
+        open={isError}
+      />
       <MenuBar
         isLoggedIn={false}
         title={intl.formatMessage({
