@@ -15,7 +15,9 @@ type Props = {
 };
 
 const RoleForm = ({ page, setPage, formData, setFormData, intl }: Props) => {
-  const [userRole, setUserRole] = useState(RoleType.PATIENT);
+  const [userRole, setUserRole] = useState(
+    formData['userRole'] ? formData['userRole'] : RoleType.PATIENT
+  );
 
   useEffect(() => {
     setFormData({ ...formData, userRole: userRole });

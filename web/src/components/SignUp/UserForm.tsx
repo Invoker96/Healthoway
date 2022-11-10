@@ -77,6 +77,7 @@ const RoleForm = ({ page, setPage, formData, setFormData, intl }: Props) => {
                   control={control}
                   name={key.id}
                   rules={key.rules}
+                  defaultValue={formData[key.id as keyof User]}
                   render={({ field, fieldState: { error } }: any) => (
                     <TextField
                       {...field}
