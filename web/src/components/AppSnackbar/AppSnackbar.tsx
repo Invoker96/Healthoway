@@ -21,8 +21,9 @@ const AppSnackbar = ({ type, message, open }: Props) => {
     <Snackbar
       open={isOpen}
       autoHideDuration={3000}
-      anchorOrigin={{ vertical: 'top', horizontal: 'right' }}
+      anchorOrigin={{ vertical: 'top', horizontal: 'center' }}
       onClose={handleClose}
+      style={{ marginTop: '50px' }}
     >
       <Alert severity={type}>{message}</Alert>
     </Snackbar>
