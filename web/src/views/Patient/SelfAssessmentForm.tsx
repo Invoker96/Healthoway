@@ -1,23 +1,28 @@
 import { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, Link } from 'react-router-dom';
 import { injectIntl } from 'react-intl';
 import {
   Grid,
-  Typography,
   RadioGroup,
   FormLabel,
   FormControlLabel,
   Radio,
   Button,
   FormControl,
-  FormHelperText
+  FormHelperText,
+  Typography
 } from '@mui/material';
-import QUESTIONS from '../../data/selfAssessmentQuestions.json';
+
 import { Controller, useForm } from 'react-hook-form';
 import { saveAssessmentForm } from '../../services/patientService';
 import { getUserName, getEmail } from '../../services/userInfoService';
 import LoadingSpinner from '../../components/common/LoadingSpinner/LoadingSpinner';
 import AppSnackbar from '../../components/AppSnackbar/AppSnackbar';
+import MenuBar from '../../components/MenuBar/MenuBar';
+
+import QUESTIONS from '../../data/selfAssessmentQuestions.json';
+
+import './SelfAssessmentForm.scss';
 
 type Props = {
   intl: any;
@@ -38,8 +43,13 @@ const SelfAssessmentForm = ({ intl }: Props) => {
 
   const navigate = useNavigate();
 
-  const { control, handleSubmit } = useForm({
-    reValidateMode: 'onBlur'
+  const {
+    control,
+    handleSubmit,
+    formState: { isDirty, isValid }
+  } = useForm({
+    reValidateMode: 'onBlur',
+    mode: 'onChange'
   });
 
   const onSubmit = (data: any) => {
@@ -52,7 +62,11 @@ const SelfAssessmentForm = ({ intl }: Props) => {
         ...data
       };
       await saveAssessmentForm(request)
-        //.then(() => })
+        .then(() => {
+          navigate('/patient', {
+            state: { successMessage: intl.formatMessage({ id: 'selfAssessment.submit.success' }) }
+          });
+        })
         .catch((err: any) => {
           console.log(err);
           setIsError(true);
@@ -71,13 +85,23 @@ const SelfAssessmentForm = ({ intl }: Props) => {
       <AppSnackbar
         type="error"
         message={intl.formatMessage({
-          id: 'selfAssessment.error'
+          id: 'selfAssessment.submit.error'
         })}
         open={isError}
       />
-      <Typography variant="h1">{intl.formatMessage({ id: 'selfAssessment.title' })}</Typography>
-      <Grid component="form" container>
-        {QUESTIONS.map((set: QuestionSet) => {
+
+      <MenuBar
+        isLoggedIn={false}
+        title={intl.formatMessage({ id: 'selfAssessment.title' })}
+        noBtn={true}
+      />
+      <Grid component="form" container className="selfAssessment-container">
+        <Grid container>
+          <Button variant="contained" component={Link} to={'/patient/home'}>
+            {intl.formatMessage({ id: 'selfAssessment.button.backToHome' })}
+          </Button>
+        </Grid>
+        {QUESTIONS.map((set: QuestionSet, qIndex: number) => {
           const options = Object.keys(set).filter((key) => key.match(/option.*/));
           const optionComponent = options.map((opt, idx) => {
             return (
@@ -90,15 +114,18 @@ const SelfAssessmentForm = ({ intl }: Props) => {
             );
           });
           return (
-            <Grid item key={set.question}>
-              <FormLabel>{set.question}</FormLabel>
+            <Grid item key={set.question} className="selfAssessment-question-container">
+              <Typography variant="h6" className="label-question">{`${intl.formatMessage({
+                id: 'selfAssessment.label.question'
+              })} ${qIndex + 1}`}</Typography>
+              <FormLabel className="question">{set.question}</FormLabel>
               <Controller
                 control={control}
                 name={set.id}
-                //rules={{ required: true }}
+                rules={{ required: true }}
                 render={({ field, fieldState: { error } }: any) => {
                   return (
-                    <FormControl>
+                    <FormControl className="question-answer-container">
                       <RadioGroup
                         {...field}
                         onChange={(event, value) => field.onChange(value)}
@@ -118,9 +145,16 @@ const SelfAssessmentForm = ({ intl }: Props) => {
             </Grid>
           );
         })}
-        <Button variant="contained" type="submit" onClick={handleSubmit(onSubmit)}>
-          {intl.formatMessage({ id: 'selfAssessment.button.submit' })}
-        </Button>
+        <Grid container justifyContent="right">
+          <Button
+            variant="contained"
+            type="submit"
+            disabled={!isDirty || !isValid}
+            onClick={handleSubmit(onSubmit)}
+          >
+            {intl.formatMessage({ id: 'selfAssessment.button.submit' })}
+          </Button>
+        </Grid>
       </Grid>
     </Grid>
   );
