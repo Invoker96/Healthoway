@@ -34,7 +34,7 @@ public class ConnectionManager {
 
 	public static int registerUser(User user) {
 		try {
-			String query = "INSERT INTO SOEN6841.USERS (USERNAME,FULLNAME,EMAIL,PASSWORD,USER_ROLE,ROLE_ID,ADDRESS,PNUM) VALUES (?,?,?,?,?,?,?,?)";
+			String query = "INSERT INTO SOEN6841.USERS (USERNAME,FULLNAME,EMAIL,PASSWORD,USER_ROLE,ROLE_ID,ADDRESS,PNUM,DOB) VALUES (?,?,?,?,?,?,?,?,?)";
 			PreparedStatement ps = con.prepareStatement(query, Statement.RETURN_GENERATED_KEYS);
 			ps.setString(1, user.getUsername());
 			ps.setString(2, user.getFullName());
@@ -44,6 +44,7 @@ public class ConnectionManager {
 			ps.setString(6, user.getRoleId());
 			ps.setString(7, user.getAddress());
 			ps.setString(8, user.getPNum());
+			ps.setString(9, user.getDob());
 			ps.executeUpdate();
 
 			ResultSet rs = ps.getGeneratedKeys();
