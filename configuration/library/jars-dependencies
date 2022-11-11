@@ -1,0 +1,10 @@
+Download and set class path for following jars with their versions
+jaf-1.1.1 - activation.jar
+javamail-1.4.4 - mail.jar
+mysql-connector-j-8.0.31.jar
+smtp.jar
+
+The last jar is to be downloaded separately
+fakeSMTP-2.0.jar 
+Link: http://nilhcem.com/FakeSMTP/index.html
+To run this server, simply double click and set listening port as 9090 and start server through GUI

@@ -129,6 +129,31 @@ BEGIN
     Please make sure you attend the appointment.','Appointment confirmed for'||new.USERNAME);
 END#
 
+----------------------------------6-nov-2022------------------------------------------
+
+DROP TRIGGER  soen6841.patient_requests_AFTER_INSERT;
+
+Delimiter #
+CREATE TRIGGER `soen6841`.`patient_requests_AFTER_INSERT` 
+AFTER INSERT ON `patient_requests` FOR EACH ROW
+BEGIN
+	INSERT INTO SOEN6841.EMAIL_TABLE(ID,USERNAME,EMAIL,BODY,SUBJECT)
+    VALUES(new.ID,new.USERNAME,new.EMAIL,'Hi User, You have requested appointment with a doctor. 
+    You will be notified as soon as we process your request','Appointment requested ');
+END#
+
+DROP TRIGGER  soen6841.appointments_AFTER_INSERT;
+
+Delimiter #
+CREATE TRIGGER `soen6841`.`appointments_AFTER_INSERT` 
+AFTER INSERT ON `appointments` FOR EACH ROW
+BEGIN
+	INSERT INTO SOEN6841.EMAIL_TABLE(ID,USERNAME,EMAIL,BODY,SUBJECT)
+    VALUES(new.ID,new.USERNAME,new.EMAIL,'Hi User,   You have a confirmed appointment. 
+    Please visit your Healthoway portal for more details.','Appointment confirmed');
+END#
+
+--------------------------------------------------------------------------------------
 -------------------------NEW 11-NOV-2022-----------------------------------------------
 
 ALTER TABLE SOEN6841.PATIENT_REQUESTS
