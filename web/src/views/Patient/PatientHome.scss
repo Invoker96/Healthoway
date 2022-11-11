@@ -1,1 +1,11 @@
 @import '../../variables.scss';
+.patientHome-greeting-container {
+  padding: $spacing-05;
+
+  p {
+    margin: $spacing-04 0;
+  }
+}
+.appointment-container {
+  padding: $spacing-05;
+}

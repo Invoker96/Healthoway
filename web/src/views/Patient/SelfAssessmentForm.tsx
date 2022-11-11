@@ -63,7 +63,7 @@ const SelfAssessmentForm = ({ intl }: Props) => {
       };
       await saveAssessmentForm(request)
         .then(() => {
-          navigate('/patient', {
+          navigate('/patient/home', {
             state: { successMessage: intl.formatMessage({ id: 'selfAssessment.submit.success' }) }
           });
         })
@@ -95,7 +95,7 @@ const SelfAssessmentForm = ({ intl }: Props) => {
         title={intl.formatMessage({ id: 'selfAssessment.title' })}
         noBtn={true}
       />
-      <Grid component="form" container className="selfAssessment-container">
+      <Grid component="form" container className="main-container">
         <Grid container>
           <Button variant="contained" component={Link} to={'/patient/home'}>
             {intl.formatMessage({ id: 'selfAssessment.button.backToHome' })}
