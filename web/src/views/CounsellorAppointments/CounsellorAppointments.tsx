@@ -278,7 +278,7 @@ const CounsellorAppointments = ({ intl }: Props) => {
             variant="contained"
             className="my_appointment_btn"
             component={Link}
-            to={'/counsellorHome'}
+            to={'/counsellor/home'}
           >
             {intl.formatMessage({
               id: 'global.my_dashboard'

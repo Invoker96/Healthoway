@@ -31,25 +31,16 @@ const LoginForm = ({ formData, setFormData, intl }: Props) => {
       await setLoading(true);
       await setFormData({ ...formData, ...data });
       await login(data)
-        .then((response) => {
+        .then((response: any) => {
           if (response?.data?.userRole !== 'NA') {
             setUserInfo(response?.data);
             const role = response.data.userRole.toLowerCase();
-
-            if (role === 'doctor') {
-              navigate('/doctorHome');
-            } else if (role === 'patient') {
-              navigate('/patientHome');
-            } else if (role === 'manager') {
-              navigate('/managerHome');
-            } else if (role === 'counsellor') {
-              navigate('/counsellorHome');
-            }
+            navigate(`/${role}/home`);
           } else {
             setLoginError(true);
           }
         })
-        .catch((err) => {
+        .catch((err: any) => {
           console.log(err);
           setLoginError(true);
         })

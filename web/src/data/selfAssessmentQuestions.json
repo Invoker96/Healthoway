@@ -1,0 +1,74 @@
+[
+  {
+    "id": "ques1",
+    "question": "Over the past 2 weeks, how often have you been bothered by any of the following problems: Little interest or pleasure in doing things?",
+    "option1": "Not at all",
+    "option2": "Several days",
+    "option3": "More than half of the days",
+    "option4": "Nearly everyday"
+  },
+  {
+    "id": "ques2",
+    "question": "Over the past 2 weeks, how often have you been bothered by any of the following problems: Feeling down, depressed or hopeless?",
+    "option1": "Not at all",
+    "option2": "Several days",
+    "option3": "More than half of the days",
+    "option4": "Nearly everyday"
+  },
+  {
+    "id": "ques3",
+    "question": "Over the past 2 weeks, how often have you been bothered by any of the following problems: Trouble falling asleep, staying asleep, or sleeping too much?",
+    "option1": "Not at all",
+    "option2": "Several days",
+    "option3": "More than half of the days",
+    "option4": "Nearly everyday"
+  },
+  {
+    "id": "ques4",
+    "question": "Over the past 2 weeks, how often have you been bothered by any of the following problems: Feeling tired or having little energy?",
+    "option1": "Not at all",
+    "option2": "Several days",
+    "option3": "More than half of the days",
+    "option4": "Nearly everyday"
+  },
+  {
+    "id": "ques5",
+    "question": "Over the past 2 weeks, how often have you been bothered by any of the following problems: Poor appetite or overeating?",
+    "option1": "Not at all",
+    "option2": "Several days",
+    "option3": "More than half of the days",
+    "option4": "Nearly everyday"
+  },
+  {
+    "id": "ques6",
+    "question": "Over the past 2 weeks, how often have you been bothered by any of the following problems: Feeling bad about yourself - or that you are a failure or have let yourself or your family down?",
+    "option1": "Not at all",
+    "option2": "Several days",
+    "option3": "More than half of the days",
+    "option4": "Nearly everyday"
+  },
+  {
+    "id": "ques7",
+    "question": "Over the past 2 weeks, how often have you been bothered by any of the following problems: Trouble concentrating on things, such as reading the newspaper or watching television?",
+    "option1": "Not at all",
+    "option2": "Several days",
+    "option3": "More than half of the days",
+    "option4": "Nearly everyday"
+  },
+  {
+    "id": "ques8",
+    "question": "Over the past 2 weeks, how often have you been bothered by any of the following problems: Moving or speaking so slowly that other people could have noticed. Or, the opposite - being so fidgety or restless that you have been moving around a lot more than usual?",
+    "option1": "Not at all",
+    "option2": "Several days",
+    "option3": "More than half of the days",
+    "option4": "Nearly everyday"
+  },
+  {
+    "id": "ques9",
+    "question": "Over the past 2 weeks, how often have you been bothered by any of the following problems: Thoughts that you would be better off dead or of hurting yourself in some way?",
+    "option1": "Not at all",
+    "option2": "Several days",
+    "option3": "More than half of the days",
+    "option4": "Nearly everyday"
+  }
+]

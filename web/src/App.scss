@@ -41,5 +41,10 @@
 }
 
 .main-container {
-  margin: $spacing-06 $spacing-07;
+  padding: $spacing-06 $spacing-07;
+
+  table {
+    margin-top: $spacing-04;
+    width: 80%;
+  }
 }

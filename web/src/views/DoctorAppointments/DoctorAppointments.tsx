@@ -277,7 +277,7 @@ const DoctorAppointments = ({ intl }: Props) => {
             variant="contained"
             className="my_appointment_btn"
             component={Link}
-            to={'/doctorHome'}
+            to={'/doctor/home'}
           >
             {intl.formatMessage({
               id: 'global.my_dashboard'
