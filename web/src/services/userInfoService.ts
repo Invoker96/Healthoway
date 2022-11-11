@@ -16,6 +16,10 @@ export function getUserName() {
   return localStorage.getItem('username');
 }
 
+export function getEmail() {
+  return localStorage.getItem('email');
+}
+
 export function setUserRole(userRole: string) {
   localStorage.setItem('userRole', userRole);
 }

@@ -34,7 +34,7 @@ const LoginForm = ({ formData, setFormData, intl }: Props) => {
         .then((response: any) => {
           if (response?.data?.userRole !== 'NA') {
             setUserInfo(response?.data);
-            const role = response.data.role.toLowerCase();
+            const role = response.data.userRole.toLowerCase();
             navigate(`/${role}/home`);
           } else {
             setLoginError(true);

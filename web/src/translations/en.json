@@ -83,5 +83,8 @@
   "global.my_dashboard": "Back To Dashboard",
   "patientHome.button.selfAssessment": "Complete Self Assessment Form",
   "selfAssessment.title": "Self Assessment Form",
-  "selfAssessment.button.backToHome": "Back to home"
+  "selfAssessment.button.backToHome": "Back to home",
+  "selfAssessment.button.submit": "Submit",
+  "selfAssessment.question.error.required": "This question is required to be answered",
+  "selfAssessment.error": "An error occured while trying to submit self assessment form"
 }
