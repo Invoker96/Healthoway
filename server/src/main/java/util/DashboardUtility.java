@@ -77,7 +77,7 @@ public class DashboardUtility {
 			do {
 				JSONObject obj = new JSONObject();
 				obj.put("userName", rs.getString(1));
-				obj.put("doctorName", rs.getString(2));
+				obj.put("doctorName", "Dr. "+rs.getString(2));
 				arr.put(obj);
 			}while(rs.next());
 		} catch (JSONException | SQLException e) {
