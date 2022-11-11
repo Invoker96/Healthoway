@@ -1,33 +1,29 @@
 @import '../../variables.scss';
 
-.selfAssessment-container {
-  padding: $spacing-05;
+.selfAssessment-question-container {
   text-align: left;
+  margin-top: $spacing-03;
+  padding: $spacing-03 $spacing-05;
 
-  .selfAssessment-question-container {
-    margin-top: $spacing-03;
-    padding: $spacing-03 $spacing-05;
+  .label-question {
+    font-size: 0.95rem;
+    font-weight: bold;
+    color: $purple-03;
+  }
 
-    .label-question {
-      font-size: 0.95rem;
-      font-weight: bold;
-      color: $purple-03;
-    }
+  .question {
+    color: black;
+  }
 
-    .question {
-      color: black;
-    }
+  label {
+    display: block;
+  }
 
-    label {
-      display: block;
-    }
-
-    .question-answer-container {
-      span,
-      svg {
-        color: $grey-04;
-        font-size: 0.9rem;
-      }
+  .question-answer-container {
+    span,
+    svg {
+      color: $grey-04;
+      font-size: 0.9rem;
     }
   }
 }
