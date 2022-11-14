@@ -21,17 +21,17 @@ const Footer = ({ intl }: Props) => {
             id: 'landingPage.workingHoursTitle'
           })}
         </Typography>
-        <Typography variant="h5" sx={{ p: 2, color: '#fff' }}>
+        <Typography variant="h5" sx={{ color: '#fff' }}>
           {intl.formatMessage({
             id: 'landingPage.workingHours1'
           })}
         </Typography>
-        <Typography variant="h5" sx={{ p: 2, color: '#fff' }}>
+        <Typography variant="h5" sx={{ color: '#fff' }}>
           {intl.formatMessage({
             id: 'landingPage.workingHours2'
           })}
         </Typography>
-        <Typography variant="h5" sx={{ p: 2, color: '#fff' }}>
+        <Typography variant="h5" sx={{ color: '#fff' }}>
           {intl.formatMessage({
             id: 'landingPage.workingHours3'
           })}
@@ -43,14 +43,9 @@ const Footer = ({ intl }: Props) => {
             id: 'landingPage.patientReviewTitle'
           })}
         </Typography>
-        <Typography variant="h5" sx={{ p: 2, color: '#fff', width: '70%', ml: '15%' }}>
+        <Typography variant="h5" sx={{ color: '#fff', width: '70%', ml: '15%' }}>
           {intl.formatMessage({
             id: 'landingPage.patientReview'
-          })}
-        </Typography>
-        <Typography variant="h5" sx={{ p: 2, color: '#fff', width: '70%', ml: '15%' }}>
-          {intl.formatMessage({
-            id: 'landingPage.patientName'
           })}
         </Typography>
       </Grid>
@@ -60,12 +55,12 @@ const Footer = ({ intl }: Props) => {
             id: 'landingPage.addressTitle'
           })}
         </Typography>
-        <Typography variant="h5" sx={{ p: 2, color: '#fff', width: '70%', ml: '15%' }}>
+        <Typography variant="h5" sx={{ color: '#fff', width: '70%', ml: '15%' }}>
           {intl.formatMessage({
             id: 'landingPage.addressLine1'
           })}
         </Typography>
-        <Typography variant="h5" sx={{ p: 2, color: '#fff', width: '70%', ml: '15%' }}>
+        <Typography variant="h5" sx={{ color: '#fff', width: '70%', ml: '15%' }}>
           {intl.formatMessage({
             id: 'landingPage.addressLine2'
           })}
