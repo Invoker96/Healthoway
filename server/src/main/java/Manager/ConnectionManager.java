@@ -1,5 +1,7 @@
 package Manager;
 
+import Email.EmailSender;
+import enums.EmailType;
 import model.Appointment;
 import model.SelfAssessmentForm;
 import model.User;
@@ -24,6 +26,19 @@ public class ConnectionManager {
 		PreparedStatement stmt = con.prepareStatement(query);
 		stmt.setString(1, username);
 		stmt.setString(2, password);
+
+		ResultSet rs = stmt.executeQuery();
+		if (rs.next()) {
+			return User.convertResultSet(rs);
+		} else {
+			return null;
+		}
+	}
+
+	public static User getUser(String username) throws SQLException {
+		String query = "SELECT * FROM SOEN6841.USERS WHERE username = ?";
+		PreparedStatement stmt = con.prepareStatement(query);
+		stmt.setString(1, username);
 
 		ResultSet rs = stmt.executeQuery();
 		if (rs.next()) {
@@ -73,7 +88,6 @@ public class ConnectionManager {
 				// GET INT VALUE FROM RESULT SET AND INCREMENT IT
 				int val = rs.getInt(1);
 				VARIABLE = val + 1;
-				System.out.println(VARIABLE);
 				check = rs.getInt(1);
 			} else {
 				// TEST FOR NULL VALUE OF VARIABLE
@@ -99,13 +113,12 @@ public class ConnectionManager {
 			ps.setString(13, form.getQues9());
 			ps.executeUpdate();
 
+			EmailSender.sendEmail(form.getUsername(), EmailType.ASSESSMENT_FORM_COMPLETED);
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
 		return check;
 	}
-
-
 
 	public static JSONArray listOfPatientForCounsellor() {
 
@@ -155,7 +168,6 @@ public class ConnectionManager {
 		return arr;
 	}
 
-
 	public static JSONArray getSelfAssesmentResult(String username) {
 
 		JSONArray arr = new JSONArray();
@@ -192,6 +204,8 @@ public class ConnectionManager {
 			stmt = con.prepareStatement(query);
 			stmt.setString(1, username);
 			n = stmt.executeUpdate();
+
+			EmailSender.sendEmail(username, EmailType.APPOINTMENT_REJECTED);
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -199,6 +213,7 @@ public class ConnectionManager {
 
 		return n;
 	}
+
 	public static void emailDetails(String uname) //function to called at end of insert to tables patient_requests and appointments
 	{
 		String selectQuery = "SELECT USERNAME, EMAIL, BODY, SUBJECT FROM SOEN6841.EMAIL_TABLE WHERE USERNAME = ?";
@@ -256,10 +271,11 @@ public class ConnectionManager {
 				pstmt.setString(1, app.getPatientUserName());
 				n=pstmt.executeUpdate();
 				if(n>0) {
+					EmailSender.sendEmail(app.getPatientUserName(), EmailType.APPOINTMENT_SCHEDULED);
 					return true;
 				}
 			}
-			
+
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -277,6 +293,7 @@ public class ConnectionManager {
 
 			int n = pstmt.executeUpdate();
 			if(n>0) {
+				EmailSender.sendEmail(patientUserName, EmailType.APPOINTMENT_SCHEDULED);
 				return true;
 			}
 
@@ -305,6 +322,7 @@ public class ConnectionManager {
 		return null;
 
 	}
+
 	public static ResultSet getAppointmentDetailsOfPatient(String username) {
 
 		String query = "SELECT U.FULLNAME, U.USER_ROLE, A.APPOINTMENT, U.USERNAME FROM SOEN6841.APPOINTMENTS A , SOEN6841.USERS U "
