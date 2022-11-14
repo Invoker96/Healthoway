@@ -171,3 +171,26 @@ ADD APPOINTMENT_GIVEN VARCHAR(255) DEFAULT 'NO';
 ---------------------------------------------------------------------------------------
 
  ALTER TABLE PATIENT_REQUESTS MODIFY ID int AUTO_INCREMENT;
+
+---------------------------11-nov-2022-----------------------------------------------
+
+DELIMITER #
+CREATE TRIGGER `soen6841`.`PATIENT_REQUESTS_AFTER_DELETE` 
+AFTER DELETE ON `PATIENT_REQUESTS` FOR EACH ROW
+BEGIN
+	INSERT INTO SOEN6841.EMAIL_TABLE(ID,USERNAME,EMAIL,BODY,SUBJECT)
+    VALUES(OLD.ID,OLD.USERNAME,OLD.EMAIL,'Hi User,   Your appointment has been cancelled. 
+    Please visit your Healthoway portal to request another appointment.','Appointment cancelled');
+END#
+
+
+DELIMITER #
+CREATE TRIGGER `soen6841`.`APPOINTMENTS_AFTER_DELETE` 
+AFTER DELETE ON `APPOINTMENTS` FOR EACH ROW
+BEGIN
+	INSERT INTO SOEN6841.EMAIL_TABLE(ID,USERNAME,EMAIL,BODY,SUBJECT)
+    VALUES(OLD.ID,OLD.USERNAME,OLD.EMAIL,'Hi User,   Your appointment has been cancelled. 
+    Please visit your Healthoway portal to request another appointment.','Appointment cancelled');
+END#
+
+-------------------------------------------------------------------------------------------
