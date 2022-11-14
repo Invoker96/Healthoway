@@ -1,11 +1,9 @@
 import { injectIntl } from 'react-intl';
-import { Button, Card, Grid, Typography } from '@mui/material';
+import { Button, Grid, Typography } from '@mui/material';
 import MenuBar from '../../components/MenuBar/MenuBar';
 import './PatientHome.scss';
 import FooterComp from '../../components/FooterComp/FooterComp';
-import { useNavigate, useLocation } from 'react-router-dom';
-import AppSnackbar from '../../components/AppSnackbar/AppSnackbar';
-import { getFullName } from '../../services/userInfoService';
+import { Link } from 'react-router-dom';
 
 type Props = {
   intl: any;
@@ -38,18 +36,9 @@ const PatientHome = ({ intl }: Props) => {
       </tr>
     );
   });
-  const navigate = useNavigate();
-  const location = useLocation();
-
-  const successMessage = location.state?.successMessage;
-
-  const navigateToSelfAssessment = () => {
-    navigate('/patient/selfAssessment');
-  };
 
   return (
     <>
-      {successMessage && <AppSnackbar type="success" message={successMessage} open={true} />}
       <MenuBar
         isLoggedIn={true}
         title={intl.formatMessage({
@@ -57,119 +46,104 @@ const PatientHome = ({ intl }: Props) => {
         })}
         noBtn={false}
       />
-      <Grid container className="main-container">
-        <Grid container justifyContent="center">
-          <Card className="patientHome-greeting-container">
-            <Typography variant="h3">
-              {intl.formatMessage(
-                {
-                  id: 'patient.label.greetings'
-                },
-                {
-                  fullName: getFullName()
-                }
-              )}
-            </Typography>
-            <Typography>
-              {intl.formatMessage({
-                id: 'patient.label.completeSelfAssessment'
-              })}
-            </Typography>
-            <Button fullWidth variant="contained" onClick={navigateToSelfAssessment}>
-              {intl.formatMessage({
-                id: 'patientHome.button.selfAssessment'
-              })}
-            </Button>
-          </Card>
-        </Grid>
-        <Grid container justifyContent="center" className="appointment-container">
-          <Typography variant="h3">
+      {/* <div style={{ backgroundImage: `url('${background}')` }}> */}
+      <Grid sx={{ mt: 10 }}>
+        <Typography
+          variant="h1"
+          sx={{ display: { xs: 'flex', sm: 'flex', justifyContent: 'center' } }}
+          style={{ margin: '20px' }}
+        >
+          <u>
             {intl.formatMessage({
-              id: 'global.my_appointments'
+              id: 'patient.desc'
             })}
-          </Typography>
-          <Grid container justifyContent="space-around">
-            <table className="table table-stripped table-container">
-              <thead>
-                <tr>
-                  <th
-                    style={{
-                      padding: '10px',
-                      border: 'none',
-                      background: '#673ab7',
-                      color: 'white'
-                    }}
-                  >
-                    {' '}
-                    <Typography variant="h3">
-                      {intl.formatMessage({
-                        id: 'global.s_no'
-                      })}
-                    </Typography>
-                  </th>
-                  <th
-                    style={{
-                      padding: '10px',
-                      border: 'none',
-                      background: '#673ab7',
-                      color: 'white'
-                    }}
-                  >
-                    <Typography variant="h3">
-                      {intl.formatMessage({
-                        id: 'patient.appointment_with'
-                      })}
-                    </Typography>
-                  </th>
-                  <th
-                    style={{
-                      padding: '10px',
-                      border: 'none',
-                      background: '#673ab7',
-                      color: 'white'
-                    }}
-                  >
-                    <Typography variant="h3">
-                      {intl.formatMessage({
-                        id: 'patient.name_title'
-                      })}
-                    </Typography>
-                  </th>
-                  <th
-                    style={{
-                      padding: '10px',
-                      border: 'none',
-                      background: '#673ab7',
-                      color: 'white'
-                    }}
-                  >
-                    <Typography variant="h3">
-                      {intl.formatMessage({
-                        id: 'global.date'
-                      })}
-                    </Typography>
-                  </th>
-                  <th
-                    style={{
-                      padding: '10px',
-                      border: 'none',
-                      background: '#673ab7',
-                      color: 'white'
-                    }}
-                  >
-                    <Typography variant="h3">
-                      {intl.formatMessage({
-                        id: 'global.time'
-                      })}
-                    </Typography>
-                  </th>
-                </tr>
-              </thead>
-              <tbody>{tableRows}</tbody>
-            </table>
-          </Grid>
-        </Grid>
+          </u>
+        </Typography>
+        <Typography
+          variant="h3"
+          sx={{ display: { xs: 'flex', sm: 'flex' } }}
+          style={{ margin: '60px' }}
+        >
+          {intl.formatMessage({
+            id: 'patient.self_assessment_title'
+          })}
+        </Typography>
+        <Button
+          variant="contained"
+          style={{ margin: '60px' }}
+          sx={{ display: { xs: 'flex', sm: 'flex', justifyContent: 'center' } }}
+        >
+          {intl.formatMessage({
+            id: 'patient.self_assessment'
+          })}
+        </Button>
+        <Button
+          variant="contained"
+          style={{ margin: '60px' }}
+          sx={{ display: { xs: 'flex', sm: 'flex', width: 'fit-content' } }}
+          component={Link}
+          to={'/patient/appointments'}
+        >
+          {intl.formatMessage({
+            id: 'global.my_appointments'
+          })}
+        </Button>
       </Grid>
+      {/* <Grid container justifyContent="space-around">
+        <table className="table table-stripped table-container">
+          <thead>
+            <tr>
+              <th
+                style={{ padding: '10px', border: 'none', background: '#673ab7', color: 'white' }}
+              >
+                {' '}
+                <Typography variant="h3">
+                  {intl.formatMessage({
+                    id: 'global.s_no'
+                  })}
+                </Typography>
+              </th>
+              <th
+                style={{ padding: '10px', border: 'none', background: '#673ab7', color: 'white' }}
+              >
+                <Typography variant="h3">
+                  {intl.formatMessage({
+                    id: 'patient.appointment_with'
+                  })}
+                </Typography>
+              </th>
+              <th
+                style={{ padding: '10px', border: 'none', background: '#673ab7', color: 'white' }}
+              >
+                <Typography variant="h3">
+                  {intl.formatMessage({
+                    id: 'patient.name_title'
+                  })}
+                </Typography>
+              </th>
+              <th
+                style={{ padding: '10px', border: 'none', background: '#673ab7', color: 'white' }}
+              >
+                <Typography variant="h3">
+                  {intl.formatMessage({
+                    id: 'global.date'
+                  })}
+                </Typography>
+              </th>
+              <th
+                style={{ padding: '10px', border: 'none', background: '#673ab7', color: 'white' }}
+              >
+                <Typography variant="h3">
+                  {intl.formatMessage({
+                    id: 'global.time'
+                  })}
+                </Typography>
+              </th>
+            </tr>
+          </thead>
+          <tbody>{tableRows}</tbody>
+        </table>
+      </Grid> */}
       <FooterComp />
     </>
   );
