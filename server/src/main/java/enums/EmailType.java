@@ -1,0 +1,7 @@
+package enums;
+
+public enum EmailType {
+    APPOINTMENT_SCHEDULED,
+    APPOINTMENT_REJECTED,
+    ASSESSMENT_FORM_COMPLETED
+}

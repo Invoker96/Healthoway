@@ -9,6 +9,7 @@ import CounsellorAppointments from './CounsellorAppointments/CounsellorAppointme
 import SignUp from './SignUp/SignUp';
 import DoctorAppointments from './DoctorAppointments/DoctorAppointments';
 import PatientAppointments from './PatientAppointments/PatientAppointments';
+import SelfAssessmentForm from './Patient/SelfAssessmentForm';
 
 const AppRoutes = () => {
   return (
@@ -17,13 +18,22 @@ const AppRoutes = () => {
         <Route path="/" element={<LandingPage />} />
         <Route path="login" element={<Login />} />
         <Route path="register" element={<SignUp />} />
-        <Route path="doctorHome" element={<DoctorHome />} />
-        <Route path="patientHome" element={<PatientHome />} />
-        <Route path="patient/appointments" element={<PatientAppointments />} />
-        <Route path="counsellorHome" element={<CounsellorHome />} />
-        <Route path="counsellor/appointments" element={<CounsellorAppointments />} />
-        <Route path="doctor/appointments" element={<DoctorAppointments />} />
-        <Route path="managerHome" element={<ManagerHome />} />
+        <Route path="doctor">
+          <Route path="home" element={<DoctorHome />} />
+          <Route path="appointments" element={<DoctorAppointments />} />
+        </Route>
+        <Route path="patient">
+          <Route path="home" element={<PatientHome />} />
+          <Route path="selfAssessment" element={<SelfAssessmentForm />} />
+          <Route path="appointments" element={<PatientAppointments />} />
+        </Route>
+        <Route path="counsellor">
+          <Route path="home" element={<CounsellorHome />} />
+          <Route path="appointments" element={<CounsellorAppointments />} />
+        </Route>
+        <Route path="manager">
+          <Route path="home" element={<ManagerHome />} />
+        </Route>
       </Routes>
     </BrowserRouter>
   );

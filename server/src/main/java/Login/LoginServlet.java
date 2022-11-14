@@ -16,48 +16,46 @@ import Manager.ConnectionManager;
 import model.User;
 import util.HttpUtils;
 
-public class LoginServlet extends HttpServlet{
+public class LoginServlet extends HttpServlet {
 
-	@Override
-	protected void doPost(HttpServletRequest req, HttpServletResponse response) throws ServletException, IOException {
+    @Override
+    protected void doPost(HttpServletRequest req, HttpServletResponse response) throws ServletException, IOException {
 
-		String data = HttpUtils.readFromRequest(req);
-		String[] value= getValues(data);
-		String username= value[0];
-		String password= value[1];
+        String data = HttpUtils.readFromRequest(req);
+        String[] value = getValues(data);
+        String username = value[0];
+        String password = value[1];
 
-		try {
-			User user = ConnectionManager.loginCheck(username, password);
-			response.setContentType("application/json");
-			response.setCharacterEncoding("UTF-8");
-			PrintWriter out = response.getWriter();
-			JSONObject obj = new JSONObject();
-			if(user!=null) {
-				obj = User.convertIntoJSON(user);
-			}
-			else {
-				obj.put("userRole", "NA");
-			}
-			out.println(obj);
-			out.flush();
-		} catch (SQLException e) {
-			e.printStackTrace();
-		}
-	}
+        try {
+            User user = ConnectionManager.loginCheck(username, password);
+            response.setContentType("application/json");
+            response.setCharacterEncoding("UTF-8");
+            PrintWriter out = response.getWriter();
+            JSONObject obj = new JSONObject();
 
-	private String[] getValues(String data) {
 
-		String[] values = new String[2];
-		try
-		{
-			JSONObject jsonObject = new JSONObject(data);
-			values[0]=(String)jsonObject.get("username");
-			values[1]=(String)jsonObject.get("password");
-		}
-		catch (JSONException e)
-		{
-			System.out.println("Error "+e.toString());
-		} 
-		return values;
-	}
+            if (user != null) {
+                obj = User.convertIntoJSON(user);
+            } else {
+                obj.put("userRole", "NA");
+            }
+            out.println(obj);
+            out.flush();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
+    private String[] getValues(String data) {
+
+        String[] values = new String[2];
+        try {
+            JSONObject jsonObject = new JSONObject(data);
+            values[0] = (String) jsonObject.get("username");
+            values[1] = (String) jsonObject.get("password");
+        } catch (JSONException e) {
+            System.out.println("Error " + e.toString());
+        }
+        return values;
+    }
 }
