@@ -12,6 +12,9 @@ type Props = {
 };
 
 const PatientHome = ({ intl }: Props) => {
+  //clear state on refresh so snack bar is not shown
+  window.history.replaceState({}, document.title);
+
   const navigate = useNavigate();
   const location = useLocation();
 
