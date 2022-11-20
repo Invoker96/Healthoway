@@ -1,0 +1,16 @@
+@import '../../variables.scss';
+.doctorHome-greeting-container {
+  padding: $spacing-05;
+  width: 100%;
+
+  p {
+    margin: $spacing-04 0;
+  }
+}
+.appointment-container {
+  padding: $spacing-05;
+}
+
+.margin-left {
+  margin-left: 20px;
+}

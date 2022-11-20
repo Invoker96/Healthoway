@@ -1,0 +1,45 @@
+@import '../../variables.scss';
+
+.role-card-container {
+  width: 160px;
+  height: 130px;
+  border-radius: $spacing-03;
+  border: 0.5px solid $grey-01;
+  box-shadow: $spacing-01 $spacing-01 $spacing-04 $grey-01;
+
+  &.MuiGrid-item {
+    padding: 0;
+
+    .MuiButton-root {
+      display: flex;
+      flex-direction: column;
+      height: -webkit-fill-available;
+      width: -webkit-fill-available;
+      text-align: center;
+
+      svg {
+        font-size: 50px;
+        color: $grey-02;
+      }
+
+      p {
+        color: $grey-02;
+      }
+    }
+  }
+
+  &.selected {
+    border: 0.5px solid $purple-00;
+    box-shadow: $spacing-01 $spacing-01 $spacing-04 $purple-00;
+
+    &.MuiGrid-item {
+      svg {
+        color: $purple-01;
+      }
+
+      p {
+        color: $purple-01;
+      }
+    }
+  }
+}
