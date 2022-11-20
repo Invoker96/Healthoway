@@ -1,0 +1,27 @@
+@import '../../variables.scss';
+
+.form-card {
+  max-width: 60vw;
+  min-width: 400px;
+
+  .disclaimer-container {
+    margin-top: $spacing-04;
+    max-height: 70vw;
+    overflow-y: scroll;
+
+    .disclaimer-type-container {
+      text-align: left;
+      margin-top: $spacing-04;
+    }
+
+    .disclaimer-checkbox-container {
+      margin-top: $spacing-02;
+      display: flex;
+      align-items: center;
+
+      .error-text {
+        color: $red-02;
+      }
+    }
+  }
+}

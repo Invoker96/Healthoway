@@ -1,0 +1,18 @@
+@import '../../variables.scss';
+
+.form-card {
+  display: flex;
+  justify-content: space-between;
+  flex-direction: column;
+  padding: $spacing-04;
+  min-height: 400px;
+
+  .button-container {
+    justify-content: end;
+    margin-top: $spacing-04;
+
+    button + button {
+      margin-left: $spacing-04;
+    }
+  }
+}
