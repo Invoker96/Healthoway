@@ -1,16 +1,11 @@
 package model;
 
-import java.sql.Timestamp;
-
 import org.json.JSONObject;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
-import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.databind.JsonMappingException;
-import com.fasterxml.jackson.databind.ObjectMapper;
 
 import enums.UserRole;
-import util.HttpUtils;
 
 public class Appointment {
 

@@ -14,14 +14,14 @@ import org.json.JSONObject;
 
 import Manager.ConnectionManager;
 import model.User;
-import util.HttpUtils;
+import util.HttpUtil;
 
 public class LoginServlet extends HttpServlet {
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse response) throws ServletException, IOException {
 
-        String data = HttpUtils.readFromRequest(req);
+        String data = HttpUtil.readFromRequest(req);
         String[] value = getValues(data);
         String username = value[0];
         String password = value[1];

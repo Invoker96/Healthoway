@@ -28,6 +28,10 @@
 		<servlet-name>AssessmentForm</servlet-name>
 		<servlet-class>User.AssessmentFormServlet</servlet-class>
 	</servlet>
+	<servlet>
+		<servlet-name>ManagerAppointment</servlet-name>
+		<servlet-class>Appointment.ManagerAppointmentServlet</servlet-class>
+	</servlet>
 	<servlet-mapping>
 		<servlet-name>Login</servlet-name>
 		<url-pattern>/login</url-pattern>
@@ -71,6 +75,10 @@
 	<servlet-mapping>
 		<servlet-name>AssessmentForm</servlet-name>
 		<url-pattern>/patient/assessmentForm</url-pattern>
+	</servlet-mapping>
+	<servlet-mapping>
+		<servlet-name>ManagerAppointment</servlet-name>
+		<url-pattern>/manager/appointments</url-pattern>
 	</servlet-mapping>
 	<resource-ref>
 		<description>MySQL Connection</description>
