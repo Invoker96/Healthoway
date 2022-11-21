@@ -98,6 +98,19 @@ const ManagerHome = ({ intl }: Props) => {
           })}
         </Button>
       </Grid>
+      <Grid container className="margin-left">
+        <Button
+          variant="contained"
+          style={{ margin: '20px' }}
+          sx={{ display: { xs: 'flex', sm: 'flex', width: 'fit-content' } }}
+          component={Link}
+          to={'/manager/report/appointments'}
+        >
+          {intl.formatMessage({
+            id: 'manager.button.report'
+          })}
+        </Button>
+      </Grid>
       <FooterComp />
     </>
   );
