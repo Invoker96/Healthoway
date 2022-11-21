@@ -103,5 +103,9 @@
   "selfAssessment.button.submit": "Submit",
   "selfAssessment.question.error.required": "This question is required to be answered",
   "selfAssessment.submit.success": "Successfully submitted self assessment form",
-  "selfAssessment.submit.error": "An error occured while trying to submit self assessment form"
+  "selfAssessment.submit.error": "An error occured while trying to submit self assessment form",
+  "report.appointment.table.header.patientName": "Patient Name",
+  "report.appointment.table.header.fullName": "Scheduled With",
+  "report.appointment.table.header.role": "Role",
+  "report.appointment.table.header.appointmentDate": "Date"
 }
