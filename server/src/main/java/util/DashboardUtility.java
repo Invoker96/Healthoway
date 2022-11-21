@@ -32,15 +32,6 @@ public class DashboardUtility {
 		return arr;
 	}
 
-
-	public static JSONArray getSelfAssesmentResult(String username) {
-
-		JSONArray arr = ConnectionManager.getSelfAssesmentResult(username);
-
-		return arr;
-	}
-
-
 	public static JSONArray getAnswers(ResultSet answer, ResultSet question) throws SQLException {
 
 		JSONArray arr = new JSONArray();

@@ -14,7 +14,7 @@ import org.json.JSONObject;
 import Manager.ConnectionManager;
 import model.Appointment;
 import util.DashboardUtility;
-import util.HttpUtils;
+import util.HttpUtil;
 
 public class CounsellorDashboard extends HttpServlet{
 
@@ -51,7 +51,7 @@ public class CounsellorDashboard extends HttpServlet{
 	protected void doPost(HttpServletRequest req, HttpServletResponse response) throws ServletException, IOException {
 
 		final String URL = req.getRequestURI();
-		String data = HttpUtils.readFromRequest(req);
+		String data = HttpUtil.readFromRequest(req);
 		JSONObject jsonObject = new JSONObject(data);
 
 		if(URL.contains("remove")) {

@@ -5,7 +5,7 @@ import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import model.User;
 import org.json.JSONObject;
-import util.HttpUtils;
+import util.HttpUtil;
 
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -22,7 +22,7 @@ public class UserServlet extends HttpServlet {
         PrintWriter out = response.getWriter();
         JSONObject obj = new JSONObject();
         try {
-            User newUser = objectMapper.readValue(HttpUtils.readFromRequest(req), User.class);
+            User newUser = objectMapper.readValue(HttpUtil.readFromRequest(req), User.class);
             int newUserId = ConnectionManager.registerUser(newUser);
             obj.put("id", newUserId);
             out.println(obj);

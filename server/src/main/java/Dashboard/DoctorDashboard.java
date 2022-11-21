@@ -12,14 +12,14 @@ import org.json.JSONArray;
 import org.json.JSONObject;
 
 import util.DashboardUtility;
-import util.HttpUtils;
+import util.HttpUtil;
 
 public class DoctorDashboard  extends HttpServlet{
 
 	@Override
 	protected void doPost(HttpServletRequest req, HttpServletResponse response) throws ServletException, IOException {
 		
-		String data = HttpUtils.readFromRequest(req);
+		String data = HttpUtil.readFromRequest(req);
 		JSONObject jsonObject = new JSONObject(data);
 		String username = (String)jsonObject.get("username");
 		JSONArray array = new JSONArray();

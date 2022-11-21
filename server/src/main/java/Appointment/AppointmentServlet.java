@@ -13,14 +13,14 @@ import org.json.JSONObject;
 
 import enums.UserRole;
 import util.AppointmentUtility;
-import util.HttpUtils;
+import util.HttpUtil;
 
 public class AppointmentServlet  extends HttpServlet{
 
 	@Override
 	protected void doPost(HttpServletRequest req, HttpServletResponse response) throws ServletException, IOException {
 		
-		String data = HttpUtils.readFromRequest(req);
+		String data = HttpUtil.readFromRequest(req);
 		JSONObject jsonObject = new JSONObject(data);
 		String userRole = (String)jsonObject.get("userRole");
 		String userName = (String)jsonObject.get("userName");
