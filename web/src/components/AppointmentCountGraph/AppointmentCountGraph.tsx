@@ -40,12 +40,6 @@ const AppointmentCountGraph = ({ intl }: Props) => {
   const [fromDate, setFromDate] = useState(dayjs().subtract(1, 'month').toDate());
   const [toDate, setToDate] = useState(dayjs().toDate());
 
-  // trigger on mount - get appointments from one month ago on initialize
-  useEffect(() => {
-    getAppointments();
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
-
   useEffect(() => {
     getAppointments();
     // eslint-disable-next-line react-hooks/exhaustive-deps
