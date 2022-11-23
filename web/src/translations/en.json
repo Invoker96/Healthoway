@@ -113,5 +113,8 @@
   "report.appointments.chart.tooltip.label": "No. of Patients",
   "report.appointments.chart.dropdown.daily": "Daily",
   "report.appointments.chart.dropdown.weekly": "Weekly",
-  "report.appointments.chart.dropdown.monthly": "Monthly"
+  "report.appointments.chart.dropdown.monthly": "Monthly",
+  "report.appointments.dropdown.count": "Patients Count Report",
+  "report.appointments.dropdown.list": "Patients List Report",
+  "report.appointmnets.dropdown.label": "Type of Report:"
 }

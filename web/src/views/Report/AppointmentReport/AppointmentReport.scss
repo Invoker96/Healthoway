@@ -1,5 +1,14 @@
 @import '../../../variables.scss';
 
+.report-selection-container {
+  display: flex;
+  align-items: center;
+
+  .report-dropdown {
+    margin-left: $spacing-02;
+  }
+}
+
 .dateRange-container {
   width: 100%;
   text-align: right;
@@ -17,15 +26,4 @@
 table {
   margin-top: $spacing-07;
   width: 100%;
-}
-
-.custom-tooltip {
-  background-color: $grey-00;
-  border: 1px solid $grey-02;
-  padding: $spacing-01;
-  font-size: 0.8rem;
-
-  .range {
-    font-weight: bold;
-  }
 }
