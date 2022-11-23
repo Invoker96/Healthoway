@@ -110,6 +110,8 @@
   "report.appointment.table.header.appointmentDate": "Date",
   "report.appointments.table.noData": "No appointments found with the selected date range",
   "report.appointments.button.generate": "Generate Report",
+  "report.appointments.list.to": "To",
+  "report.appointments.list.from": "From",
   "report.appointments.chart.tooltip.label": "No. of Patients",
   "report.appointments.chart.dropdown.daily": "Daily",
   "report.appointments.chart.dropdown.weekly": "Weekly",

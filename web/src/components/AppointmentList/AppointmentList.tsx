@@ -66,7 +66,7 @@ const AppointmentList = ({ intl }: Props) => {
       <Grid className="dateRange-container">
         <LocalizationProvider dateAdapter={AdapterDayjs}>
           <DesktopDatePicker
-            label="From"
+            label={intl.formatMessage({ id: 'report.appointments.list.from' })}
             inputFormat="MM/DD/YYYY"
             value={fromDate}
             onChange={handleFromDateChanged}
@@ -74,7 +74,7 @@ const AppointmentList = ({ intl }: Props) => {
             renderInput={(params: any) => <TextField {...params} />}
           />
           <DesktopDatePicker
-            label="To"
+            label={intl.formatMessage({ id: 'report.appointments.list.to' })}
             inputFormat="MM/DD/YYYY"
             value={toDate}
             onChange={handleToDateChanged}
