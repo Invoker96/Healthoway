@@ -1,4 +1,4 @@
-import { deepPurple, lightBlue } from '@mui/material/colors';
+import { indigo, lightBlue } from '@mui/material/colors';
 import { createTheme, ThemeProvider, StyledEngineProvider } from '@mui/material/styles';
 import ReactDOM from 'react-dom/client';
 import { IntlProvider } from 'react-intl';
@@ -14,10 +14,20 @@ const locale = navigator.language;
 const theme = createTheme({
   palette: {
     primary: {
-      main: deepPurple[500]
+      main: '#6573c3'
     },
     secondary: {
       main: lightBlue[100]
+    }
+  },
+  components: {
+    MuiBottomNavigation: {
+      styleOverrides: {
+        root: {
+          backgroundColor: '#6573c3',
+          color: 'white'
+        }
+      }
     }
   },
   typography: {

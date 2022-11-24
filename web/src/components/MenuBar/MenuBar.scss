@@ -1,13 +1,13 @@
 @import '../../variables.scss';
 
-.home_logo {
-  background: $grey-00;
-  width: 3%;
-}
-
 .menu-bar-container {
   display: flex;
   justify-content: space-between;
+
+  .home_logo {
+    width: 50px;
+    margin-bottom: $spacing-02;
+  }
 
   a:not(:last-child) {
     margin-right: $spacing-04;

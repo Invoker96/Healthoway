@@ -1,10 +1,4 @@
 import { injectIntl } from 'react-intl';
-import AppBar from '@mui/material/AppBar';
-import { Link } from 'react-router-dom';
-import Box from '@mui/material/Box';
-import Toolbar from '@mui/material/Toolbar';
-import Button from '@mui/material/Button';
-import Image from '../../assets/logo.png';
 import './Footer.scss';
 import { Grid, Typography } from '@mui/material';
 import WorkHistoryIcon from '@mui/icons-material/WorkHistory';

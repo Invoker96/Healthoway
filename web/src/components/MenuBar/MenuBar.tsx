@@ -1,13 +1,9 @@
 import { injectIntl } from 'react-intl';
-import AppBar from '@mui/material/AppBar';
 import { Link } from 'react-router-dom';
-import Box from '@mui/material/Box';
-import Toolbar from '@mui/material/Toolbar';
-import Button from '@mui/material/Button';
+import { AppBar, Grid, Box, Toolbar, Button, Typography } from '@mui/material';
+import { getUserName, getUserRole } from '../../services/userInfoService';
 import Image from '../../assets/logo.png';
 import './MenuBar.scss';
-import { Typography } from '@mui/material';
-import { getUserName } from '../../services/userInfoService';
 
 type Props = {
   intl: any;
@@ -17,6 +13,32 @@ type Props = {
 
 const MenuBar = ({ intl, title, noBtn }: Props) => {
   const isLoggedIn = Boolean(getUserName());
+  const userRole = getUserRole();
+
+  const menuItems = {
+    Patient: [
+      {
+        id: 'myAppointments',
+        link: 'appointments'
+      }
+    ],
+    Counsellor: [
+      {
+        id: 'myAppointments',
+        link: 'appointments'
+      }
+    ],
+    Doctor: [
+      {
+        id: 'myAppointments',
+        link: 'appointments'
+      }
+    ],
+    Admin: [
+      { id: 'manageUsers', link: 'users' },
+      { id: 'viewReports', link: 'reports' }
+    ]
+  };
 
   const doLogout = () => {
     localStorage.clear();
@@ -28,8 +50,21 @@ const MenuBar = ({ intl, title, noBtn }: Props) => {
         <Toolbar className="menu-bar-container">
           <img className="home_logo" src={Image}></img>
           <Typography variant="h6">{title}</Typography>
-          <Box>
-            {!isLoggedIn && !noBtn ? (
+          <Grid>
+            {isLoggedIn && (
+              <Button
+                variant="outlined"
+                color="secondary"
+                component={Link}
+                to={'/'}
+                onClick={doLogout}
+              >
+                {intl.formatMessage({
+                  id: 'authForm.button.logout'
+                })}
+              </Button>
+            )}
+            {!isLoggedIn && !noBtn && (
               <>
                 <Button variant="outlined" color="secondary" component={Link} to={'/login'}>
                   {intl.formatMessage({
@@ -42,22 +77,8 @@ const MenuBar = ({ intl, title, noBtn }: Props) => {
                   })}
                 </Button>
               </>
-            ) : (
-              !noBtn && (
-                <Button
-                  variant="outlined"
-                  color="secondary"
-                  component={Link}
-                  to={'/'}
-                  onClick={doLogout}
-                >
-                  {intl.formatMessage({
-                    id: 'authForm.button.logout'
-                  })}
-                </Button>
-              )
             )}
-          </Box>
+          </Grid>
         </Toolbar>
       </AppBar>
     </Box>
