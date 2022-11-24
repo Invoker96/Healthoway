@@ -272,16 +272,6 @@ const DoctorAppointments = ({ intl }: Props) => {
               id: 'global.my_appointments'
             })}
           </Typography>
-          <Button
-            variant="contained"
-            className="my_appointment_btn"
-            component={Link}
-            to={'/doctor/home'}
-          >
-            {intl.formatMessage({
-              id: 'global.my_dashboard'
-            })}
-          </Button>
         </Grid>
         <Grid container justifyContent="space-around">
           <Paper sx={{ width: '100%', overflow: 'hidden' }}>

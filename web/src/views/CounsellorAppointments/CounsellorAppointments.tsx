@@ -273,16 +273,6 @@ const CounsellorAppointments = ({ intl }: Props) => {
               id: 'global.my_appointments'
             })}
           </Typography>
-          <Button
-            variant="contained"
-            className="my_appointment_btn"
-            component={Link}
-            to={'/counsellor/home'}
-          >
-            {intl.formatMessage({
-              id: 'global.my_dashboard'
-            })}
-          </Button>
         </Grid>
         <Grid container justifyContent="space-around">
           <Paper sx={{ width: '100%', overflow: 'hidden' }}>
