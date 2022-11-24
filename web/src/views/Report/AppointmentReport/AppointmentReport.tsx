@@ -21,11 +21,7 @@ const AppointmentReport = ({ intl }: Props) => {
 
   return (
     <Grid container>
-      <MenuBar
-        isLoggedIn={false}
-        title={intl.formatMessage({ id: 'report.appointments.title' })}
-        noBtn={true}
-      />
+      <MenuBar title={intl.formatMessage({ id: 'report.appointments.title' })} noBtn={true} />
 
       <Grid container className="main-container">
         <Button variant="contained" component={Link} to={'/manager/home'}>

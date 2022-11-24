@@ -4,7 +4,6 @@ import Table from '@mui/material/Table';
 import TableBody from '@mui/material/TableBody';
 import TableCell from '@mui/material/TableCell';
 import TableContainer from '@mui/material/TableContainer';
-import TableHead from '@mui/material/TableHead';
 import TablePagination from '@mui/material/TablePagination';
 import TableRow from '@mui/material/TableRow';
 import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
@@ -24,8 +23,7 @@ import Slide from '@mui/material/Slide';
 import { getUserName, getUserRole } from '../../services/userInfoService';
 import { TransitionProps } from '@mui/material/transitions';
 import { injectIntl } from 'react-intl';
-import { Button, Grid, Typography, TextField, MenuItem } from '@mui/material';
-import './DoctorHome.scss';
+import { Button, Grid, Typography, TextField } from '@mui/material';
 import MenuBar from '../../components/MenuBar/MenuBar';
 import {
   listOfPatient,
@@ -36,8 +34,8 @@ import {
 import { DateTimePicker } from '@mui/x-date-pickers/DateTimePicker';
 import dayjs, { Dayjs } from 'dayjs';
 import { Link } from 'react-router-dom';
-import './DoctorHome.scss';
 import FooterComp from '../../components/FooterComp/FooterComp';
+import './DoctorHome.scss';
 
 type Props = {
   intl: any;
@@ -335,7 +333,6 @@ const DoctorHome = ({ intl }: Props) => {
         </List>
       </Dialog>
       <MenuBar
-        isLoggedIn={true}
         title={intl.formatMessage({
           id: 'doctor.title'
         })}

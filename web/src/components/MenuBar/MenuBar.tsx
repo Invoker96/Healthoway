@@ -7,15 +7,21 @@ import Button from '@mui/material/Button';
 import Image from '../../assets/logo.png';
 import './MenuBar.scss';
 import { Typography } from '@mui/material';
+import { getUserName } from '../../services/userInfoService';
 
 type Props = {
   intl: any;
-  isLoggedIn: boolean;
   title: string;
   noBtn: boolean;
 };
 
-const MenuBar = ({ intl, isLoggedIn, title, noBtn }: Props) => {
+const MenuBar = ({ intl, title, noBtn }: Props) => {
+  const isLoggedIn = Boolean(getUserName());
+
+  const doLogout = () => {
+    localStorage.clear();
+  };
+
   return (
     <Box sx={{ flexGrow: 1 }}>
       <AppBar component="nav" position="sticky">
@@ -38,7 +44,13 @@ const MenuBar = ({ intl, isLoggedIn, title, noBtn }: Props) => {
               </>
             ) : (
               !noBtn && (
-                <Button variant="outlined" color="secondary" component={Link} to={'/'}>
+                <Button
+                  variant="outlined"
+                  color="secondary"
+                  component={Link}
+                  to={'/'}
+                  onClick={doLogout}
+                >
                   {intl.formatMessage({
                     id: 'authForm.button.logout'
                   })}

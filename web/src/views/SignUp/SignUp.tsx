@@ -79,7 +79,6 @@ const SignUp = ({ intl }: Props) => {
         open={isError}
       />
       <MenuBar
-        isLoggedIn={false}
         title={intl.formatMessage({
           id: 'global.app_title'
         })}

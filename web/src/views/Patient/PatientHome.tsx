@@ -142,7 +142,6 @@ const PatientHome = ({ intl }: Props) => {
 
       {successMessage && <AppSnackbar type="success" message={successMessage} open={true} />}
       <MenuBar
-        isLoggedIn={true}
         title={intl.formatMessage({
           id: 'patient.title'
         })}

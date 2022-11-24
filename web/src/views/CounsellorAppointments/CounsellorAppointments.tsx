@@ -257,7 +257,6 @@ const CounsellorAppointments = ({ intl }: Props) => {
         </List>
       </Dialog>
       <MenuBar
-        isLoggedIn={true}
         title={intl.formatMessage({
           id: 'counsellor.title'
         })}
