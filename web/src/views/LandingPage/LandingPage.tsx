@@ -1,13 +1,11 @@
 import { injectIntl } from 'react-intl';
 import { useLocation } from 'react-router-dom';
-import { Box, Grid } from '@mui/material';
 import MenuBar from '../../components/MenuBar/MenuBar';
 import bg from '../../assets/LandingImage.jpg';
 import './LandingPage.scss';
 import Footer from '../../components/Footer/Footer';
 import AppSnackbar from '../../components/AppSnackbar/AppSnackbar';
 import Login from '../Login/Login';
-import LoginForm from '../../components/Login/LoginForm';
 
 type Props = {
   intl: any;
