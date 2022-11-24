@@ -24,9 +24,6 @@ const AppointmentReport = ({ intl }: Props) => {
       <MenuBar title={intl.formatMessage({ id: 'report.appointments.title' })} noBtn={true} />
 
       <Grid container className="main-container">
-        <Button variant="contained" component={Link} to={'/manager/home'}>
-          {intl.formatMessage({ id: 'global.my_dashboard' })}
-        </Button>
         <Grid container className="report-selection-container">
           <Typography>
             {intl.formatMessage({ id: 'report.appointmnets.dropdown.label' })}

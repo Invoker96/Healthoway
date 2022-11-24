@@ -513,7 +513,7 @@ const CounsellorHome = ({ intl }: Props) => {
         })}
         noBtn={false}
       />
-      <Grid sx={{ mt: 5 }}>
+      <Grid container className="main-container">
         <Grid container justifyContent="center">
           <Typography
             variant="h3"

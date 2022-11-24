@@ -6,6 +6,7 @@
   .dateRange-container {
     width: 100%;
     text-align: right;
+    margin-bottom: $spacing-05;
 
     .datepicker-input {
       margin-right: $spacing-03;
@@ -18,7 +19,6 @@
   }
 
   table {
-    margin-top: $spacing-07;
     width: 100%;
   }
 }
