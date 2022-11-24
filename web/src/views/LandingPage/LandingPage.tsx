@@ -31,12 +31,7 @@ const LandingPage = ({ intl }: Props) => {
           open={true}
         />
       )}
-      <MenuBar
-        title={intl.formatMessage({
-          id: 'global.empty'
-        })}
-        noBtn={true}
-      />
+      <MenuBar title={''} noBtn={false} />
       <Grid container spacing={2}>
         <Grid item xs={6}>
           {' '}
@@ -46,8 +41,6 @@ const LandingPage = ({ intl }: Props) => {
           <Login></Login>
         </Grid>
       </Grid>
-
-      <Box sx={{ flexGrow: 1, display: { xs: 'flex', sm: 'flex' } }}></Box>
       <Footer />
     </>
   );
