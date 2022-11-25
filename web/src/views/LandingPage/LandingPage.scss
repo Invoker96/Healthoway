@@ -1,6 +1,8 @@
 @import '../../variables.scss';
 
-.bg-img {
-  width: -webkit-fill-available;
-  height: 500px;
+.landing-page-container {
+  background-image: url(../../assets/LandingImage.jpg);
+  background-size: 51vw;
+
+  // height: 500px;
 }

@@ -30,15 +30,13 @@ const LandingPage = ({ intl }: Props) => {
           open={true}
         />
       )}
-      <MenuBar title={''} noBtn={false} />
-      {/* <Grid container spacing={2}> */}
-      {/* <Grid item xs={6}> */}
-      <img className="bg-img" src={bg}></img>
-      {/* </Grid> */}
-      {/* <Grid item xs={6} className="login">
+      <MenuBar title={''} noBtn={true} />
+      <Grid container spacing={2} height="100vh">
+        <Grid item xs={6} className="landing-page-container"></Grid>
+        <Grid item xs={6} className="login">
           <Login></Login>
-        </Grid> */}
-      {/* </Grid> */}
+        </Grid>
+      </Grid>
       <Footer />
     </>
   );
