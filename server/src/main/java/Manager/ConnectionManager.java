@@ -79,12 +79,12 @@ public class ConnectionManager {
             check = 0;
             int VARIABLE;
             int id = form.getId();
-            String query1 = "SELECT MAX(REQ) FROM SOEN6841.PATIENT_REQUESTS WHERE ID = ?";
+            String query1 = "SELECT MAX(REQ) FROM SOEN6841.PATIENT_REQUESTS WHERE USERNAME = ?";
             PreparedStatement stmt = con.prepareStatement(query1, Statement.RETURN_GENERATED_KEYS);
-            stmt.setInt(1, id);
+            stmt.setString(1, form.getUsername());
             stmt.executeQuery();
             ResultSet rs = stmt.getGeneratedKeys();
-            if (rs.next() && rs != null) {
+            if (rs != null && rs.next()) {
                 // GET INT VALUE FROM RESULT SET AND INCREMENT IT
                 int val = rs.getInt(1);
                 VARIABLE = val + 1;
@@ -94,10 +94,19 @@ public class ConnectionManager {
                 VARIABLE = 1;
                 System.out.println(VARIABLE);
             }
-
+                
+            String query3 = "SELECT ID FROM SOEN6841.USERS WHERE USERNAME = ?";
+            PreparedStatement ps1 = con.prepareStatement(query3);
+            ps1.setString(1, form.getUsername());
+            ResultSet rs1 = ps1.executeQuery();
+            if (rs1 != null && rs1.next()) {
+            	id=rs1.getInt(1);
+            }
+            
+            System.out.println("ID & REQ = "+id+" "+VARIABLE);
             String query2 = "INSERT INTO SOEN6841.PATIENT_REQUESTS(ID,REQ,USERNAME,EMAIL,QUES1,QUES2,QUES3,QUES4,QUES5,QUES6,QUES7,QUES8,QUES9)VALUES(?,?,?,?,?,?,?,?,?,?,?,?,?)";
             PreparedStatement ps = con.prepareStatement(query2);
-            ps.setInt(1, form.getId());
+            ps.setInt(1, id);
             ps.setInt(2, VARIABLE);
             System.out.println(form.getUsername());
             ps.setString(3, form.getUsername());
