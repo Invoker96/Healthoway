@@ -15,7 +15,7 @@ const Login = () => {
   }, [formData]);
 
   return (
-    <Grid container direction="column" className="sign-up-container">
+    <Grid container direction="column" className="login-container">
       <img src={img} className="logo" height="230" width="230" />
       {loginPage}
     </Grid>

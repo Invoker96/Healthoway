@@ -1,9 +1,16 @@
 @import '../../variables.scss';
-.patientHome-greeting-container {
+.patientHome-greeting-container-form {
   padding: $spacing-05;
 
   p {
     margin: $spacing-04 0;
+  }
+}
+.patientHome-greeting-container {
+  padding: $spacing-05;
+
+  p {
+    margin: $spacing-04 $spacing-07;
   }
 }
 .appointment-container {

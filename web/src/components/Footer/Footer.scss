@@ -1,12 +1,35 @@
 @import '../../variables.scss';
 
 .actionBtn {
-    margin-right: 10px;
+  margin-right: 10px;
 }
 
 .footer-container {
-    position:absolute;
-    left:0;
-    bottom:0;
-    right:0;
+  position: absolute;
+  left: 0;
+  //   bottom: 0;
+  right: 0;
+  background-color: #673ab7;
+}
+
+.footer-values {
+  // color: #223762;
+  color: white;
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 15px;
+  margin: 0 $spacing-04;
+}
+
+.footer-header {
+  font-family: Arial, Helvetica, sans-serif;
+  font-weight: bold;
+  font-size: 20px;
+  margin-top: $spacing-06;
+  margin-bottom: $spacing-02;
+  // color: #673ab7;
+  color: white;
+}
+.footer-icons {
+  margin-right: 10px;
+  margin-bottom: -3px;
 }

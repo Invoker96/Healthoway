@@ -7,34 +7,23 @@ import TableContainer from '@mui/material/TableContainer';
 import TableHead from '@mui/material/TableHead';
 import TablePagination from '@mui/material/TablePagination';
 import TableRow from '@mui/material/TableRow';
-import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
-import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
-import Box from '@mui/material/Box';
 import Dialog from '@mui/material/Dialog';
-import DialogActions from '@mui/material/DialogActions';
-import DialogContent from '@mui/material/DialogContent';
-import DialogContentText from '@mui/material/DialogContentText';
-import DialogTitle from '@mui/material/DialogTitle';
 import ListItemText from '@mui/material/ListItemText';
 import ListItem from '@mui/material/ListItem';
 import List from '@mui/material/List';
 import AppBar from '@mui/material/AppBar';
 import Toolbar from '@mui/material/Toolbar';
 import Slide from '@mui/material/Slide';
-import { getUserName, getUserRole } from '../../services/userInfoService';
+import { getFullName, getUserName, getUserRole } from '../../services/userInfoService';
 import { TransitionProps } from '@mui/material/transitions';
 import { injectIntl } from 'react-intl';
-import { Button, Grid, Typography, TextField, MenuItem } from '@mui/material';
-import MenuBar from '../../components/MenuBar/MenuBar';
-import {
-  myAppointments,
-  getSelfAssesmentResult,
-  removePatient
-} from '../../services/counsellorService';
+import { Button, Grid, Typography, TextField, MenuItem, Card } from '@mui/material';
 import dayjs, { Dayjs } from 'dayjs';
-import { Link } from 'react-router-dom';
 import './PatientAppointments.scss';
 import FooterComp from '../../components/FooterComp/FooterComp';
+import { patientsAppointments } from '../../services/patientService';
+import { getSelfAssesmentResult } from '../../services/counsellorService';
+import CalendarMonthIcon from '@mui/icons-material/CalendarMonth';
 // import moment from 'moment';
 
 type Props = {
@@ -75,35 +64,29 @@ const PatientAppointments = ({ intl }: Props) => {
     {
       id: 's_no',
       label: intl.formatMessage({ id: 'global.s_no' }),
-      minWidth: 30
+      minWidth: 100
     },
     {
-      id: 'patientName',
-      label: intl.formatMessage({ id: 'global.patient_name_title' }),
-      minWidth: 120
+      id: 'fullName',
+      label: intl.formatMessage({ id: 'patient.name_title' }),
+      minWidth: 100
     },
     {
-      id: 'self_assessment_title',
-      label: '',
-      minWidth: 200,
+      id: 'userRole',
+      label: 'Appointment With',
+      minWidth: 250,
       align: 'center'
     },
     {
       id: 'appointment',
-      label: 'Appointment',
-      minWidth: 200,
+      label: 'Appointment Details',
+      minWidth: 250,
       align: 'center'
     },
     {
-      id: 'comments',
-      label: 'Comments',
-      minWidth: 200,
-      align: 'center'
-    },
-    {
-      id: 'reject',
+      id: 'self_assessment_title',
       label: '',
-      minWidth: 80,
+      minWidth: 300,
       align: 'center'
     }
   ];
@@ -126,30 +109,17 @@ const PatientAppointments = ({ intl }: Props) => {
     setValue(newValue);
   };
 
-  React.useEffect(() => {
-    getMyAppointments();
-  }, []);
-
-  function getMyAppointments() {
-    const payload = {
-      userName: getUserName(),
-      userRole: getUserRole()
-    };
-    myAppointments(payload)
-      .then((response: any) => {
-        console.log(response);
-        setAppointmentsList(response.data);
-      })
-      .catch((error: any) => {
-        console.log(error);
-      });
-  }
+  const handleClose = (type: string) => {
+    if (type === 'selfAssessment') {
+      setOpen(false);
+    }
+  };
 
   const handleClickOpen = (selectedPatientDataInfo: any, type: string) => {
     setSelectedPatientData(selectedPatientDataInfo);
     if (type === 'selfAssessment') {
       const payload = {
-        username: selectedPatientDataInfo.userName
+        username: getUserName()
       };
       getSelfAssesmentResult(payload)
         .then((response: any) => {
@@ -163,38 +133,24 @@ const PatientAppointments = ({ intl }: Props) => {
     }
   };
 
-  const handleClose = (type: string) => {
-    if (type === 'selfAssessment') {
-      setOpen(false);
-    }
-  };
+  React.useEffect(() => {
+    getMyAppointments();
+  }, []);
 
-  const handleRemoveClickOpen = (selectedPatientDataInfo: any) => {
-    console.log(selectedPatientDataInfo);
-    setSelectedPatientData(selectedPatientDataInfo);
-    setOpenRemoveDialog(true);
-  };
-
-  const handleRemovePatient = () => {
-    console.log(selectedPatientData);
+  function getMyAppointments() {
     const payload = {
-      username: selectedPatientData.userName
+      userName: getUserName(),
+      userRole: getUserRole()
     };
-    removePatient(payload)
-      .then((response) => {
+    patientsAppointments(payload)
+      .then((response: any) => {
         console.log(response);
-        getMyAppointments();
-        setOpenRemoveDialog(false);
+        setAppointmentsList(response.data);
       })
-      .catch((error) => {
+      .catch((error: any) => {
         console.log(error);
-        setOpenRemoveDialog(false);
       });
-  };
-
-  const handleRemoveDialogClose = () => {
-    setOpenRemoveDialog(false);
-  };
+  }
 
   const handleChangePage = (event: unknown, newPage: number) => {
     setPage(newPage);
@@ -206,105 +162,136 @@ const PatientAppointments = ({ intl }: Props) => {
   };
   return (
     <>
-      <MenuBar
-        isLoggedIn={true}
-        title={intl.formatMessage({
-          id: 'patient.title'
-        })}
-        noBtn={false}
-      />
-      <Grid sx={{ mt: 5 }}>
-        <Grid container justifyContent="center">
-          <Typography
-            variant="h3"
-            sx={{ display: { xs: 'flex', sm: 'flex', justifyContent: 'left' } }}
-            style={{ margin: '20px' }}
-          >
-            {intl.formatMessage({
-              id: 'global.my_appointments'
+      <Dialog
+        fullScreen
+        open={open}
+        onClose={() => handleClose('selfAssessment')}
+        TransitionComponent={Transition}
+      >
+        <AppBar sx={{ position: 'relative' }}>
+          <Toolbar>
+            {/* <IconButton edge="start" color="inherit" onClick={handleClose} aria-label="close">
+              <CloseIcon />
+            </IconButton> */}
+            <Typography sx={{ ml: 2, flex: 1 }} variant="h6" component="div">
+              {getFullName()}
+            </Typography>
+            <Button autoFocus color="inherit" onClick={() => handleClose('selfAssessment')}>
+              Close
+            </Button>
+          </Toolbar>
+        </AppBar>
+        <List>
+          {selfAssesmentResult.length > 0 &&
+            selfAssesmentResult.map((selfAssesment, index) => {
+              return (
+                <ListItem button key={index}>
+                  <ListItemText primary={selfAssesment.question} secondary={selfAssesment.answer} />
+                </ListItem>
+              );
             })}
-          </Typography>
-          <Button
-            variant="contained"
-            className="my_appointment_btn"
-            component={Link}
-            to={'/patient/home'}
-          >
-            {intl.formatMessage({
-              id: 'global.my_dashboard'
-            })}
-          </Button>
+        </List>
+      </Dialog>
+      {appointmentsList.length > 0 && (
+        <Grid container justifyContent="center" sx={{ mt: 10 }}>
+          <Card className="patientAppointment-greeting-container">
+            <CalendarMonthIcon />
+            <Typography variant="h3">
+              {intl.formatMessage(
+                {
+                  id: 'patient.upcoming_appointment'
+                },
+                {
+                  fullName: getFullName()
+                }
+              )}
+            </Typography>{' '}
+            <Paper sx={{ width: '100%', overflow: 'hidden' }}>
+              <TableContainer sx={{ maxHeight: 440 }}>
+                <Table stickyHeader aria-label="sticky table">
+                  <TableHead>
+                    <TableRow>
+                      {patientsColumns.map((column) => (
+                        <TableCell
+                          className="patient-appointment-table-header"
+                          key={column.id}
+                          align={column.align}
+                          style={{ minWidth: column.minWidth }}
+                        >
+                          {column.label}
+                        </TableCell>
+                      ))}
+                    </TableRow>
+                  </TableHead>
+                  <TableBody>
+                    {appointmentsList
+                      .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
+                      .map((row, index) => {
+                        return (
+                          <TableRow hover role="checkbox" tabIndex={-1} key={index}>
+                            {patientsColumns.map((column) => {
+                              const value = (row as any)[column.id];
+                              // let date = '';
+                              // if (column.id === 'appointment') {
+                              //   // date = moment(value).format('MM/DD/YYYY HH:mm');
+                              // }
+                              return (
+                                <TableCell key={column.id} align={column.align}>
+                                  {column.id === 's_no' ? index + 1 : value}
+                                  {column.id === 'self_assessment_title' && (
+                                    <Button
+                                      variant="contained"
+                                      onClick={() => handleClickOpen(row, 'selfAssessment')}
+                                    >
+                                      {intl.formatMessage({
+                                        id: 'global.self_assessment_title'
+                                      })}
+                                    </Button>
+                                  )}
+                                </TableCell>
+                              );
+                            })}
+                          </TableRow>
+                        );
+                      })}
+                  </TableBody>
+                </Table>
+              </TableContainer>
+              <TablePagination
+                rowsPerPageOptions={[10, 25, 100]}
+                component="div"
+                count={appointmentsList.length}
+                rowsPerPage={rowsPerPage}
+                page={page}
+                onPageChange={handleChangePage}
+                onRowsPerPageChange={handleChangeRowsPerPage}
+              />
+            </Paper>
+          </Card>
         </Grid>
-        {/* <Grid container justifyContent="space-around">
-          <Paper sx={{ width: '100%', overflow: 'hidden' }}>
-            <TableContainer sx={{ maxHeight: 440 }}>
-              <Table stickyHeader aria-label="sticky table">
-                <TableBody>
-                  {appointmentsList
-                    .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
-                    .map((row, index) => {
-                      return (
-                        <TableRow hover role="checkbox" tabIndex={-1} key={index}>
-                          {patientsColumns.map((column) => {
-                            const value = (row as any)[column.id];
-                            // let date = '';
-                            // if (column.id === 'appointment') {
-                            //   // date = moment(value).format('MM/DD/YYYY HH:mm');
-                            // }
-                            return (
-                              <TableCell key={column.id} align={column.align}>
-                                {column.id === 's_no' ? index + 1 : value}
-                                {column.id === 'self_assessment_title' && (
-                                  <Button
-                                    variant="contained"
-                                    onClick={() => handleClickOpen(row, 'selfAssessment')}
-                                  >
-                                    {intl.formatMessage({
-                                      id: 'global.self_assessment_title'
-                                    })}
-                                  </Button>
-                                )}
-                                {column.id === 'doctor_assign' && (
-                                  <Button
-                                    variant="contained"
-                                    onClick={() => handleClickOpen(row, 'assignToDoctor')}
-                                  >
-                                    {intl.formatMessage({
-                                      id: 'counsellor.doctor_assign'
-                                    })}
-                                  </Button>
-                                )}
-                                {column.id === 'reject' && (
-                                  <Typography
-                                    variant="h3"
-                                    onClick={() => handleRemoveClickOpen(row)}
-                                  >
-                                    {intl.formatMessage({
-                                      id: 'global.reject'
-                                    })}
-                                  </Typography>
-                                )}
-                              </TableCell>
-                            );
-                          })}
-                        </TableRow>
-                      );
-                    })}
-                </TableBody>
-              </Table>
-            </TableContainer>
-            <TablePagination
-              rowsPerPageOptions={[10, 25, 100]}
-              component="div"
-              count={appointmentsList.length}
-              rowsPerPage={rowsPerPage}
-              page={page}
-              onPageChange={handleChangePage}
-              onRowsPerPageChange={handleChangeRowsPerPage}
-            />
-          </Paper>
-        </Grid> */}
-      </Grid>
+      )}
+      {appointmentsList.length == 0 && (
+        <Grid container justifyContent="center" sx={{ mt: 10 }}>
+          <Card className="patientAppointment-greeting-container">
+            <CalendarMonthIcon />
+            <Typography variant="h3">
+              {intl.formatMessage(
+                {
+                  id: 'patient.upcoming_appointment'
+                },
+                {
+                  fullName: getFullName()
+                }
+              )}
+            </Typography>
+            <Typography>
+              {intl.formatMessage({
+                id: 'patient.no_appointment'
+              })}
+            </Typography>
+          </Card>
+        </Grid>
+      )}
       <FooterComp />
     </>
   );

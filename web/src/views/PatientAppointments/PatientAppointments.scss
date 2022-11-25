@@ -1,14 +1,16 @@
 @import '../../variables.scss';
 
-// thead, tbody, th, tr, td {
-//     padding: 20px 120px;
-// }
+.patientAppointment-greeting-container {
+  padding: $spacing-05;
 
-// td {
-//     border: 1px solid black;
-//     border-collapse: collapse;
-// }
+  p {
+    margin: $spacing-04 $spacing-08;
+  }
+}
+.appointment-container {
+  padding: $spacing-05;
+}
 
-// .table-wrapper {
-//     margin-top: 25px;
-// }
+.patient-appointment-table-header {
+  font-weight: 600;
+}
