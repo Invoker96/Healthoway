@@ -14,11 +14,13 @@ const Footer = ({ intl }: Props) => {
       <BottomNavigation className="footer-container">
         <Grid container>
           <Grid item xs={4} className="footer-section-container">
-            <Typography className="footer-title">
-              {intl.formatMessage({
-                id: 'landingPage.workingHoursTitle'
-              })}
-            </Typography>
+            <Grid className="footer-title-container">
+              <Typography className="footer-title">
+                {intl.formatMessage({
+                  id: 'landingPage.workingHoursTitle'
+                })}
+              </Typography>
+            </Grid>
             <Typography className="footer-description">
               {intl.formatMessage({
                 id: 'landingPage.workingHours1'
@@ -36,13 +38,14 @@ const Footer = ({ intl }: Props) => {
             </Typography>
           </Grid>
           <Grid item xs={4} className="footer-section-container">
-            <PersonIcon className="footer-icons" />
-
-            <Typography className="footer-title">
-              {intl.formatMessage({
-                id: 'landingPage.patientReviewTitle'
-              })}
-            </Typography>
+            <Grid className="footer-title-container">
+              <PersonIcon className="footer-icons" />
+              <Typography className="footer-title">
+                {intl.formatMessage({
+                  id: 'landingPage.patientReviewTitle'
+                })}
+              </Typography>
+            </Grid>
             <Typography className="footer-description">
               {intl.formatMessage({
                 id: 'landingPage.patientReview'
@@ -50,13 +53,14 @@ const Footer = ({ intl }: Props) => {
             </Typography>
           </Grid>
           <Grid item xs={4} className="footer-section-container">
-            <BusinessIcon className="footer-icons" />
-
-            <Typography className="footer-title">
-              {intl.formatMessage({
-                id: 'landingPage.addressTitle'
-              })}
-            </Typography>
+            <Grid className="footer-title-container">
+              <BusinessIcon className="footer-icons" />
+              <Typography className="footer-title">
+                {intl.formatMessage({
+                  id: 'landingPage.addressTitle'
+                })}
+              </Typography>
+            </Grid>
             <Typography className="footer-description">
               {intl.formatMessage({
                 id: 'landingPage.addressLine1'
