@@ -48,7 +48,7 @@ const ManagerSignUp = ({ intl }: Props) => {
       await setLoading(true);
       await createUser(formData)
         .then((res) => {
-          navigate('/', { state: { ...res.data } });
+          navigate('/manager/home', { state: { ...res.data } });
         })
         .catch((err) => {
           setPage(page - 1);
