@@ -22,7 +22,6 @@ const AppointmentReport = ({ intl }: Props) => {
   return (
     <Grid container>
       <MenuBar title={intl.formatMessage({ id: 'report.appointments.title' })} noBtn={true} />
-
       <Grid container className="main-container">
         <Grid container className="report-selection-container">
           <Typography>

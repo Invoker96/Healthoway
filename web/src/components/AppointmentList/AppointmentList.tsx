@@ -9,7 +9,8 @@ import {
   TableCell,
   TableBody,
   TextField,
-  Button
+  Button,
+  TablePagination
 } from '@mui/material';
 import { LocalizationProvider, DesktopDatePicker } from '@mui/x-date-pickers';
 import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
@@ -30,6 +31,9 @@ const AppointmentList = ({ intl }: Props) => {
   const [fromDate, setFromDate] = useState(dayjs().subtract(1, 'month').toDate());
   const [toDate, setToDate] = useState(dayjs().toDate());
   const [appointments, setAppointments] = useState([]);
+
+  const [page, setPage] = useState(0);
+  const [rowsPerPage, setRowsPerPage] = useState(10);
 
   // trigger on mount - get appointments from one month ago on initialize
   useEffect(() => {
@@ -58,6 +62,15 @@ const AppointmentList = ({ intl }: Props) => {
       }
     );
     setIsLoading(false);
+  };
+
+  const handleChangePage = (event: unknown, newPage: number) => {
+    setPage(newPage);
+  };
+
+  const handleChangeRowsPerPage = (event: React.ChangeEvent<HTMLInputElement>) => {
+    setRowsPerPage(+event.target.value);
+    setPage(0);
   };
 
   return (
@@ -99,17 +112,19 @@ const AppointmentList = ({ intl }: Props) => {
           </TableHead>
           <TableBody>
             {appointments.length > 0 ? (
-              appointments.map((appt) => (
-                <TableRow>
-                  {columns.map((column) => (
-                    <TableCell key={column}>
-                      {column === 'appointmentDate'
-                        ? formatDateTimeString(appt[column])
-                        : appt[column]}
-                    </TableCell>
-                  ))}
-                </TableRow>
-              ))
+              appointments
+                .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
+                .map((appt) => (
+                  <TableRow>
+                    {columns.map((column) => (
+                      <TableCell key={column}>
+                        {column === 'appointmentDate'
+                          ? formatDateTimeString(appt[column])
+                          : appt[column]}
+                      </TableCell>
+                    ))}
+                  </TableRow>
+                ))
             ) : (
               <TableRow>
                 <TableCell colSpan={columns.length} align="center">
@@ -119,6 +134,15 @@ const AppointmentList = ({ intl }: Props) => {
             )}
           </TableBody>
         </Table>
+        <TablePagination
+          rowsPerPageOptions={[10, 25, 100]}
+          component="div"
+          count={appointments.length}
+          rowsPerPage={rowsPerPage}
+          page={page}
+          onPageChange={handleChangePage}
+          onRowsPerPageChange={handleChangeRowsPerPage}
+        />
       </TableContainer>
     </Grid>
   );
