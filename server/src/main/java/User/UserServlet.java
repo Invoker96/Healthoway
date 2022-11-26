@@ -13,8 +13,11 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.logging.*;
+
+import static util.HttpUtil.convertResultSetToArray;
 
 public class UserServlet extends HttpServlet {
 
@@ -55,6 +58,27 @@ public class UserServlet extends HttpServlet {
             out.flush();
         } catch (SQLException e) {
             e.printStackTrace();
+        }
+
+    }
+
+    @Override
+    protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        PrintWriter out = resp.getWriter();
+        try {
+            ResultSet rs = ConnectionManager.getAllActiveUsers();
+
+            resp.setContentType("application/json");
+            resp.setCharacterEncoding("UTF-8");
+
+            out.println(convertResultSetToArray(rs));
+
+        } catch (Exception ex) {
+            JSONObject obj = new JSONObject();
+            obj.put("error", ex.getMessage());
+            out.println(obj);
+        } finally {
+            out.flush();
         }
 
     }
