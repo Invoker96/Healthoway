@@ -508,13 +508,12 @@ const CounsellorHome = ({ intl }: Props) => {
         </List>
       </Dialog>
       <MenuBar
-        isLoggedIn={true}
         title={intl.formatMessage({
           id: 'counsellor.title'
         })}
         noBtn={false}
       />
-      <Grid sx={{ mt: 5 }}>
+      <Grid container className="main-container">
         <Grid container justifyContent="center">
           <Typography
             variant="h3"
@@ -525,16 +524,6 @@ const CounsellorHome = ({ intl }: Props) => {
               id: 'global.list_of_patients'
             })}
           </Typography>
-          <Button
-            variant="contained"
-            className="my_appointment_btn"
-            component={Link}
-            to={'/counsellor/appointments'}
-          >
-            {intl.formatMessage({
-              id: 'global.my_appointments'
-            })}
-          </Button>
         </Grid>
         <Grid container justifyContent="space-around">
           <Paper sx={{ width: '100%', overflow: 'hidden' }}>

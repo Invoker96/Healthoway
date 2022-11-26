@@ -142,7 +142,6 @@ const PatientHome = ({ intl }: Props) => {
 
       {successMessage && <AppSnackbar type="success" message={successMessage} open={true} />}
       <MenuBar
-        isLoggedIn={true}
         title={intl.formatMessage({
           id: 'patient.title'
         })}
@@ -218,22 +217,9 @@ const PatientHome = ({ intl }: Props) => {
             </Card>
           )}
         </Grid>
-        <Grid container className="abc">
+        <Grid container>
           <PatientAppointments></PatientAppointments>
         </Grid>
-        {/* <Grid container justifyContent="center" className="appointment-container">
-          <Button
-            variant="contained"
-            style={{ margin: '60px' }}
-            sx={{ display: { xs: 'flex', sm: 'flex', width: 'fit-content' } }}
-            component={Link}
-            to={'/patient/appointments'}
-          >
-            {intl.formatMessage({
-              id: 'global.my_appointments'
-            })}
-          </Button>
-        </Grid> */}
       </Grid>
       <FooterComp />
     </>

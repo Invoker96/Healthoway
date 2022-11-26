@@ -1,0 +1,11 @@
+@import '../../../variables.scss';
+
+.report-selection-container {
+  margin-top: $spacing-04;
+  display: flex;
+  align-items: center;
+
+  .report-dropdown {
+    margin-left: $spacing-02;
+  }
+}

@@ -368,7 +368,8 @@ public class ConnectionManager {
                 "JOIN users pu ON pu.USERNAME = a.PATIENT_USERNAME " +
                 "JOIN users u ON u.USERNAME = a.USERNAME " +
                 "WHERE DATE(appointment) >= ? " +
-                "AND DATE(appointment) <= ?";
+                "AND DATE(appointment) <= ? " +
+                "ORDER BY appointment DESC";
 
         PreparedStatement pstmt = con.prepareStatement(query);
         pstmt.setString(1, from);

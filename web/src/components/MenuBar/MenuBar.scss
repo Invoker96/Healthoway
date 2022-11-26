@@ -1,15 +1,37 @@
 @import '../../variables.scss';
 
-.home_logo {
-  background: $grey-00;
-  width: 3%;
-}
-
 .menu-bar-container {
   display: flex;
   justify-content: space-between;
 
-  a:not(:last-child) {
-    margin-right: $spacing-04;
+  .home_logo {
+    width: 50px;
+    margin-bottom: $spacing-02;
+    margin-right: $spacing-07;
+  }
+
+  .end-container {
+    align-items: center;
+    justify-content: end;
+
+    a + a {
+      margin-left: $spacing-04;
+    }
+  }
+
+  .userProfile-container {
+    .MuiAvatar-root {
+      margin-right: $spacing-02;
+    }
+
+    .MuiIconButton-root {
+      margin-left: $spacing-05;
+    }
+  }
+
+  .menu-bar-link {
+    color: $grey-00;
+    margin-right: $spacing-05;
+    text-decoration: none;
   }
 }

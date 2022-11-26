@@ -1,6 +1,6 @@
 import { injectIntl } from 'react-intl';
+import { BottomNavigation, Paper, Typography } from '@mui/material';
 import './FooterComp.scss';
-import { Grid, Typography } from '@mui/material';
 
 type Props = {
   intl: any;
@@ -8,13 +8,15 @@ type Props = {
 
 const FooterComp = ({ intl }: Props) => {
   return (
-    <Grid className="footer-wrapper">
-      <Typography variant="h3">
-        {intl.formatMessage({
-          id: 'global.copyright'
-        })}
-      </Typography>
-    </Grid>
+    <Paper sx={{ position: 'fixed', bottom: 0, left: 0, right: 0 }} elevation={3}>
+      <BottomNavigation className="footer-wrapper">
+        <Typography>
+          {intl.formatMessage({
+            id: 'global.copyright'
+          })}
+        </Typography>
+      </BottomNavigation>
+    </Paper>
   );
 };
 

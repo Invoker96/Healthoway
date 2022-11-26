@@ -17,7 +17,7 @@ import Slide from '@mui/material/Slide';
 import { getFullName, getUserName, getUserRole } from '../../services/userInfoService';
 import { TransitionProps } from '@mui/material/transitions';
 import { injectIntl } from 'react-intl';
-import { Button, Grid, Typography, TextField, MenuItem, Card } from '@mui/material';
+import { Button, Grid, Typography, Card } from '@mui/material';
 import dayjs, { Dayjs } from 'dayjs';
 import './PatientAppointments.scss';
 import FooterComp from '../../components/FooterComp/FooterComp';

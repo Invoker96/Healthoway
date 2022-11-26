@@ -28,7 +28,6 @@ const ManagerHome = ({ intl }: Props) => {
     <>
       {successMessage && <AppSnackbar type="success" message={successMessage} open={true} />}
       <MenuBar
-        isLoggedIn={true}
         title={intl.formatMessage({
           id: 'manager.title'
         })}

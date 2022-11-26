@@ -1,15 +1,8 @@
 @import '../../variables.scss';
 
-.bg-img {
-  width: -webkit-fill-available;
-  height: 500px;
-}
+.landing-page-container {
+  background-image: url(../../assets/LandingImage.jpg);
+  background-size: 51vw;
 
-.footer-container {
-  background-color: white;
-  min-height: 10rem;
-  opacity: 0.9;
-}
-.login {
-  background-color: white;
+  // height: 500px;
 }

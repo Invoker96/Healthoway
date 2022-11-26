@@ -90,11 +90,7 @@ const SelfAssessmentForm = ({ intl }: Props) => {
         open={isError}
       />
 
-      <MenuBar
-        isLoggedIn={false}
-        title={intl.formatMessage({ id: 'selfAssessment.title' })}
-        noBtn={true}
-      />
+      <MenuBar title={intl.formatMessage({ id: 'selfAssessment.title' })} noBtn={true} />
       <Grid component="form" container className="main-container">
         <Grid container>
           <Button variant="contained" component={Link} to={'/patient/home'}>
