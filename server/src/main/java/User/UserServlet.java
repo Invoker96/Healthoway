@@ -7,11 +7,13 @@ import model.User;
 import org.json.JSONObject;
 import util.HttpUtil;
 
+import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.sql.SQLException;
 import java.util.logging.*;
 
 public class UserServlet extends HttpServlet {
@@ -33,4 +35,27 @@ public class UserServlet extends HttpServlet {
         }
     }
 
+    @Override
+    protected void doDelete(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        String username = req.getParameter("username");
+        try {
+            boolean result = ConnectionManager.deleteUser(username);
+            if(!result) {
+                resp.sendError(500, "Failed to delete user");
+            }
+
+            resp.setContentType("application/json");
+            resp.setCharacterEncoding("UTF-8");
+
+            PrintWriter out = resp.getWriter();
+            JSONObject res = new JSONObject();
+            res.put("username", username);
+
+            out.println(res);
+            out.flush();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+    }
 }

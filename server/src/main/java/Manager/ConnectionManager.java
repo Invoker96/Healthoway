@@ -22,7 +22,7 @@ public class ConnectionManager {
     static Connection con = new DatabaseManager("jdbc/soen6841").getConnection();
 
     public static User loginCheck(String username, String password) throws SQLException {
-        String query = "SELECT * FROM SOEN6841.USERS WHERE username = ? AND password = ?";
+        String query = "SELECT * FROM SOEN6841.USERS WHERE username = ? AND password = ? AND is_active='YES'";
         PreparedStatement stmt = con.prepareStatement(query);
         stmt.setString(1, username);
         stmt.setString(2, password);
@@ -36,7 +36,7 @@ public class ConnectionManager {
     }
 
     public static User getUser(String username) throws SQLException {
-        String query = "SELECT * FROM SOEN6841.USERS WHERE username = ?";
+        String query = "SELECT * FROM SOEN6841.USERS WHERE username = ? AND is_active='YES'";
         PreparedStatement stmt = con.prepareStatement(query);
         stmt.setString(1, username);
 
@@ -133,8 +133,9 @@ public class ConnectionManager {
 
         JSONArray arr = new JSONArray();
         try {
-            String query = "SELECT U.USERNAME, U.FULLNAME, P.REQ, P.EMAIL FROM USERS U,PATIENT_REQUESTS P "
-                    + "WHERE P.USERNAME = U.USERNAME AND P.APPOINTMENT_GIVEN = 'NO' AND (P.DOCTOR_USERNAME IS NULL OR P.DOCTOR_USERNAME = '');";
+            String query = "SELECT U.USERNAME, U.FULLNAME, P.REQ, P.EMAIL FROM USERS U,PATIENT_REQUESTS P " +
+                    "WHERE P.USERNAME = U.USERNAME AND P.APPOINTMENT_GIVEN = 'NO' AND (P.DOCTOR_USERNAME IS NULL OR P.DOCTOR_USERNAME = '') " +
+                    "AND U.IS_ACTIVE='YES';";
             PreparedStatement stmt = con.prepareStatement(query);
             ResultSet rs = stmt.executeQuery();
             if (rs.next()) {
@@ -159,7 +160,7 @@ public class ConnectionManager {
 
         JSONArray arr = new JSONArray();
         try {
-            String query = "select username, fullname from users where user_role = ?;";
+            String query = "select username, fullname from users where user_role = ? and is_active='YES';";
             PreparedStatement stmt = con.prepareStatement(query);
             stmt.setString(1, String.valueOf(UserRole.Doctor));
             ResultSet rs = stmt.executeQuery();
@@ -311,7 +312,7 @@ public class ConnectionManager {
 
         String query = "SELECT U.FULLNAME,A.PATIENT_USERNAME, A.APPOINTMENT,A.COMMENTS "
                 + "FROM SOEN6841.APPOINTMENTS A , SOEN6841.USERS U , SOEN6841.PATIENT_REQUESTS P WHERE A.USERNAME = ? AND A.PATIENT_USERNAME = P.USERNAME "
-                + "AND P.USERNAME = U.USERNAME;";
+                + "AND P.USERNAME = U.USERNAME AND U.IS_ACTIVE = 'YES';";
 
         try {
             PreparedStatement pstmt = con.prepareStatement(query);
@@ -328,7 +329,7 @@ public class ConnectionManager {
     public static ResultSet getAppointmentDetailsOfPatient(String username) {
 
         String query = "SELECT U.FULLNAME, U.USER_ROLE, A.APPOINTMENT, U.USERNAME FROM SOEN6841.APPOINTMENTS A , SOEN6841.USERS U "
-                + "WHERE A.PATIENT_USERNAME = ? AND A.USERNAME = U.USERNAME;";
+                + "WHERE A.PATIENT_USERNAME = ? AND A.USERNAME = U.USERNAME AND U.IS_ACTIVE='YES';";
         try {
             PreparedStatement pstmt = con.prepareStatement(query);
             pstmt.setString(1, username);
@@ -343,7 +344,7 @@ public class ConnectionManager {
     public static ResultSet getListOfPatientForDoctor(String username) {
 
         String query = "SELECT U.USERNAME, U.FULLNAME, P.REQ, P.EMAIL FROM SOEN6841.PATIENT_REQUESTS P, SOEN6841.USERS U "
-                + "WHERE P.USERNAME = U.USERNAME AND P.DOCTOR_USERNAME = ? AND P.APPOINTMENT_GIVEN = 'NO';";
+                + "WHERE P.USERNAME = U.USERNAME AND P.DOCTOR_USERNAME = ? AND P.APPOINTMENT_GIVEN = 'NO' AND U.IS_ACTIVE='YES';";
         try {
             PreparedStatement pstmt = con.prepareStatement(query);
             pstmt.setString(1, username);
@@ -376,5 +377,18 @@ public class ConnectionManager {
         pstmt.setString(2, to);
         return pstmt.executeQuery();
 
+    }
+
+    public static boolean deleteUser(String username) throws SQLException {
+        String query = "UPDATE users u SET IS_ACTIVE = 'NO' WHERE username = ?";
+
+        PreparedStatement pstmt = con.prepareStatement(query);
+        pstmt.setString(1, username);
+
+        int n = pstmt.executeUpdate();
+        if(n > 0) {
+            return true;
+        }
+        return false;
     }
 }
