@@ -5,6 +5,7 @@ export type User = {
   userRole: RoleType;
   dob: string;
   pNum: string;
+  username: string;
 };
 
 export enum RoleType {

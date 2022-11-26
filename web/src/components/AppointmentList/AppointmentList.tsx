@@ -14,7 +14,7 @@ import {
 import { LocalizationProvider, DesktopDatePicker } from '@mui/x-date-pickers';
 import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
 import dayjs, { Dayjs } from 'dayjs';
-import { getAppointmentsByDateRange } from '../../services/managerService';
+import { getAppointmentsByDateRange } from '../../services/appointmentService';
 import { formatDateTimeString, formatDateToString } from '../../utils/DateUtil';
 import LoadingSpinner from '../common/LoadingSpinner/LoadingSpinner';
 

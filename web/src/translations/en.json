@@ -122,5 +122,13 @@
   "report.appointments.chart.dropdown.monthly": "Monthly",
   "report.appointments.dropdown.count": "Patients Count Report",
   "report.appointments.dropdown.list": "Patients List Report",
-  "report.appointmnets.dropdown.label": "Type of Report:"
+  "report.appointmnets.dropdown.label": "Type of Report:",
+  "userManagement.delete.success": "Successfully deleted user",
+  "userManagement.delete.error": "An error occured while trying to delete user",
+  "userManagement.table.noData": "There are no users",
+  "userManagement.table.header.fullName": "Name",
+  "userManagement.table.header.email": "Email Address",
+  "userManagement.table.header.role": "Role",
+  "userManagement.table.header.address": "Address",
+  "userManagement.table.header.dob": "Date of Birth"
 }

@@ -60,7 +60,7 @@ const MenuBar = ({ intl, title, noBtn }: Props) => {
         link: '/manager/home'
       },
       { id: 'manageUsers', link: '/manager/users' },
-      { id: 'viewReports', link: '/manager/report/appointments' }
+      { id: 'viewReports', link: '/manager/reports' }
     ]
   };
 

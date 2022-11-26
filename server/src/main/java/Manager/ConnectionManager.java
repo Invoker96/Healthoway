@@ -393,7 +393,7 @@ public class ConnectionManager {
     }
 
     public static ResultSet getAllActiveUsers() throws SQLException {
-        String query = "SELECT FULLNAME fullName, USERNAME userName, USER_ROLE role, ROLE_ID roleId, EMAIL email, ADDRESS address, DOB dob, PNUM phoneNumber FROM users WHERE is_active='YES'";
+        String query = "SELECT FULLNAME fullName, USERNAME username, USER_ROLE role, ROLE_ID roleId, EMAIL email, ADDRESS address, DOB dob, PNUM phoneNumber FROM users WHERE is_active='YES'";
 
         PreparedStatement pstmt = con.prepareStatement(query);
         return pstmt.executeQuery();
