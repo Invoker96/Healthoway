@@ -18,6 +18,7 @@ import { User } from '../../types';
 import AppSnackbar, { AppSnackbarType } from '../../components/AppSnackbar/AppSnackbar';
 import { formatDisplayDate } from '../../utils/DateUtil';
 import dayjs from 'dayjs';
+import MenuBar from '../../components/MenuBar/MenuBar';
 
 type Props = {
   intl: any;
@@ -86,69 +87,72 @@ const UserManagement = ({ intl }: Props) => {
   };
 
   return (
-    <Grid className="main-container">
-      <LoadingSpinner isOpen={isLoading} />
-      <AppSnackbar
-        type={snackbarType as AppSnackbarType}
-        message={message}
-        open={snackbarIsOpen}
-      />{' '}
-      <TableContainer>
-        <Table stickyHeader>
-          <TableHead>
-            <TableRow>
-              {columns.map((column) => (
-                <TableCell key={column}>
-                  {intl.formatMessage({ id: `userManagement.table.header.${column}` })}
-                </TableCell>
-              ))}
-              <TableCell></TableCell>
-            </TableRow>
-          </TableHead>
-          <TableBody>
-            {users.length > 0 ? (
-              users
-                .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
-                .map((user: User) => (
-                  <TableRow>
-                    {columns.map((column) => (
-                      <TableCell key={`${user.username}_${column}`}>
-                        {column === 'dob'
-                          ? formatDisplayDate(dayjs(user[column as keyof User]).toDate())
-                          : user[column as keyof User]}
-                      </TableCell>
-                    ))}
-                    <TableCell>
-                      <IconButton
-                        onClick={() => {
-                          handleDelete(user.username);
-                        }}
-                      >
-                        <DeleteOutlined className="error" />
-                      </IconButton>
-                    </TableCell>
-                  </TableRow>
-                ))
-            ) : (
+    <>
+      <MenuBar title="" noBtn={true} />
+      <Grid className="main-container">
+        <LoadingSpinner isOpen={isLoading} />
+        <AppSnackbar
+          type={snackbarType as AppSnackbarType}
+          message={message}
+          open={snackbarIsOpen}
+        />{' '}
+        <TableContainer>
+          <Table stickyHeader>
+            <TableHead>
               <TableRow>
-                <TableCell colSpan={columns.length} align="center">
-                  {intl.formatMessage({ id: 'userManagement.table.noData' })}
-                </TableCell>
+                {columns.map((column) => (
+                  <TableCell key={column}>
+                    {intl.formatMessage({ id: `userManagement.table.header.${column}` })}
+                  </TableCell>
+                ))}
+                <TableCell></TableCell>
               </TableRow>
-            )}
-          </TableBody>
-        </Table>
-        <TablePagination
-          rowsPerPageOptions={[10, 25, 100]}
-          component="div"
-          count={users.length}
-          rowsPerPage={rowsPerPage}
-          page={page}
-          onPageChange={handleChangePage}
-          onRowsPerPageChange={handleChangeRowsPerPage}
-        />
-      </TableContainer>
-    </Grid>
+            </TableHead>
+            <TableBody>
+              {users.length > 0 ? (
+                users
+                  .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
+                  .map((user: User) => (
+                    <TableRow>
+                      {columns.map((column) => (
+                        <TableCell key={`${user.username}_${column}`}>
+                          {column === 'dob'
+                            ? formatDisplayDate(dayjs(user[column as keyof User]).toDate())
+                            : user[column as keyof User]}
+                        </TableCell>
+                      ))}
+                      <TableCell>
+                        <IconButton
+                          onClick={() => {
+                            handleDelete(user.username);
+                          }}
+                        >
+                          <DeleteOutlined className="error" />
+                        </IconButton>
+                      </TableCell>
+                    </TableRow>
+                  ))
+              ) : (
+                <TableRow>
+                  <TableCell colSpan={columns.length} align="center">
+                    {intl.formatMessage({ id: 'userManagement.table.noData' })}
+                  </TableCell>
+                </TableRow>
+              )}
+            </TableBody>
+          </Table>
+          <TablePagination
+            rowsPerPageOptions={[10, 25, 100]}
+            component="div"
+            count={users.length}
+            rowsPerPage={rowsPerPage}
+            page={page}
+            onPageChange={handleChangePage}
+            onRowsPerPageChange={handleChangeRowsPerPage}
+          />
+        </TableContainer>
+      </Grid>
+    </>
   );
 };
 
