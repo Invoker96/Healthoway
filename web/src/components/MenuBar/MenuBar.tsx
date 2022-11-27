@@ -28,10 +28,6 @@ const MenuBar = ({ intl, title, noBtn }: Props) => {
       {
         id: 'dashboard',
         link: '/patient/home'
-      },
-      {
-        id: 'myAppointments',
-        link: '/patient/appointments'
       }
     ],
     Counsellor: [

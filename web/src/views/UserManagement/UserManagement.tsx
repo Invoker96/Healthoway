@@ -9,9 +9,13 @@ import {
   TableCell,
   TableBody,
   IconButton,
-  TablePagination
+  TablePagination,
+  Dialog,
+  Button,
+  DialogContent,
+  DialogTitle
 } from '@mui/material';
-import { DeleteOutlined } from '@mui/icons-material';
+import { DeleteOutlined, CloseOutlined } from '@mui/icons-material';
 import LoadingSpinner from '../../components/common/LoadingSpinner/LoadingSpinner';
 import { deleteUser, getAllUsers } from '../../services/userService';
 import { User } from '../../types';
@@ -19,6 +23,8 @@ import AppSnackbar, { AppSnackbarType } from '../../components/AppSnackbar/AppSn
 import { formatDisplayDate } from '../../utils/DateUtil';
 import dayjs from 'dayjs';
 import MenuBar from '../../components/MenuBar/MenuBar';
+import ManagerSignUp from '../../components/ManagerSignUp/ManagerSignUp';
+import './UserManagement.scss';
 
 type Props = {
   intl: any;
@@ -32,6 +38,8 @@ const UserManagement = ({ intl }: Props) => {
   const [snackbarIsOpen, setSnackbarIsOpen] = useState(false);
   const [message, setMessage] = useState('');
   const [snackbarType, setSnackbarType] = useState('');
+
+  const [dialogIsOpen, setDialogIsOpen] = useState(false);
 
   const [page, setPage] = useState(0);
   const [rowsPerPage, setRowsPerPage] = useState(10);
@@ -86,6 +94,12 @@ const UserManagement = ({ intl }: Props) => {
     setPage(0);
   };
 
+  const handleUserCreated = (isSuccess: boolean) => {
+    setSnackbarIsOpen(true);
+    setSnackbarType('success');
+    setMessage(intl.formatMessage({ id: 'userForm.createUser.success' }));
+  };
+
   return (
     <>
       <MenuBar title="" noBtn={true} />
@@ -95,7 +109,46 @@ const UserManagement = ({ intl }: Props) => {
           type={snackbarType as AppSnackbarType}
           message={message}
           open={snackbarIsOpen}
-        />{' '}
+        />
+        <Dialog maxWidth="md" open={dialogIsOpen}>
+          <DialogTitle textAlign="right">
+            <IconButton>
+              <CloseOutlined
+                onClick={() => {
+                  setDialogIsOpen(false);
+                }}
+              />
+            </IconButton>
+          </DialogTitle>
+          <DialogContent>
+            <ManagerSignUp
+              isUserCreated={(res: boolean) => {
+                console.log({ res });
+                if (res) {
+                  setSnackbarType('success');
+                  setMessage(intl.formatMessage({ id: 'userForm.createUser.success' }));
+                  getUsers();
+                } else {
+                  setSnackbarType('error');
+                  setMessage(intl.formatMessage({ id: 'userForm.createUser.error' }));
+                }
+                setSnackbarIsOpen(true);
+                setDialogIsOpen(false);
+              }}
+            />
+          </DialogContent>
+        </Dialog>
+        <Grid container className="button-container">
+          <Button
+            variant="contained"
+            color="primary"
+            onClick={() => {
+              setDialogIsOpen(true);
+            }}
+          >
+            {intl.formatMessage({ id: 'userManagement.button.addUser' })}
+          </Button>
+        </Grid>
         <TableContainer>
           <Table stickyHeader>
             <TableHead>

@@ -1,6 +1,5 @@
 import { useState } from 'react';
 import { injectIntl } from 'react-intl';
-import { Link } from 'react-router-dom';
 import { FormControl, Grid, MenuItem, Select, Typography, Button } from '@mui/material';
 import AppointmentCountGraph from '../../../components/AppointmentCountGraph/AppointmentCountGraph';
 import AppointmentList from '../../../components/AppointmentList/AppointmentList';

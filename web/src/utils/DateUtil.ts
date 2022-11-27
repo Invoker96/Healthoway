@@ -6,7 +6,7 @@ export const formatDateToString = (date: Date) => {
 };
 
 export const formatDateTimeString = (date: string) => {
-  return dayjs(date).format('D MMM YYYY h:m A');
+  return dayjs(date).format('D MMM YYYY hh:mm A');
 };
 
 export const formatDisplayDate = (date: Date) => {

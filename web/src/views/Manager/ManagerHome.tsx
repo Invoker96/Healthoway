@@ -51,51 +51,8 @@ const ManagerHome = ({ intl }: Props) => {
                 id: 'manager.label.desc1'
               })}
             </Typography>
-            <Typography variant="h3" style={{ margin: '20px' }}>
-              {intl.formatMessage({
-                id: 'manager.label.desc2'
-              })}
-            </Typography>
           </Card>
         </Grid>
-      </Grid>
-      <Grid container className="margin-left">
-        <Button
-          onClick={navigateToManagerRegister}
-          variant="contained"
-          style={{ margin: '20px' }}
-          sx={{ display: { xs: 'flex', sm: 'flex', width: 'fit-content' } }}
-        >
-          {intl.formatMessage({
-            id: 'manager.add'
-          })}
-        </Button>
-      </Grid>
-      <Grid container className="margin-left">
-        <Button
-          variant="contained"
-          style={{ margin: '20px' }}
-          sx={{ display: { xs: 'flex', sm: 'flex', width: 'fit-content' } }}
-          component={Link}
-          to={'/'}
-        >
-          {intl.formatMessage({
-            id: 'manager.remove'
-          })}
-        </Button>
-      </Grid>
-      <Grid container className="margin-left">
-        <Button
-          variant="contained"
-          style={{ margin: '20px' }}
-          sx={{ display: { xs: 'flex', sm: 'flex', width: 'fit-content' } }}
-          component={Link}
-          to={'/'}
-        >
-          {intl.formatMessage({
-            id: 'manager.users'
-          })}
-        </Button>
       </Grid>
       <FooterComp />
     </>

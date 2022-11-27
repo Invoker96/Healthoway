@@ -65,10 +65,6 @@ const SignUp = ({ intl }: Props) => {
     }
   }, [page, formData, signUpPages, navigate]);
 
-  const navigateToHome = () => {
-    navigate('/');
-  };
-
   return (
     <>
       <AppSnackbar
@@ -81,15 +77,14 @@ const SignUp = ({ intl }: Props) => {
       <MenuBar title="" noBtn={true} />
       <Grid container className="sign-up-container">
         <LoadingSpinner isOpen={loading} />
-        <Grid container justifyContent="center">
-          <Button className="my_appointment_btn" component={Link} to={'/'}>
+        <Grid container justifyContent="left">
+          <Button component={Link} to={'/'}>
             <ArrowLeftIcon />
             {intl.formatMessage({
               id: 'global.back_to_home'
             })}
           </Button>
         </Grid>
-        {/* <Link onClick={navigateToHome}>{intl.formatMessage({ id: 'button.backToHome' })}</Link> */}
         {signUpPages[page]}
       </Grid>
       <FooterComp />

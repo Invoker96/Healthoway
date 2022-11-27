@@ -70,14 +70,9 @@
   "patient.no_appointment": "You don't have any scheduled appointments at this time.",
   "patient.upcoming_appointment": "Upcoming Appointments",
   "manager.title": "Home",
-  "manager.add": "Add User",
-  "manager.remove": "Remove User",
-  "manager.users": "List of Users",
   "manager.button.report": "View Report",
   "manager.label.greetings": "Hello Manager!",
   "manager.label.desc1": "Welcome back to the profile.",
-  "manager.label.desc2": "Now you can add, remove new users to the system",
-  "manager.alternateTitle": "Add user as...",
   "report.appointments.title": "List of Appointments",
   "global.s_no": "No.",
   "global.patient_name_title": "Patient Name",
@@ -130,5 +125,8 @@
   "userManagement.table.header.email": "Email Address",
   "userManagement.table.header.role": "Role",
   "userManagement.table.header.address": "Address",
-  "userManagement.table.header.dob": "Date of Birth"
+  "userManagement.table.header.dob": "Date of Birth",
+  "userManagement.button.addUser": "Add new user",
+  "managerRegister.userForm.title": "Create new user",
+  "managerRegister.roleForm.title": "Create new user as a..."
 }
