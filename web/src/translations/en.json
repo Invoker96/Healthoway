@@ -98,7 +98,7 @@
   "patientHome.button.selfAssessment": "Complete Self Assessment Form",
   "selfAssessment.title": "Self Assessment Form",
   "selfAssessment.label.question": "Question",
-  "selfAssessment.button.backToHome": "Back to Dashboard",
+  "selfAssessment.button.cancel": "Cancel",
   "selfAssessment.button.submit": "Submit",
   "selfAssessment.question.error.required": "This question is required to be answered",
   "selfAssessment.submit.success": "Successfully submitted self assessment form",
