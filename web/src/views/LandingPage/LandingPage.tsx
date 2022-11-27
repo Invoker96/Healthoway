@@ -31,8 +31,8 @@ const LandingPage = ({ intl }: Props) => {
         />
       )}
       <MenuBar title={''} noBtn={true} />
-      <Grid container spacing={2} height="100vh">
-        <Grid item xs={6} className="landing-page-container"></Grid>
+      <Grid container spacing={2} height="100vh" className="landing-page-container">
+        <Grid item xs={6}></Grid>
         <Grid item xs={6} className="login">
           <Login></Login>
         </Grid>

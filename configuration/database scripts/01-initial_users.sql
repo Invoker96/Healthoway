@@ -194,3 +194,5 @@ BEGIN
 END#
 
 -------------------------------------------------------------------------------------------
+
+ALTER TABLE users ADD IS_ACTIVE VARCHAR(5) NOT NULL DEFAULT 'YES';

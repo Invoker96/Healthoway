@@ -6,6 +6,7 @@ import FooterComp from '../../components/FooterComp/FooterComp';
 import { useNavigate, useLocation, Link } from 'react-router-dom';
 import AppSnackbar from '../../components/AppSnackbar/AppSnackbar';
 import { getFullName } from '../../services/userInfoService';
+import AdminDashboard from '../../assets/AdminDashboard.png';
 
 type Props = {
   intl: any;
@@ -15,14 +16,9 @@ const ManagerHome = ({ intl }: Props) => {
   //clear state on refresh so snack bar is not shown
   window.history.replaceState({}, document.title);
 
-  const navigate = useNavigate();
   const location = useLocation();
 
   const successMessage = location.state?.successMessage;
-
-  const navigateToManagerRegister = () => {
-    navigate('/manager/home/add');
-  };
 
   return (
     <>
@@ -35,7 +31,8 @@ const ManagerHome = ({ intl }: Props) => {
       />
       <Grid container className="main-container">
         <Grid container justifyContent="center">
-          <Card className="doctorHome-greeting-container">
+          <Card className="manager-greeting-container">
+            <img src={AdminDashboard} className="manager-dashboard-image" />
             <Typography variant="h1" style={{ margin: '20px' }}>
               {intl.formatMessage(
                 {
@@ -48,7 +45,7 @@ const ManagerHome = ({ intl }: Props) => {
             </Typography>
             <Typography variant="h3" style={{ margin: '20px' }}>
               {intl.formatMessage({
-                id: 'manager.label.desc1'
+                id: 'manager.label.desc'
               })}
             </Typography>
           </Card>
