@@ -23,12 +23,7 @@ const ManagerHome = ({ intl }: Props) => {
   return (
     <>
       {successMessage && <AppSnackbar type="success" message={successMessage} open={true} />}
-      <MenuBar
-        title={intl.formatMessage({
-          id: 'manager.title'
-        })}
-        noBtn={false}
-      />
+      <MenuBar title="" noBtn={false} />
       <Grid container className="main-container">
         <Grid container justifyContent="center">
           <Card className="manager-greeting-container">
@@ -43,11 +38,24 @@ const ManagerHome = ({ intl }: Props) => {
                 }
               )}
             </Typography>
-            <Typography variant="h3" style={{ margin: '20px' }}>
-              {intl.formatMessage({
-                id: 'manager.label.desc'
-              })}
-            </Typography>
+            <Grid container className="manager-description-container">
+              <Typography variant="h3">
+                {intl.formatMessage({
+                  id: 'manager.label.desc'
+                })}
+              </Typography>
+              <Typography variant="h3" component={Link} to="/manager/users">
+                {intl.formatMessage({
+                  id: 'managerHome.manageUsers.label'
+                })}
+              </Typography>
+              <Typography variant="h3">/</Typography>
+              <Typography variant="h3" component={Link} to="/manager/reports">
+                {intl.formatMessage({
+                  id: 'managerHome.viewReports.label'
+                })}
+              </Typography>
+            </Grid>
           </Card>
         </Grid>
       </Grid>

@@ -78,6 +78,7 @@ const MenuBar = ({ intl, title, noBtn }: Props) => {
                 </Typography>
               ))}
           </Grid>
+          <Typography className="menu-bar-title">{title}</Typography>
           <Grid container>
             {isLoggedIn && (
               <Grid container className="userProfile-container end-container">

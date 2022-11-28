@@ -90,7 +90,7 @@ const SelfAssessmentForm = ({ intl }: Props) => {
         open={isError}
       />
 
-      <MenuBar title={intl.formatMessage({ id: 'selfAssessment.title' })} noBtn={true} />
+      <MenuBar title="" noBtn={true} />
       <Grid component="form" container className="main-container">
         {QUESTIONS.map((set: QuestionSet, qIndex: number) => {
           const options = Object.keys(set).filter((key) => key.match(/option.*/));

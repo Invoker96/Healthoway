@@ -34,4 +34,12 @@
     margin-right: $spacing-05;
     text-decoration: none;
   }
+
+  .menu-bar-title {
+    font-family: cursive;
+    //text-transform: uppercase;
+    font-weight: 600;
+    font-size: 1.5rem;
+    // letter-spacing: 2.2px;
+  }
 }

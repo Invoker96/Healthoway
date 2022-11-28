@@ -72,7 +72,7 @@
   "manager.title": "Home",
   "manager.button.report": "View Report",
   "manager.label.greetings": "Hello, {fullName}!",
-  "manager.label.desc": "Get started on your managerial duties by selecting a menu option above.",
+  "manager.label.desc": "Get started on your managerial duties by ",
   "report.appointments.title": "List of Appointments",
   "global.s_no": "No.",
   "global.patient_name_title": "Patient Name",
@@ -85,7 +85,7 @@
   "global.date": "Date",
   "global.time": "Time",
   "global.empty": " ",
-  "global.app_title": "HEALTHOWAY",
+  "global.app_title": "Healthoway",
   "global.copyright": "Copyright © HEALTHOWAY 2022",
   "global.my_appointments": "My Appointments",
   "global.upcoming_appointments": "Upcoming Appointments",
@@ -128,5 +128,7 @@
   "userManagement.table.header.dob": "Date of Birth",
   "userManagement.button.addUser": "Add new user",
   "managerRegister.userForm.title": "Create new user",
-  "managerRegister.roleForm.title": "Create new user as a..."
+  "managerRegister.roleForm.title": "Create new user as a...",
+  "managerHome.manageUsers.label": "managing users",
+  "managerHome.viewReports.label": "viewing reports"
 }

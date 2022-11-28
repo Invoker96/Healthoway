@@ -255,12 +255,7 @@ const DoctorAppointments = ({ intl }: Props) => {
             })}
         </List>
       </Dialog>
-      <MenuBar
-        title={intl.formatMessage({
-          id: 'doctor.title'
-        })}
-        noBtn={false}
-      />
+      <MenuBar title="" noBtn={false} />
       <Grid container className="main-container">
         <Grid container justifyContent="center">
           <Typography

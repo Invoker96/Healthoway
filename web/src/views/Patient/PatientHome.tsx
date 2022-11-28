@@ -141,12 +141,7 @@ const PatientHome = ({ intl }: Props) => {
       </Dialog>
 
       {successMessage && <AppSnackbar type="success" message={successMessage} open={true} />}
-      <MenuBar
-        title={intl.formatMessage({
-          id: 'patient.title'
-        })}
-        noBtn={false}
-      />
+      <MenuBar title="" noBtn={false} />
       <Grid container className="main-container">
         <Grid container justifyContent="center">
           {appointmentsList.length == 0 && selfAssesmentResult.length == 0 && (
