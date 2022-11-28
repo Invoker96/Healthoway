@@ -1,4 +1,4 @@
-import { Grid } from '@mui/material';
+import { Card, Grid } from '@mui/material';
 import LoginForm from '../../components/Login/LoginForm';
 import { useMemo, useState } from 'react';
 import img from '../../assets/logo.png';
@@ -16,8 +16,10 @@ const Login = () => {
 
   return (
     <Grid container direction="column" className="login-container">
-      <img src={img} className="logo" height="230" width="230" />
-      {loginPage}
+      <Card style={{ marginTop: '35px', padding: '10px 20px' }}>
+        <img src={img} className="logo" height="230" width="230" />
+        {loginPage}
+      </Card>
     </Grid>
   );
 };
