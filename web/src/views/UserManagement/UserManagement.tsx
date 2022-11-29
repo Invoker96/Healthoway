@@ -61,6 +61,7 @@ const UserManagement = ({ intl }: Props) => {
 
   const handleDelete = async (username: string) => {
     setIsLoading(true);
+    setSnackbarIsOpen(false);
 
     await deleteUser(username)
       .then(() => {
@@ -94,12 +95,6 @@ const UserManagement = ({ intl }: Props) => {
     setPage(0);
   };
 
-  const handleUserCreated = (isSuccess: boolean) => {
-    setSnackbarIsOpen(true);
-    setSnackbarType('success');
-    setMessage(intl.formatMessage({ id: 'userForm.createUser.success' }));
-  };
-
   return (
     <>
       <MenuBar title="" noBtn={true} />
@@ -123,16 +118,13 @@ const UserManagement = ({ intl }: Props) => {
           <DialogContent>
             <ManagerSignUp
               isUserCreated={(res: boolean) => {
-                console.log({ res });
+                setSnackbarIsOpen(false);
                 if (res) {
                   setSnackbarType('success');
                   setMessage(intl.formatMessage({ id: 'userForm.createUser.success' }));
                   getUsers();
-                } else {
-                  setSnackbarType('error');
-                  setMessage(intl.formatMessage({ id: 'userForm.createUser.error' }));
+                  setSnackbarIsOpen(true);
                 }
-                setSnackbarIsOpen(true);
                 setDialogIsOpen(false);
               }}
             />

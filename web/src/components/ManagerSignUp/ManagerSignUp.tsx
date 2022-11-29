@@ -39,6 +39,7 @@ const ManagerSignUp = ({ intl, isUserCreated }: Props) => {
 
   useEffect(() => {
     const submitForm = async () => {
+      isUserCreated(false);
       setIsLoading(true);
       await createUser(formData)
         .then(() => {
