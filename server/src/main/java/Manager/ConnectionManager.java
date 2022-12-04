@@ -297,7 +297,7 @@ public class ConnectionManager {
 
             int n = pstmt.executeUpdate();
             if (n > 0) {
-                EmailSender.sendEmail(patientUserName, EmailType.APPOINTMENT_SCHEDULED);
+                //EmailSender.sendEmail(patientUserName, EmailType.APPOINTMENT_SCHEDULED);
                 return true;
             }
 
