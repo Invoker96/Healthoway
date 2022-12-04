@@ -130,5 +130,6 @@
   "managerRegister.userForm.title": "Create new user",
   "managerRegister.roleForm.title": "Create new user as a...",
   "managerHome.manageUsers.label": "managing users",
-  "managerHome.viewReports.label": "viewing reports"
+  "managerHome.viewReports.label": "viewing reports",
+  "doctorAppointments.removePatient.success": "Successfully rejected patient appointment"
 }
