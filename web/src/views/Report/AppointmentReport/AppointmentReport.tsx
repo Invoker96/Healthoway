@@ -1,6 +1,5 @@
 import { useState } from 'react';
 import { injectIntl } from 'react-intl';
-import { Link } from 'react-router-dom';
 import { FormControl, Grid, MenuItem, Select, Typography, Button } from '@mui/material';
 import AppointmentCountGraph from '../../../components/AppointmentCountGraph/AppointmentCountGraph';
 import AppointmentList from '../../../components/AppointmentList/AppointmentList';
@@ -21,8 +20,7 @@ const AppointmentReport = ({ intl }: Props) => {
 
   return (
     <Grid container>
-      <MenuBar title={intl.formatMessage({ id: 'report.appointments.title' })} noBtn={true} />
-
+      <MenuBar title="" noBtn={true} />
       <Grid container className="main-container">
         <Grid container className="report-selection-container">
           <Typography>

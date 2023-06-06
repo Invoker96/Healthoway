@@ -35,6 +35,7 @@ import dayjs, { Dayjs } from 'dayjs';
 import { Link } from 'react-router-dom';
 import './DoctorAppointments.scss';
 import FooterComp from '../../components/FooterComp/FooterComp';
+import AppSnackbar from '../../components/AppSnackbar/AppSnackbar';
 
 type Props = {
   intl: any;
@@ -118,6 +119,7 @@ const DoctorAppointments = ({ intl }: Props) => {
     userName: '',
     appointment: ''
   });
+  const [isSnackbarOpen, setIsSnackbarOpen] = React.useState(false);
 
   const [value, setValue] = React.useState<Dayjs | null>(dayjs(new Date().toISOString()));
 
@@ -175,7 +177,7 @@ const DoctorAppointments = ({ intl }: Props) => {
   };
 
   const handleRemovePatient = () => {
-    console.log(selectedPatientData);
+    setIsSnackbarOpen(false);
     const payload = {
       username: selectedPatientData.userName
     };
@@ -184,6 +186,7 @@ const DoctorAppointments = ({ intl }: Props) => {
         console.log(response);
         getMyAppointments();
         setOpenRemoveDialog(false);
+        setIsSnackbarOpen(true);
       })
       .catch((error) => {
         console.log(error);
@@ -205,16 +208,20 @@ const DoctorAppointments = ({ intl }: Props) => {
   };
   return (
     <>
+      <AppSnackbar
+        type="success"
+        message={intl.formatMessage({ id: 'doctorAppointments.removePatient.success' })}
+        open={isSnackbarOpen}
+      />
       <Dialog
         open={openRemoveDialog}
         onClose={handleRemoveDialogClose}
         aria-labelledby="alert-dialog-title"
         aria-describedby="alert-dialog-description"
       >
-        {/* <DialogTitle id="alert-dialog-title">{'Do you want to remove patient?'}</DialogTitle> */}
         <DialogContent>
           <DialogContentText id="alert-dialog-description">
-            Do you want to remove the patient {selectedPatientData?.patientName}?
+            Do you want to reject the patient {selectedPatientData?.patientName}?
           </DialogContentText>
         </DialogContent>
         <DialogActions>
@@ -255,12 +262,7 @@ const DoctorAppointments = ({ intl }: Props) => {
             })}
         </List>
       </Dialog>
-      <MenuBar
-        title={intl.formatMessage({
-          id: 'doctor.title'
-        })}
-        noBtn={false}
-      />
+      <MenuBar title="" noBtn={false} />
       <Grid container className="main-container">
         <Grid container justifyContent="center">
           <Typography

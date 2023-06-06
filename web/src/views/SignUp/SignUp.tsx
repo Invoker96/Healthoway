@@ -1,6 +1,6 @@
 import { useEffect, useMemo, useState } from 'react';
 import { injectIntl } from 'react-intl';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, Link } from 'react-router-dom';
 import { Button, Grid, Typography } from '@mui/material';
 import RoleForm from '../../components/SignUp/RoleForm';
 import UserForm from '../../components/SignUp/UserForm';
@@ -12,7 +12,6 @@ import LoadingSpinner from '../../components/common/LoadingSpinner/LoadingSpinne
 import MenuBar from '../../components/MenuBar/MenuBar';
 import FooterComp from '../../components/FooterComp/FooterComp';
 import AppSnackbar from '../../components/AppSnackbar/AppSnackbar';
-import { Link } from 'react-router-dom';
 import ArrowLeftIcon from '@mui/icons-material/ArrowLeft';
 type Props = {
   intl: any;
@@ -32,7 +31,8 @@ const SignUp = ({ intl }: Props) => {
     password: '',
     userRole: RoleType.PATIENT,
     dob: new Date().toISOString().split('T')[0],
-    pNum: ''
+    pNum: '',
+    username: ''
   });
 
   const signUpPages = useMemo(() => {
@@ -65,10 +65,6 @@ const SignUp = ({ intl }: Props) => {
     }
   }, [page, formData, signUpPages, navigate]);
 
-  const navigateToHome = () => {
-    navigate('/');
-  };
-
   return (
     <>
       <AppSnackbar
@@ -78,18 +74,17 @@ const SignUp = ({ intl }: Props) => {
         })}
         open={isError}
       />
-      <MenuBar title="" noBtn={true} />
+      <MenuBar title={intl.formatMessage({ id: 'global.app_title' })} noBtn={true} />
       <Grid container className="sign-up-container">
         <LoadingSpinner isOpen={loading} />
-        <Grid container justifyContent="center">
-          <Button className="my_appointment_btn" component={Link} to={'/'}>
+        <Grid container justifyContent="left">
+          <Button component={Link} to={'/'}>
             <ArrowLeftIcon />
             {intl.formatMessage({
               id: 'global.back_to_home'
             })}
           </Button>
         </Grid>
-        {/* <Link onClick={navigateToHome}>{intl.formatMessage({ id: 'button.backToHome' })}</Link> */}
         {signUpPages[page]}
       </Grid>
       <FooterComp />

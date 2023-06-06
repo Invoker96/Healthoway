@@ -365,10 +365,9 @@ const CounsellorHome = ({ intl }: Props) => {
         aria-labelledby="alert-dialog-title"
         aria-describedby="alert-dialog-description"
       >
-        {/* <DialogTitle id="alert-dialog-title">{'Do you want to remove patient?'}</DialogTitle> */}
         <DialogContent>
           <DialogContentText id="alert-dialog-description">
-            Do you want to remove the patient {selectedPatientData?.patientName}?
+            Do you want to reject the patient {selectedPatientData?.patientName}?
           </DialogContentText>
         </DialogContent>
         <DialogActions>
@@ -507,12 +506,7 @@ const CounsellorHome = ({ intl }: Props) => {
             })}
         </List>
       </Dialog>
-      <MenuBar
-        title={intl.formatMessage({
-          id: 'counsellor.title'
-        })}
-        noBtn={false}
-      />
+      <MenuBar title="" noBtn={false} />
       <Grid container className="main-container">
         <Grid container justifyContent="center">
           <Typography

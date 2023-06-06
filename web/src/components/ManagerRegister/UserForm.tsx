@@ -74,15 +74,10 @@ const RoleForm = ({ page, setPage, formData, setFormData, intl }: Props) => {
       <Grid container className="form-card">
         <Typography variant="h1">
           {intl.formatMessage({
-            id: 'userForm.title'
+            id: 'managerRegister.userForm.title'
           })}
         </Typography>
-        <Typography variant="h2">
-          {intl.formatMessage({
-            id: 'userForm.label'
-          })}
-        </Typography>
-        <Grid component="form" container spacing={3}>
+        <Grid className="form-container" component="form" container spacing={3}>
           {USER_FIELDS.map((key) => {
             return (
               <Grid item xs={6}>
@@ -122,7 +117,7 @@ const RoleForm = ({ page, setPage, formData, setFormData, intl }: Props) => {
           </Button>
           <Button variant="contained" type="submit" onClick={handleSubmit(onSubmit)}>
             {intl.formatMessage({
-              id: 'userForm.button.next'
+              id: 'userManagement.button.addUser'
             })}
           </Button>
         </Grid>

@@ -1,4 +1,4 @@
-import * as React from 'react';
+import { useEffect, useState, forwardRef } from 'react';
 import Paper from '@mui/material/Paper';
 import Table from '@mui/material/Table';
 import TableBody from '@mui/material/TableBody';
@@ -30,7 +30,7 @@ type Props = {
   intl: any;
 };
 
-const Transition = React.forwardRef(function Transition(
+const Transition = forwardRef(function Transition(
   props: TransitionProps & {
     children: React.ReactElement;
   },
@@ -91,19 +91,19 @@ const PatientAppointments = ({ intl }: Props) => {
     }
   ];
 
-  const [page, setPage] = React.useState(0);
-  const [rowsPerPage, setRowsPerPage] = React.useState(10);
-  const [open, setOpen] = React.useState(false);
-  const [openRemoveDialog, setOpenRemoveDialog] = React.useState(false);
-  const [appointmentsList, setAppointmentsList] = React.useState<Array<Patient>>([]);
-  const [selfAssesmentResult, setSelfAssesmentResult] = React.useState<Array<SelfAssesment>>([]);
-  const [selectedPatientData, setSelectedPatientData] = React.useState({
+  const [page, setPage] = useState(0);
+  const [rowsPerPage, setRowsPerPage] = useState(10);
+  const [open, setOpen] = useState(false);
+  const [openRemoveDialog, setOpenRemoveDialog] = useState(false);
+  const [appointmentsList, setAppointmentsList] = useState<Array<Patient>>([]);
+  const [selfAssesmentResult, setSelfAssesmentResult] = useState<Array<SelfAssesment>>([]);
+  const [selectedPatientData, setSelectedPatientData] = useState({
     patientName: '',
     userName: '',
     appointment: ''
   });
 
-  const [value, setValue] = React.useState<Dayjs | null>(dayjs(new Date().toISOString()));
+  const [value, setValue] = useState<Dayjs | null>(dayjs(new Date().toISOString()));
 
   const handleChange = (newValue: Dayjs | null) => {
     setValue(newValue);
@@ -123,7 +123,6 @@ const PatientAppointments = ({ intl }: Props) => {
       };
       getSelfAssesmentResult(payload)
         .then((response: any) => {
-          console.log(response.data);
           setSelfAssesmentResult(response.data);
         })
         .catch((error: any) => {
@@ -133,7 +132,11 @@ const PatientAppointments = ({ intl }: Props) => {
     }
   };
 
-  React.useEffect(() => {
+  const filterFutureAppointments = (data: any) => {
+    return data.filter((appointment: any) => dayjs(appointment.appointment) > dayjs());
+  };
+
+  useEffect(() => {
     getMyAppointments();
   }, []);
 
@@ -144,8 +147,7 @@ const PatientAppointments = ({ intl }: Props) => {
     };
     patientsAppointments(payload)
       .then((response: any) => {
-        console.log(response);
-        setAppointmentsList(response.data);
+        setAppointmentsList(filterFutureAppointments(response.data));
       })
       .catch((error: any) => {
         console.log(error);

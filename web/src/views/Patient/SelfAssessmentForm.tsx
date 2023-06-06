@@ -90,13 +90,8 @@ const SelfAssessmentForm = ({ intl }: Props) => {
         open={isError}
       />
 
-      <MenuBar title={intl.formatMessage({ id: 'selfAssessment.title' })} noBtn={true} />
+      <MenuBar title="" noBtn={true} />
       <Grid component="form" container className="main-container">
-        <Grid container>
-          <Button variant="contained" component={Link} to={'/patient/home'}>
-            {intl.formatMessage({ id: 'selfAssessment.button.backToHome' })}
-          </Button>
-        </Grid>
         {QUESTIONS.map((set: QuestionSet, qIndex: number) => {
           const options = Object.keys(set).filter((key) => key.match(/option.*/));
           const optionComponent = options.map((opt, idx) => {
@@ -141,7 +136,10 @@ const SelfAssessmentForm = ({ intl }: Props) => {
             </Grid>
           );
         })}
-        <Grid container justifyContent="right">
+        <Grid container className="button-container">
+          <Button variant="contained" component={Link} to={'/patient/home'}>
+            {intl.formatMessage({ id: 'selfAssessment.button.cancel' })}
+          </Button>
           <Button
             variant="contained"
             type="submit"

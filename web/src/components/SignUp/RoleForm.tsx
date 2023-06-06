@@ -28,7 +28,8 @@ const RoleForm = ({ page, setPage, formData, setFormData, intl }: Props) => {
         password: '',
         userRole: RoleType.PATIENT,
         dob: new Date().toISOString().split('T')[0],
-        pNum: ''
+        pNum: '',
+        username: ''
       },
       userRole: userRole
     });

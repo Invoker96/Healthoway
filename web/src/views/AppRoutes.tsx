@@ -7,11 +7,11 @@ import PatientHome from './Patient/PatientHome';
 import LandingPage from './LandingPage/LandingPage';
 import CounsellorAppointments from './CounsellorAppointments/CounsellorAppointments';
 import SignUp from './SignUp/SignUp';
-import ManagerSignUp from './ManagerSignUp/ManagerSignUp';
 import DoctorAppointments from './DoctorAppointments/DoctorAppointments';
 import PatientAppointments from './PatientAppointments/PatientAppointments';
 import SelfAssessmentForm from './Patient/SelfAssessmentForm';
 import AppointmentReport from './Report/AppointmentReport/AppointmentReport';
+import UserManagement from './UserManagement/UserManagement';
 
 const AppRoutes = () => {
   return (
@@ -35,8 +35,8 @@ const AppRoutes = () => {
         </Route>
         <Route path="manager">
           <Route path="home" element={<ManagerHome />} />
-          <Route path="home/add" element={<ManagerSignUp />} />
-          <Route path="report/appointments" element={<AppointmentReport />} />
+          <Route path="reports" element={<AppointmentReport />} />
+          <Route path="users" element={<UserManagement />} />
         </Route>
       </Routes>
     </BrowserRouter>

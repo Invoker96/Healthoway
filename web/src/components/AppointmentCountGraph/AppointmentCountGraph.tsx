@@ -14,7 +14,7 @@ import {
   LabelList,
   ResponsiveContainer
 } from 'recharts';
-import { getAppointmentsByDateRange } from '../../services/managerService';
+import { getAppointmentsByDateRange } from '../../services/appointmentService';
 import { formatDateToString, formatDisplayDate, getMonthNameShort } from '../../utils/DateUtil';
 import LoadingSpinner from '../common/LoadingSpinner/LoadingSpinner';
 

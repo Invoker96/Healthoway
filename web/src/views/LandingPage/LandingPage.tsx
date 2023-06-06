@@ -1,7 +1,7 @@
 import { injectIntl } from 'react-intl';
 import { useLocation } from 'react-router-dom';
 import MenuBar from '../../components/MenuBar/MenuBar';
-import bg from '../../assets/LandingImage.jpg';
+import Background from '../../assets/LandingImage.jpg';
 import './LandingPage.scss';
 import Footer from '../../components/Footer/Footer';
 import AppSnackbar from '../../components/AppSnackbar/AppSnackbar';
@@ -30,9 +30,10 @@ const LandingPage = ({ intl }: Props) => {
           open={true}
         />
       )}
-      <MenuBar title={''} noBtn={true} />
-      <Grid container spacing={2} height="100vh">
-        <Grid item xs={6} className="landing-page-container"></Grid>
+      <MenuBar title={intl.formatMessage({ id: 'global.app_title' })} noBtn={true} />
+      <img className="landing-page-background" src={Background} />
+      <Grid container className="landing-page-container">
+        <Grid item xs={6}></Grid>
         <Grid item xs={6} className="login">
           <Login></Login>
         </Grid>

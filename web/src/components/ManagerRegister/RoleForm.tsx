@@ -28,7 +28,8 @@ const RoleForm = ({ page, setPage, formData, setFormData, intl }: Props) => {
         password: '',
         userRole: RoleType.PATIENT,
         dob: new Date().toISOString().split('T')[0],
-        pNum: ''
+        pNum: '',
+        username: ''
       },
       userRole: userRole
     });
@@ -38,7 +39,7 @@ const RoleForm = ({ page, setPage, formData, setFormData, intl }: Props) => {
     <Grid className="form-card">
       <Typography variant="h1">
         {intl.formatMessage({
-          id: 'manager.alternateTitle'
+          id: 'managerRegister.roleForm.title'
         })}
       </Typography>
       <Grid container justifyContent="space-around">

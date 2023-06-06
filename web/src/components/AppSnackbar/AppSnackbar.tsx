@@ -1,8 +1,10 @@
 import { useState, useEffect } from 'react';
 import { Snackbar, Alert } from '@mui/material';
 
+export type AppSnackbarType = 'warning' | 'error' | 'success' | 'info';
+
 type Props = {
-  type: 'warning' | 'error' | 'success' | 'info';
+  type: AppSnackbarType;
   message: string;
   open: boolean;
 };
